@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package lknet;
+
+message Header {
+    int32       protocol_version        =   1;
+    string      protocol_name           =   2;
+}
+
+message Request {
+    Header      header                  =   1;  // 用于传递版本相关信息
+    bytes       endpoint                =   2;  // 相当于路由
+    uint32      method                  =   3;  // 代表传递方法 {json、 endpoint}
+    string      json                    =   4;  // 当使用json参数方法的时候，json用于传递相关参数
+}
+
+message Response {
+    int32       my_err                   =   1;  // 状态码
+    string      err_message             =   2;  // 可读错误消息
+}
