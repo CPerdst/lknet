@@ -12,8 +12,8 @@ namespace lknet {
 
         class message {
         public:
-            static constexpr unsigned int header_size = 8;
-            static constexpr unsigned int max_body_size = 4096;
+            static constexpr unsigned int header_size = 4;
+            static constexpr unsigned int max_body_size = 512;
             message() = default;
             ~message() = default;
 

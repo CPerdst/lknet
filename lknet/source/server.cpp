@@ -21,7 +21,7 @@ namespace lknet{
 
     void lknet::server::do_async_accept() {
         auto self(shared_from_this());
-        acceptor_->async_accept(io_ctx_->get_executor(), [this, self](std::error_code ec, boost::asio::ip::tcp::socket sock){
+        acceptor_->async_accept(*io_ctx_, [this, self](std::error_code ec, boost::asio::ip::tcp::socket sock){
             if(!ec){
                 std::make_shared<session>(sock)->run();
                 do_async_accept();
