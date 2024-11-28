@@ -4,9 +4,9 @@
 
 #include "Server.h"
 
-Server::Server(const std::string& host, unsigned short port):
+Server::Server(const std::string& host, unsigned short port, std::function<void(Message)> handler):
 acceptor(ioContext),
-callback(nullptr),
+messageHandler(std::move(handler)),
 runInOtherThread(false)
 {
     auto endpoint = boost::asio::ip::tcp::endpoint(
@@ -34,24 +34,36 @@ void Server::start(bool runInOtherThread_) {
 void Server::doAccept() {
     acceptor.async_accept([this](std::error_code ec, boost::asio::ip::tcp::socket sock){
         std::shared_ptr<IOBase> base = std::make_shared<IOBase>(sock);
-        ioBases.push_back(base);
-        auto weakBase = std::weak_ptr<IOBase>(base);
-        ioBases.back()->setCloseHandler([weakBase, this]() {
-            if (auto base = weakBase.lock()) { // 检查对象是否仍然存在
-                auto ite = std::find_if(ioBases.begin(), ioBases.end(), [&base](const std::shared_ptr<IOBase>& ptr) {
-                    return ptr.get() == base.get();
-                });
-                if (ite != ioBases.end()) {
-                    (*ite)->socket().close();
-                    ioBases.erase(ite); // 从 vector 中移除
+        {   // 对ioBases操作需要上锁
+            std::unique_lock<std::mutex> lock(ioBasesMutex);
+            ioBases.push_back(base);
+            auto weakBase = std::weak_ptr<IOBase>(base);
+            ioBases.back()->setCloseHandler([weakBase, this]() {
+                std::unique_lock<std::mutex> lock(ioBasesMutex);
+                if (auto base = weakBase.lock()) { // 检查对象是否仍然存在
+                    auto ite = std::find_if(ioBases.begin(), ioBases.end(), [&base](const std::shared_ptr<IOBase>& ptr) {
+                        return ptr.get() == base.get();
+                    });
+                    if (ite != ioBases.end()) {
+                        (*ite)->socket().close();
+                        ioBases.erase(ite); // 从 vector 中移除
+                    }
                 }
-            }
-        });
-        ioBases.back()->setMessageHandler([this](Message message){
-            // handle the message
-            std::cout << "server received: " << message.parseMessageToString().c_str() << std::endl;
-        });
+            });
+            ioBases.back()->setMessageHandler([this](Message message){
+                // handle the message
+                std::cout << "server received: " << message.parseMessageToString().c_str() << std::endl;
+            });
+        }
         base->start();
         doAccept();
     });
+}
+
+void Server::setMessageHandler(std::function<void(Message)>& handler) {
+    std::unique_lock<std::mutex> lock(ioBasesMutex);
+    messageHandler = std::move(handler);
+    for(const auto& ioBase : ioBases){
+        ioBase->setMessageHandler(messageHandler);
+    }
 }

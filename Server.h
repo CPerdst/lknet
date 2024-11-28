@@ -13,10 +13,12 @@
 
 class Server {
 public:
-    Server(const std::string& host, unsigned short port);
+    Server(const std::string& host, unsigned short port, std::function<void(Message)> handler = nullptr);
     ~Server() = default;
 
     void start(bool runInOtherThread = false);
+
+    void setMessageHandler(std::function<void(Message)>& handler);
 
 private:
 
@@ -27,7 +29,9 @@ private:
 
     std::vector<std::shared_ptr<IOBase>> ioBases;
 
-    std::function<void(void)> callback;
+    std::mutex ioBasesMutex;
+
+    std::function<void(Message)> messageHandler;
 
     bool runInOtherThread{};
 
