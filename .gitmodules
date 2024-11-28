@@ -1,0 +1,3 @@
+[submodule "lklog"]
+	path = lklog
+	url = https://github.com/CPerdst/lklog.git
