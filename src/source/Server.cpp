@@ -17,6 +17,9 @@ runInOtherThread(false)
     acceptor.set_option(boost::asio::socket_base::reuse_address(true));
     acceptor.bind(endpoint);
     acceptor.listen(5);
+    RootInfo() << "Server Running on " << \
+    endpoint.address().to_string() << \
+    ":" << endpoint.port();
     doAccept();
 }
 
@@ -46,6 +49,8 @@ void Server::doAccept() {
                         return ptr.get() == base.get();
                     });
                     if (ite != ioBases.end()) {
+                        RootDebug() << (*ite)->socket().remote_endpoint().address().to_string() <<\
+                        ":" << (*ite)->socket().remote_endpoint().port() << " has been removed from ioBases";
                         (*ite)->socket().close();
                         ioBases.erase(ite); // 从 vector 中移除
                     }
