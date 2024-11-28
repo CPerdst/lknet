@@ -4,9 +4,9 @@ project(lknet)
 set(CMAKE_CXX_STANDARD 17)
 
 # 设置输出路径
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib) # 静态库输出路径
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib) # 动态库输出路径
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin) # 二进制文件输出路径
 
 # ---------------
 # 编译 lklog 共享库
@@ -23,9 +23,9 @@ target_include_directories(lklog PRIVATE lklog/src/include)
 # ---------------
 
 # 获取 lknet 源码
-file(GLOB SOURCE "src/source/*.cpp")
+file(GLOB LKNETSOURCE "src/source/*.cpp")
 # 编译 lknet 共享库
-add_executable(lknet main.cpp ${SOURCE})
+add_library(lknet SHARED ${LKNETSOURCE})
 target_include_directories(lknet PRIVATE src/include lklog/src/include)
 target_link_directories(lknet PRIVATE ${CMAKE_BINARY_DIR}/lib)
 target_link_libraries(lknet PRIVATE pthread lklog)
