@@ -60,7 +60,7 @@ void IOBase::doReadHeader() {
         if(!ec && readMessage.isValidMessage()){
             doReadBody();
         }else{
-            std::cout << "socket closed as head receive failed" << std::endl;
+            RootError() << "socket closed as head receive failed";
             if(closeHandler) closeHandler();
         }
     });
@@ -79,7 +79,7 @@ void IOBase::doReadBody() {
             }
             doReadHeader();
         }else{
-            std::cout << "socket closed as body receive failed" << std::endl;
+            RootError() << "socket closed as body receive failed";
             if(closeHandler) closeHandler();
         }
     });
@@ -107,7 +107,7 @@ void IOBase::doWrite() {
             if(canWrite)
                 doWrite();
         }else{
-            std::cout << "socket closed as for write message failed：" << ec.message() << std::endl;
+            RootError() << "socket closed as for write message failed：" << ec.message();
             if(closeHandler) closeHandler();
         }
     });

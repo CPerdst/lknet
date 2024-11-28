@@ -29,7 +29,7 @@ int main(int argc, char* argv[]) {
 
     int times = 5;
     while(times++){
-        client.send("nihaoa");
+        client.send("nihaoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
 

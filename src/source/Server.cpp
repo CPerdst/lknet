@@ -9,6 +9,7 @@ acceptor(ioContext),
 messageHandler(std::move(handler)),
 runInOtherThread(false)
 {
+    initLogger();
     auto endpoint = boost::asio::ip::tcp::endpoint(
             boost::asio::ip::make_address(host),
             port);
@@ -52,7 +53,7 @@ void Server::doAccept() {
             });
             ioBases.back()->setMessageHandler([this](Message message){
                 // handle the message
-                std::cout << "server received: " << message.parseMessageToString().c_str() << std::endl;
+                RootInfo() << "server received: " << message.parseMessageToString().c_str();
             });
         }
         base->start();
@@ -66,4 +67,11 @@ void Server::setMessageHandler(std::function<void(Message)>& handler) {
     for(const auto& ioBase : ioBases){
         ioBase->setMessageHandler(messageHandler);
     }
+}
+
+void Server::initLogger() {
+    logger::logger::Root()->setLevel(packer::Debug);
+    logger::logger::Root()->setLogFormater(
+    "[%level] [%s {%Y-%m-%d %H:%M:%S}] %filepath:%line: %message\n"
+    );
 }

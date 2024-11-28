@@ -24,6 +24,8 @@ private:
 
     void doAccept();
 
+    void initLogger();
+
     boost::asio::io_context ioContext;
     boost::asio::ip::tcp::acceptor acceptor;
 

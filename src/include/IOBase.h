@@ -8,6 +8,7 @@
 #include <deque>
 #include <mutex>
 #include "Message.h"
+#include "eventCapturer.h"
 
 class Client;
 class Server;
