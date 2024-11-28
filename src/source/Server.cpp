@@ -16,7 +16,7 @@ runInOtherThread(false)
     acceptor.open(endpoint.protocol());
     acceptor.set_option(boost::asio::socket_base::reuse_address(true));
     acceptor.bind(endpoint);
-    acceptor.listen(5);
+    acceptor.listen(10);
     RootInfo() << "Server Running on " << \
     endpoint.address().to_string() << \
     ":" << endpoint.port();
