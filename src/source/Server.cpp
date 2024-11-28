@@ -9,7 +9,6 @@ acceptor(ioContext),
 messageHandler(std::move(handler)),
 runInOtherThread(false)
 {
-    initLogger();
     auto endpoint = boost::asio::ip::tcp::endpoint(
             boost::asio::ip::make_address(host),
             port);
@@ -72,11 +71,4 @@ void Server::setMessageHandler(std::function<void(Message)>& handler) {
     for(const auto& ioBase : ioBases){
         ioBase->setMessageHandler(messageHandler);
     }
-}
-
-void Server::initLogger() {
-    logger::logger::Root()->setLevel(packer::Debug);
-    logger::logger::Root()->setLogFormater(
-    "[%level] [%s {%Y-%m-%d %H:%M:%S}] %filepath:%line: %message\n"
-    );
 }
