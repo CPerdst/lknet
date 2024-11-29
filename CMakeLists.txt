@@ -18,6 +18,18 @@ file(GLOB LKLOGSOURCE "lklog/src/source/*.cpp")
 add_library(lklog SHARED ${LKLOGSOURCE})
 target_include_directories(lklog PRIVATE lklog/src/include)
 
+# ------------
+# 查找Boost库
+# ------------
+
+find_package(Boost REQUIRED COMPONENTS)
+
+if(Boost_FOUND)
+    message(STATUS "Found boost library ${Boost_VERSION}")
+else ()
+    message(FATAL_ERROR "Boost library can not be found")
+endif ()
+
 # ---------------
 # 编译 lknet 共享库
 # ---------------
@@ -26,8 +38,8 @@ target_include_directories(lklog PRIVATE lklog/src/include)
 file(GLOB LKNETSOURCE "src/source/*.cpp")
 # 编译 lknet 共享库
 add_library(lknet SHARED ${LKNETSOURCE})
-target_include_directories(lknet PRIVATE src/include lklog/src/include)
-target_link_directories(lknet PRIVATE ${CMAKE_BINARY_DIR}/lib)
+target_include_directories(lknet PRIVATE src/include lklog/src/include ${Boost_INCLUDE_DIR})
+target_link_directories(lknet PRIVATE ${CMAKE_BINARY_DIR}/lib ${Boost_LIBRARY_DIRS})
 target_link_libraries(lknet PRIVATE pthread lklog)
 
 
