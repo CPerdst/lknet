@@ -12,11 +12,14 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin) # 二进制文件输
 # 编译 lklog 共享库
 # ---------------
 
+# 通过 lklog 子库构建 liblklog.so 动态链接库
+add_subdirectory(lklog)
+
 # 获取 lklog 源码
-file(GLOB LKLOGSOURCE "lklog/src/source/*.cpp")
+#file(GLOB LKLOGSOURCE "lklog/src/source/*.cpp")
 # 编译 lklog 共享库
-add_library(lklog SHARED ${LKLOGSOURCE})
-target_include_directories(lklog PRIVATE lklog/src/include)
+#add_library(lklog SHARED ${LKLOGSOURCE})
+#target_include_directories(lklog PRIVATE lklog/src/include)
 
 # ------------
 # 查找Boost库
@@ -38,7 +41,7 @@ endif ()
 file(GLOB LKNETSOURCE "src/source/*.cpp")
 # 编译 lknet 共享库
 add_library(lknet SHARED ${LKNETSOURCE})
-target_include_directories(lknet PRIVATE src/include lklog/src/include ${Boost_INCLUDE_DIR})
+target_include_directories(lknet PRIVATE src/include ${Boost_INCLUDE_DIR})
 target_link_directories(lknet PRIVATE ${CMAKE_BINARY_DIR}/lib ${Boost_LIBRARY_DIRS})
 target_link_libraries(lknet PRIVATE pthread lklog)
 
