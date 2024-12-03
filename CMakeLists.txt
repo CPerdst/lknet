@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.29)
+cmake_minimum_required(VERSION 3.16)
 project(lknet)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -25,6 +25,12 @@ add_subdirectory(lklog)
 # 查找Boost库
 # ------------
 
+# 如果是 Windows 平台，需要设置对应的 Boost 库路径
+if(WIN32)
+    # 设置 Boost 配置路径，并查找 Boost 的 Boost_INCLUDE_DIR 和 Boost_LIBRARY_DIRS
+    set(Boost_DIR "D:/boost-1.76.0-windows-x86_64-msvc")
+endif ()
+
 find_package(Boost REQUIRED COMPONENTS)
 
 if(Boost_FOUND)
@@ -38,11 +44,26 @@ endif ()
 # ---------------
 
 # 获取 lknet 源码
-file(GLOB LKNETSOURCE "src/source/*.cpp")
+file(GLOB LKNET_SOURCE "src/source/*.cpp")
 # 编译 lknet 共享库
-add_library(lknet SHARED ${LKNETSOURCE})
+add_library(lknet SHARED ${LKNET_SOURCE})
+
+# 定义 Windows 编译链接库所需宏
+if (WIN32)
+    add_definitions(-D_WIN32_WINNT=0x0601)  # 目标 Windows 7
+    target_compile_definitions(lknet PRIVATE EXPORTING_DLL)
+endif ()
+
+# 包含头文件路径
 target_include_directories(lknet PUBLIC src/include ${Boost_INCLUDE_DIR})
+
+# 包含连接库路径
 target_link_directories(lknet PUBLIC ${CMAKE_BINARY_DIR}/lib ${Boost_LIBRARY_DIRS})
-target_link_libraries(lknet PUBLIC pthread lklog)
+
+# 查找不同平台下的 thread 库
+find_package(Threads REQUIRED)
+
+# 链接动态库
+target_link_libraries(lknet PUBLIC Threads::Threads lklog)
 
 

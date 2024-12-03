@@ -6,8 +6,9 @@
 #include <boost/asio.hpp>
 #include <memory>
 #include "IOBase.h"
+#include "tools.h"
 
-class Client {
+class DLL_API Client {
 public:
     Client(const std::string& host, unsigned short port);
 

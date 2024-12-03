@@ -7,10 +7,11 @@
 #include <cstdio>
 #include <cstdlib>
 #include <string>
+#include "tools.h"
 
 class IOBase;
 
-class IMessage{
+class DLL_API IMessage{
 public:
     IMessage() = default;
     virtual ~IMessage() = default;

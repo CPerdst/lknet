@@ -10,8 +10,9 @@
 #include <boost/asio.hpp>
 #include <iostream>
 #include "IOBase.h"
+#include "tools.h"
 
-class Server {
+class DLL_API Server {
 public:
     Server(const std::string& host, unsigned short port, std::function<void(Message)> handler = nullptr);
     ~Server() = default;

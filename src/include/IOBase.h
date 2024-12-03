@@ -9,11 +9,12 @@
 #include <mutex>
 #include "Message.h"
 #include "eventCapturer.h"
+#include "tools.h"
 
 class Client;
 class Server;
 
-class IOBase : public std::enable_shared_from_this<IOBase> {
+class DLL_API IOBase : public std::enable_shared_from_this<IOBase> {
 public:
     friend Client;
     friend Server;
