@@ -107,7 +107,7 @@ void IOBase::doWrite() {
             if(canWrite)
                 doWrite();
         }else{
-//            RootError() << "socket closed as for write message failed：" << ec.message() << std::endl;
+            RootError() << "socket closed as for write message failed: " << ec.message() <<std::endl;
             if(closeHandler)
                 closeHandler();
         }

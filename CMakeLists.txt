@@ -46,11 +46,13 @@ endif ()
 # 获取 lknet 源码
 file(GLOB LKNET_SOURCE "src/source/*.cpp")
 # 编译 lknet 共享库
-add_library(lknet SHARED ${LKNET_SOURCE})
+add_library(lknet SHARED ${LKNET_SOURCE}
+        src/source/tools.cpp)
 
 # 定义 Windows 编译链接库所需宏
 if (WIN32)
     add_definitions(-D_WIN32_WINNT=0x0601)  # 目标 Windows 7
+#    target_compile_definitions(lknet PRIVATE -D_WIN32_WINNT=0x0601)
     target_compile_definitions(lknet PRIVATE EXPORTING_DLL)
 endif ()
 
@@ -66,4 +68,16 @@ find_package(Threads REQUIRED)
 # 链接动态库
 target_link_libraries(lknet PUBLIC Threads::Threads lklog)
 
+# ----------------
+# 测试服务器功能
+# ----------------
 
+add_executable(test_server_handler_set_func main.cpp)
+
+target_include_directories(test_server_handler_set_func PRIVATE src/include ${Boost_INCLUDE_DIR})
+
+target_link_directories(test_server_handler_set_func PRIVATE ${CMAKE_BINARY_DIR}/lib ${Boost_LIBRARY_DIRS})
+
+find_package(Threads REQUIRED)
+
+target_link_libraries(test_server_handler_set_func PRIVATE Threads::Threads lklog lknet)

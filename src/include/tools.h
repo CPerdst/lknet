@@ -19,4 +19,6 @@
 #endif
 #endif
 
+DLL_API void printClass();
+
 #endif //LKNET_TOOLS_H
