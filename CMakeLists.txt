@@ -41,8 +41,8 @@ endif ()
 file(GLOB LKNETSOURCE "src/source/*.cpp")
 # 编译 lknet 共享库
 add_library(lknet SHARED ${LKNETSOURCE})
-target_include_directories(lknet PRIVATE src/include ${Boost_INCLUDE_DIR})
-target_link_directories(lknet PRIVATE ${CMAKE_BINARY_DIR}/lib ${Boost_LIBRARY_DIRS})
-target_link_libraries(lknet PRIVATE pthread lklog)
+target_include_directories(lknet PUBLIC src/include ${Boost_INCLUDE_DIR})
+target_link_directories(lknet PUBLIC ${CMAKE_BINARY_DIR}/lib ${Boost_LIBRARY_DIRS})
+target_link_libraries(lknet PUBLIC pthread lklog)
 
 
