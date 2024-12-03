@@ -28,10 +28,14 @@ add_subdirectory(lklog)
 # 如果是 Windows 平台，需要设置对应的 Boost 库路径
 if(WIN32)
     # 设置 Boost 配置路径，并查找 Boost 的 Boost_INCLUDE_DIR 和 Boost_LIBRARY_DIRS
-    set(Boost_DIR "D:/boost-1.76.0-windows-x86_64-msvc")
+    # 使用 GNU Compiler Collection 的 MingW 编译套件依赖于同样使用 MingW 编译的 Boost
+    # 使用 MSVC 编译套件依赖于使用 MSVC 编译的 Boost
+    set(Boost_DIR "D:\\boost-1.76.0-windows-x86-mingw\\lib\\cmake\\Boost-1.86.0")
 endif ()
 
-find_package(Boost REQUIRED COMPONENTS)
+find_package(Boost REQUIRED)
+
+message(STATUS "${Boost_VERSION}")
 
 if(Boost_FOUND)
     message(STATUS "Found boost library ${Boost_VERSION}")
@@ -46,8 +50,7 @@ endif ()
 # 获取 lknet 源码
 file(GLOB LKNET_SOURCE "src/source/*.cpp")
 # 编译 lknet 共享库
-add_library(lknet SHARED ${LKNET_SOURCE}
-        src/source/tools.cpp)
+add_library(lknet SHARED ${LKNET_SOURCE})
 
 # 定义 Windows 编译链接库所需宏
 if (WIN32)
@@ -66,7 +69,7 @@ target_link_directories(lknet PUBLIC ${CMAKE_BINARY_DIR}/lib ${Boost_LIBRARY_DIR
 find_package(Threads REQUIRED)
 
 # 链接动态库
-target_link_libraries(lknet PUBLIC Threads::Threads lklog)
+target_link_libraries(lknet PUBLIC Threads::Threads lklog ws2_32 mswsock)
 
 # ----------------
 # 测试服务器功能
