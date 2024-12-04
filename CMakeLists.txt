@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.10)
 project(lknet)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -12,14 +12,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin) # 二进制文件输
 # 编译 lklog 共享库
 # ---------------
 
-# 通过 lklog 子库构建 liblklog.so 动态链接库
+# 引用 lklog 子模块
 add_subdirectory(lklog)
-
-# 获取 lklog 源码
-#file(GLOB LKLOGSOURCE "lklog/src/source/*.cpp")
-# 编译 lklog 共享库
-#add_library(lklog SHARED ${LKLOGSOURCE})
-#target_include_directories(lklog PRIVATE lklog/src/include)
 
 # ------------
 # 查找Boost库
@@ -34,8 +28,6 @@ if(WIN32)
 endif ()
 
 find_package(Boost REQUIRED)
-
-message(STATUS "${Boost_VERSION}")
 
 if(Boost_FOUND)
     message(STATUS "Found boost library ${Boost_VERSION}")
@@ -69,18 +61,14 @@ target_link_directories(lknet PUBLIC ${CMAKE_BINARY_DIR}/lib ${Boost_LIBRARY_DIR
 find_package(Threads REQUIRED)
 
 # 链接动态库
-target_link_libraries(lknet PUBLIC Threads::Threads lklog ws2_32 mswsock)
+if(WIN32)
+    target_link_libraries(lknet PUBLIC Threads::Threads lklog ws2_32 mswsock)
+else ()
+    target_link_libraries(lknet PUBLIC Threads::Threads lklog)
+endif ()
 
-# ----------------
-# 测试服务器功能
-# ----------------
+# ----------------------
+# 编译测试样例
+# ----------------------
 
-add_executable(test_server_handler_set_func main.cpp)
-
-target_include_directories(test_server_handler_set_func PRIVATE src/include ${Boost_INCLUDE_DIR})
-
-target_link_directories(test_server_handler_set_func PRIVATE ${CMAKE_BINARY_DIR}/lib ${Boost_LIBRARY_DIRS})
-
-find_package(Threads REQUIRED)
-
-target_link_libraries(test_server_handler_set_func PRIVATE Threads::Threads lklog lknet)
+add_subdirectory(example)
