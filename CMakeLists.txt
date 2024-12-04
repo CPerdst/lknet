@@ -52,7 +52,7 @@ if (WIN32)
 endif ()
 
 # 包含头文件路径
-target_include_directories(lknet PUBLIC src/include ${Boost_INCLUDE_DIR})
+target_include_directories(lknet PUBLIC src/include ${Boost_INCLUDE_DIR} json/single_include/nlohmann)
 
 # 包含连接库路径
 target_link_directories(lknet PUBLIC ${CMAKE_BINARY_DIR}/lib ${Boost_LIBRARY_DIRS})

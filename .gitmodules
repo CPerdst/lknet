@@ -1,3 +1,6 @@
 [submodule "lklog"]
 	path = lklog
 	url = https://github.com/CPerdst/lklog.git
+[submodule "json"]
+	path = json
+	url = https://github.com/nlohmann/json.git
