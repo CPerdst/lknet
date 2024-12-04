@@ -3,7 +3,7 @@
 //
 
 #include "iostream"
-#include "Server.h"
+#include "Client.h"
 
 void initLogger() {
     logger::logger::Root()->setLevel(packer::Debug);
@@ -31,9 +31,11 @@ int main(int argc, char* argv[]) {
     }else{
         RootError() << "usage: " << argv[0] << " [host] [port]";
     }
-
-    Server s(host, port);
-    s.start();
-
-    return 0;
+    Client c(host, port);
+    // 让 Client 运行在新线程之中，需要保证主线程一直运行
+    c.start(true);
+    while(true){
+        c.send("hello server");
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+    }
 }
