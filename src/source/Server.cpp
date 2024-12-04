@@ -19,6 +19,11 @@ runInOtherThread(false)
     RootInfo() << "Server Running on " << \
     endpoint.address().to_string() << \
     ":" << endpoint.port();
+    // init default messageHandler
+    setMessageHandler([this](Message message){
+        // output the message
+        RootInfo() << "server received: " << message.parseMessageToString().c_str();
+    });
     doAccept();
 }
 
@@ -55,17 +60,14 @@ void Server::doAccept() {
                     }
                 }
             });
-            ioBases.back()->setMessageHandler([this](Message message){
-                // handle the message
-                RootInfo() << "server received: " << message.parseMessageToString().c_str();
-            });
+            ioBases.back()->setMessageHandler(messageHandler);
         }
         base->start();
         doAccept();
     });
 }
 
-void Server::setMessageHandler(std::function<void(Message)>& handler) {
+void Server::setMessageHandler(std::function<void(Message)> handler) {
     std::unique_lock<std::mutex> lock(ioBasesMutex);
     messageHandler = std::move(handler);
     for(const auto& ioBase : ioBases){

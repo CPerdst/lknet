@@ -19,7 +19,7 @@ public:
 
     void start(bool runInOtherThread = false);
 
-    void setMessageHandler(std::function<void(Message)>& handler);
+    void setMessageHandler(std::function<void(Message)> handler);
 
 private:
 
