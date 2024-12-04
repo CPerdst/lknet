@@ -2,6 +2,13 @@
 // Created by zwj1 on 24-12-4.
 //
 
+/**
+ * 代码使用 Server 类创建了服务器对象，通过 start 函数，
+ * 启动该对象。
+ * server 对象能够自动接收来自客户端的数据，并将其使用-
+ * lklog 模块进行输出。
+ */
+
 #include "iostream"
 #include "Server.h"
 

@@ -2,6 +2,12 @@
 // Created by zwj1 on 24-12-4.
 //
 
+/**
+ * 代码使用 Client 类创建客户端对象。
+ * start 函数开启客户端对象，send 函数-
+ * 可以发送数据到已连接的服务器。
+ */
+
 #include "iostream"
 #include "Client.h"
 
