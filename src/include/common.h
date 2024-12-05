@@ -6,8 +6,9 @@
 #define LKNET_COMMON_H
 
 #include "json.hpp"
+#include "tools.h"
 
-struct DataBase {
+struct DLL_API DataBase {
     DataBase() = default;
     ~DataBase() = default;
 
@@ -15,7 +16,7 @@ struct DataBase {
     virtual void from_json(nlohmann::json& j) = 0;
 };
 
-struct myTestDataBase: public DataBase{
+struct DLL_API myTestDataBase: public DataBase{
     int age;
     std::string name;
 

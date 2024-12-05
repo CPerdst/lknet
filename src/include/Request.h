@@ -9,11 +9,12 @@
 #include "functional"
 #include "memory"
 #include "map"
+#include "tools.h"
 
-class Request {
+class DLL_API Request {
 public:
 
-    class RequestFactory{
+    class DLL_API RequestFactory{
     public:
         using Creator = std::function<std::unique_ptr<DataBase>()>;
 

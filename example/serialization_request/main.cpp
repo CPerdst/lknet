@@ -24,6 +24,9 @@ struct service: public DataBase{
 };
 
 int main(){
+    Request::RequestFactory::Creator asd = [](){
+        return std::make_unique<myTestDataBase>();
+    };
     // 注册 myTestDataBase
     RootInfo() << "----------- First register data struct \"myTestDataBase\" -----------" << std::endl;
     Request::RequestFactory::getInstance().registerDatabase(0, [](){
