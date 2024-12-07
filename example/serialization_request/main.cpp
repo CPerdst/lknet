@@ -2,16 +2,17 @@
 // Created by zwj1 on 24-12-4.
 //
 
-#include "Request.h"
 #include "eventCapturer.h"
+#include "common.h"
+#include "iostream"
 
 struct service: public DataBase{
     std::string serviceName;
     int value{};
 
     service() = default;
-    ~service() = default;
-    service(int val, std::string name): value(val), serviceName(name) {}
+    ~service() override = default;
+    service(int val, std::string name): value(val), serviceName(std::move(name)) {}
 
     nlohmann::json to_json() override{
         return {{"service_name", serviceName}, {"value", value}};
@@ -23,6 +24,36 @@ struct service: public DataBase{
     }
 };
 
+enum DATABASE_MAP {
+    SERVICE = 1
+};
+
+int main() {
+    // register service struct to DataBaseRegister
+    DataBaseRegister::getInstance().registerDataBase(SERVICE, [](){
+        return std::make_unique<service>();
+    });
+
+    // Request serialization test
+    std::cout << "Request serialization test" << std::endl;
+    Request r(SERVICE, std::make_unique<service>(19, "John"));
+    nlohmann::json requestJson = r.to_json();
+    std::cout << requestJson.dump(4) << std::endl;
+
+    // Deserialization Request Object
+    std::cout << "Deserialization Request Object" << std::endl;
+    std::string myJsonStr = R"({"data": {"service_name": "John", "value": 19}, "id": 1})";
+    nlohmann::json myRequestJson = nlohmann::json::parse(myJsonStr);
+    Request a{};
+    a.from_json(myRequestJson);
+    std::cout << "id: " << a.getId() << \
+    "\ndata:\n" << "value: " << dynamic_cast<service*>(a.getData().get())->value << \
+    "\nserviceName: " << dynamic_cast<service*>(a.getData().get())->serviceName << std::endl;
+}
+
+// ** 废弃代码 **
+
+/*
 int main(){
     Request::RequestFactory::Creator asd = [](){
         return std::make_unique<myTestDataBase>();
@@ -79,4 +110,5 @@ int main(){
     RootInfo() << "\ndata:\n" << test4.getData()->to_json().dump(4) << std::endl;
 
 }
+*/
 
