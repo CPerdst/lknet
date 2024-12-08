@@ -3,10 +3,8 @@
 //
 
 /**
- * 代码使用 Server 类创建了服务器对象，通过 start 函数，
- * 启动该对象。
- * server 对象能够自动接收来自客户端的数据，并将其使用-
- * lklog 模块进行输出。
+ * simple server
+ * 此样例展示了如何通过 server 实例来实现自定义协议消息处理
  */
 
 #include "iostream"
@@ -17,8 +15,80 @@ void initLogger() {
     logger::logger::Root()->setLogFormater("[%level] [%s {%Y-%m-%d %H-%M-%S}]: %message\n");
 }
 
-int main(int argc, char* argv[]) {
+enum DATABASE_MAP {
+    LOGIN_DATA = 1,
+    REGISTER_DATA = 2
+};
+
+/**
+ * @note 自定义的DataBase结构体需要继承自DataBase抽象类
+ *       并实现from_json和to_json两个接口
+ */
+
+// 用于登录的登录数据结构
+struct LoginDataBase: public DataBase {
+    std::string username;
+    std::string password;
+
+    void from_json(nlohmann::json &j) override {
+        j.at("username").get_to(username);
+        j.at("password").get_to(password);
+    }
+
+    nlohmann::json to_json() override {
+        return {{"username", username}, {"password", password}};
+    }
+};
+
+// 用于注册的注册数据结构
+struct RegisterDataBase: public DataBase {
+    std::string username;
+    std::string password;
+
+    void from_json(nlohmann::json &j) override {
+        j.at("username").get_to(username);
+        j.at("password").get_to(password);
+    }
+
+    nlohmann::json to_json() override {
+        return {{"username", username}, {"password", password}};
+    }
+};
+
+// 注册协议DataBase
+void registerDataBase() {
+    // 注册登录协议结构
+    DataBaseRegister::getInstance().registerDataBase(LOGIN_DATA, [](){
+        return std::make_unique<LoginDataBase>();
+    });
+    // 注册注册协议结构
+    DataBaseRegister::getInstance().registerDataBase(REGISTER_DATA, [](){
+        return std::make_unique<RegisterDataBase>();
+    });
+};
+
+// 注册协议Handler
+void registerHandler() {
+    RequestHandlerRouter::getInstance().registerHandlerGetter(LOGIN_DATA, [](){
+        return [](const Request& r){
+            std::cout << "this is handler(id: 1)" << std::endl;
+        };
+    });
+    RequestHandlerRouter::getInstance().registerHandlerGetter(REGISTER_DATA, [](){
+        return [](const Request& r){
+            std::cout << "this is handler(id: 2)" << std::endl;
+        };
+    });
+}
+
+void initServer() {
     initLogger();
+    registerDataBase();
+    registerHandler();
+}
+
+int main(int argc, char* argv[]) {
+    initServer();
     // connect to 127.0.0.1 : 8080
     std::string host;
     unsigned short port = 0;

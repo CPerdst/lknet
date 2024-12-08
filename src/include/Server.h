@@ -11,6 +11,34 @@
 #include <iostream>
 #include "IOBase.h"
 #include "tools.h"
+#include "common.h"
+
+class DLL_API RequestHandlerRouter {
+public:
+    using HandlerWithoutResponse = std::function<void(const Request&)>;
+    using HandlerWithResponse = std::function<Response(const Request&)>;
+    using HandlerGetterWithoutResponse = std::function<HandlerWithoutResponse()>;
+    using HandlerGetterWithResponse = std::function<HandlerWithResponse()>;
+
+    RequestHandlerRouter(const RequestHandlerRouter&) = delete;
+    RequestHandlerRouter& operator=(const RequestHandlerRouter&) = delete;
+
+    static RequestHandlerRouter &getInstance();
+
+    void registerHandlerGetter(unsigned short id, HandlerGetterWithoutResponse getter);
+
+    HandlerGetterWithoutResponse& get(unsigned short id);
+
+private:
+    RequestHandlerRouter() = default;
+    ~RequestHandlerRouter() = default;
+
+    std::map<unsigned short, HandlerGetterWithoutResponse> mapper;
+
+    static RequestHandlerRouter instance;
+
+    std::mutex instanceMutex;
+};
 
 class DLL_API Server {
 public:

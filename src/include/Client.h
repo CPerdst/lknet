@@ -7,6 +7,7 @@
 #include <memory>
 #include "IOBase.h"
 #include "tools.h"
+#include "common.h"
 
 class DLL_API Client {
 public:
@@ -14,6 +15,7 @@ public:
 
     void start(bool runInOtherThread = false);
     void send(const std::string& message);
+    void send(const Request& request);
     void close();
 
 private:

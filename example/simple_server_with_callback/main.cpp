@@ -2,6 +2,12 @@
 // Created by zwj1 on 24-12-4.
 //
 
+/**
+ * simple server with callback
+ * 此样例展示了通过自定义 server 实例的 message callback 实现
+ * 自定义 message 处理的功能
+ */
+
 #include "iostream"
 #include "Server.h"
 

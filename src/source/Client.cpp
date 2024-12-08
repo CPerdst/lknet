@@ -56,6 +56,13 @@ void Client::send(const std::string& message) {
     ioBase->send(msg);
 }
 
+void Client::send(const Request& request) {
+    Message msg;
+    nlohmann::json serialization_request_json = request.to_json();
+    msg.buildMessageFromString(serialization_request_json.dump());
+    ioBase->send(msg);
+}
+
 void Client::close() {
     ioBase->socket().close();
     ioContext.stop();

@@ -4,6 +4,34 @@
 
 #include "Server.h"
 
+// -------------------------
+// RequestHandlerRouter 实现
+// -------------------------
+
+RequestHandlerRouter RequestHandlerRouter::instance;
+
+RequestHandlerRouter &RequestHandlerRouter::getInstance() {
+    return instance;
+}
+
+void RequestHandlerRouter::registerHandlerGetter(unsigned short id, RequestHandlerRouter::HandlerGetterWithoutResponse getter) {
+    std::unique_lock<std::mutex> lock(instanceMutex);
+    mapper[id] = std::move(getter);
+}
+
+RequestHandlerRouter::HandlerGetterWithoutResponse& RequestHandlerRouter::get(unsigned short id) {
+    std::unique_lock<std::mutex> lock(instanceMutex);
+    auto it = mapper.find(id);
+    if(it != mapper.end()){
+        return it->second;
+    }
+    throw std::runtime_error("RequestHandlerRouter can't find(id: " + std::to_string(id) + ")");
+}
+
+// -------------------------
+// Server 实现
+// -------------------------
+
 Server::Server(const std::string& host, unsigned short port, std::function<void(Message)> handler):
 acceptor(ioContext),
 messageHandler(std::move(handler)),
@@ -20,7 +48,20 @@ runInOtherThread(false)
     endpoint.address().to_string() << \
     ":" << endpoint.port();
     // init default messageHandler
-    setMessageHandler(handler);
+    if(handler){
+        setMessageHandler(handler);
+    }else{
+        // 默认使用RequestHandlerRouter进行路由处理Request
+        setMessageHandler([this](Message message){
+            // 使用 RequestHandlerRouter 进行 Request-Handler 路由
+            nlohmann::json requestJson = nlohmann::json::parse(message.parseMessageToString());
+            Request r{};
+            r.from_json(requestJson);
+            auto handler = RequestHandlerRouter::getInstance().get(r.getId())();
+            // 进行事务处理
+            handler(r);
+        });
+    }
     doAccept();
 }
 

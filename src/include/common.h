@@ -103,7 +103,7 @@ public:
     void setData(std::unique_ptr<DataBase> data_);
 
 private:
-    unsigned short id;
+    unsigned short id{};
     std::unique_ptr<DataBase> data;
 
 };
