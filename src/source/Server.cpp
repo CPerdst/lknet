@@ -20,10 +20,7 @@ runInOtherThread(false)
     endpoint.address().to_string() << \
     ":" << endpoint.port();
     // init default messageHandler
-    setMessageHandler([this](Message message){
-        // output the message
-        RootInfo() << "server received: " << message.parseMessageToString().c_str();
-    });
+    setMessageHandler(handler);
     doAccept();
 }
 
