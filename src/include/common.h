@@ -46,6 +46,13 @@ public:
 
     void registerDataBase(unsigned short id, const Creator& c);
 
+    /**
+     * 根据注册的 id-creator 创建相应的 std::unique_ptr<DataBase> 对象。
+     * throw std::runtime_error();
+     *
+     * @param id
+     * @return std::unique_ptr<DataBase>
+     */
     std::unique_ptr<DataBase> create(unsigned short id);
 
 private:

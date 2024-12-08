@@ -53,13 +53,17 @@ runInOtherThread(false)
     }else{
         // 默认使用RequestHandlerRouter进行路由处理Request
         setMessageHandler([this](Message message){
-            // 使用 RequestHandlerRouter 进行 Request-Handler 路由
-            nlohmann::json requestJson = nlohmann::json::parse(message.parseMessageToString());
-            Request r{};
-            r.from_json(requestJson);
-            auto handler = RequestHandlerRouter::getInstance().get(r.getId())();
-            // 进行事务处理
-            handler(r);
+            try{
+                // 使用 RequestHandlerRouter 进行 Request-Handler 路由
+                nlohmann::json requestJson = nlohmann::json::parse(message.parseMessageToString());
+                Request r{};
+                r.from_json(requestJson);
+                auto handler = RequestHandlerRouter::getInstance().get(r.getId())();
+                // 进行事务处理
+                handler(r);
+            }catch(std::exception& e){
+                RootError() << "The Message Was Dropped as: " << e.what();
+            }
         });
     }
     doAccept();
