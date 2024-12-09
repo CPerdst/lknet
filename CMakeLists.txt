@@ -71,4 +71,6 @@ endif ()
 # 编译测试样例
 # ----------------------
 
-add_subdirectory(example)
+if (EXAMPLE_BUILD)
+    add_subdirectory(example)
+endif ()

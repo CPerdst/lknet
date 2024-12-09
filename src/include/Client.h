@@ -14,11 +14,11 @@ public:
     Client(const std::string& host, unsigned short port);
 
     void start(bool runInOtherThread = false);
-    void send(const std::string& message);
     void send(const Request& request);
     void close();
 
 private:
+    void send(const std::string& message);
     void do_connect(const boost::asio::ip::tcp::resolver::results_type& endpoints);
 
     boost::asio::io_context ioContext;
