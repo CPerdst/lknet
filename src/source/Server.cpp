@@ -16,10 +16,17 @@ RequestHandlerRouter &RequestHandlerRouter::getInstance() {
 
 void RequestHandlerRouter::registerHandlerGetter(unsigned short id, RequestHandlerRouter::HandlerGetterWithoutResponse getter) {
     std::unique_lock<std::mutex> lock(instanceMutex);
-    mapper[id] = std::move(getter);
+    mapper[id] = std::variant<HandlerGetterWithoutResponse, HandlerGetterWithResponse>(getter);
 }
 
-RequestHandlerRouter::HandlerGetterWithoutResponse& RequestHandlerRouter::get(unsigned short id) {
+void RequestHandlerRouter::registerHandlerGetterWithResponse(unsigned short id, RequestHandlerRouter::HandlerGetterWithResponse getter) {
+    std::unique_lock<std::mutex> lock(instanceMutex);
+    mapper[id] = std::variant<HandlerGetterWithoutResponse, HandlerGetterWithResponse>(getter);
+}
+
+std::variant<RequestHandlerRouter::HandlerGetterWithoutResponse, \
+RequestHandlerRouter::HandlerGetterWithResponse>&
+        RequestHandlerRouter::get(unsigned short id) {
     std::unique_lock<std::mutex> lock(instanceMutex);
     auto it = mapper.find(id);
     if(it != mapper.end()){
@@ -32,7 +39,7 @@ RequestHandlerRouter::HandlerGetterWithoutResponse& RequestHandlerRouter::get(un
 // Server 实现
 // -------------------------
 
-Server::Server(const std::string& host, unsigned short port, std::function<void(Message)> handler):
+Server::Server(const std::string& host, unsigned short port, std::function<void(Message, IOBase*)> handler):
 acceptor(ioContext),
 messageHandler(std::move(handler)),
 runInOtherThread(false)
@@ -52,17 +59,24 @@ runInOtherThread(false)
         setMessageHandler(handler);
     }else{
         // 默认使用RequestHandlerRouter进行路由处理Request
-        setMessageHandler([this](Message message){
-            try{
-                // 使用 RequestHandlerRouter 进行 Request-Handler 路由
-                nlohmann::json requestJson = nlohmann::json::parse(message.parseMessageToString());
-                Request r{};
-                r.from_json(requestJson);
-                auto handler = RequestHandlerRouter::getInstance().get(r.getId())();
-                // 进行事务处理
-                handler(r);
-            }catch(std::exception& e){
-                RootError() << "The Message Was Dropped as: " << e.what();
+        setMessageHandler([this](Message message, IOBase* base){
+            // 使用 RequestHandlerRouter 进行 Request-Handler 路由
+            nlohmann::json requestJson = nlohmann::json::parse(message.parseMessageToString());
+            Request r{};
+            r.from_json(requestJson);
+            auto handlerVariant = RequestHandlerRouter::getInstance().get(r.getId());
+            // 进行事务处理
+            if(std::holds_alternative<RequestHandlerRouter::HandlerGetterWithoutResponse>(handlerVariant)){
+                auto creator = std::get<RequestHandlerRouter::HandlerGetterWithoutResponse>(handlerVariant);
+                creator()(r);
+            }else if(std::holds_alternative<RequestHandlerRouter::HandlerGetterWithResponse>(handlerVariant)){
+                auto creator = std::get<RequestHandlerRouter::HandlerGetterWithResponse>(handlerVariant);
+                auto response = creator()(r);
+                // 发送响应
+                nlohmann::json responseJson = response.to_json();
+                Message responseMessage;
+                responseMessage.buildMessageFromString(responseJson.dump());
+                base->send(responseMessage);
             }
         });
     }
@@ -109,10 +123,12 @@ void Server::doAccept() {
     });
 }
 
-void Server::setMessageHandler(std::function<void(Message)> handler) {
+void Server::setMessageHandler(std::function<void(Message, IOBase*)> handler) {
     std::unique_lock<std::mutex> lock(ioBasesMutex);
     messageHandler = std::move(handler);
     for(const auto& ioBase : ioBases){
-        ioBase->setMessageHandler(messageHandler);
+        ioBase->setMessageHandler(handler);
     }
 }
+
+

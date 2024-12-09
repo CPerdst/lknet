@@ -13,9 +13,9 @@ struct DLL_API DataBase {
     DataBase() = default;
     virtual ~DataBase() = default;
 
-    virtual nlohmann::json to_json() = 0;
+    virtual nlohmann::json to_json() = 0; // 序列化
 
-    virtual void from_json(nlohmann::json& j) = 0;
+    virtual void from_json(nlohmann::json& j) = 0; // 反序列化
 };
 
 /**
@@ -29,6 +29,24 @@ struct DLL_API myTestDataBase: public DataBase{
     nlohmann::json to_json() override; // 序列化
 
     void from_json(nlohmann::json &j) override; // 反序列化
+};
+
+struct DLL_API DataBaseStatus: public DataBase {
+    enum RESPONSE_STATUS {
+        Success = 200
+    };
+
+    RESPONSE_STATUS status;
+
+    DataBaseStatus() = default;
+
+    ~DataBaseStatus() override = default;
+
+    explicit DataBaseStatus(RESPONSE_STATUS status);
+
+    nlohmann::json to_json() override; // 序列化
+
+    void from_json(nlohmann::json& j) override; // 反序列化
 };
 
 /**

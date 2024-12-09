@@ -25,7 +25,7 @@ public:
 
     void start();
     void send(const Message& msg);
-    void setMessageHandler(const std::function<void(Message)>& handler);
+    void setMessageHandler(const std::function<void(Message, IOBase*)>& handler);
     void setCloseHandler(const std::function<void(void)>& handler);
 
 protected:
@@ -41,7 +41,7 @@ private:
 
     std::deque<Message> writeMessages;
     std::mutex writeMutex;
-    std::function<void(Message)> messageHandler;
+    std::function<void(Message, IOBase*)> messageHandler;
 
     std::function<void(void)> closeHandler;
 

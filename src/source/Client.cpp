@@ -8,7 +8,7 @@ resolver(ioContext),
 ioBase(std::make_shared<IOBase>(ioContext)),
 runInOtherThread(false)
 {
-    ioBase->setMessageHandler([this](Message message){
+    ioBase->setMessageHandler([this](Message message, IOBase*){
         std::string messageString = message.parseMessageToString();
         std::cout << messageString << std::endl;
     });

@@ -39,6 +39,24 @@ std::unique_ptr<DataBase> DataBaseRegister::create(unsigned short id) {
 }
 
 // ----------------------
+// DataBaseStatus 实现
+// ----------------------
+
+DataBaseStatus::DataBaseStatus(RESPONSE_STATUS status):
+status(status)
+{
+
+}
+
+nlohmann::json DataBaseStatus::to_json() {
+    return {"status", status};
+}
+
+void DataBaseStatus::from_json(nlohmann::json &j) {
+    status = j.at("status");
+}
+
+// ----------------------
 // Request 实现
 // ----------------------
 

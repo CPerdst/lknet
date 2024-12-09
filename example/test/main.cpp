@@ -56,9 +56,10 @@
 //    }
 //};
 
+#include "variant"
+
 int main() {
-
-
+    /*
 //    std::unique_ptr<DataBase> obj = std::make_unique<person>(19, "John");
 //    std::cout << obj->to_json().dump(4) << std::endl;
 //    std::unique_ptr<DataBase> obj2 = std::make_unique<animal>(true, "John");
@@ -92,6 +93,9 @@ int main() {
 //            exit(EXIT_FAILURE);
 //        }
 //    }
+    */
+
+    std::variant<int, std::string> item;
 
     return 0;
 }

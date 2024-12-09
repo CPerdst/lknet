@@ -12,12 +12,13 @@
 
 void initLogger() {
     logger::logger::Root()->setLevel(packer::Debug);
-    logger::logger::Root()->setLogFormater("[%level] [%s {%Y-%m-%d %H-%M-%S}]: %message\n");
+    logger::logger::Root()->setLogFormater("[%level] [%s {%Y-%m-%d %H-%M-%S}] [%path:%line]: %message\n");
 }
 
-enum DATABASE_MAP {
-    LOGIN_DATA = 1,
-    REGISTER_DATA = 2
+enum PROTOCOL_MAP {
+    REQUEST_LOGIN_DATA = 0x101,
+    REQUEST_REGISTER_DATA = 0x102,
+    RESPONSE_STATUS = 0x201
 };
 
 /**
@@ -58,26 +59,32 @@ struct RegisterDataBase: public DataBase {
 // 注册协议DataBase
 void registerDataBase() {
     // 注册登录协议结构
-    DataBaseRegister::getInstance().registerDataBase(LOGIN_DATA, [](){
+    DataBaseRegister::getInstance().registerDataBase(REQUEST_LOGIN_DATA, [](){
         return std::make_unique<LoginDataBase>();
     });
     // 注册注册协议结构
-    DataBaseRegister::getInstance().registerDataBase(REGISTER_DATA, [](){
+    DataBaseRegister::getInstance().registerDataBase(REQUEST_REGISTER_DATA, [](){
         return std::make_unique<RegisterDataBase>();
+    });
+    // 注册响应状态结构体
+    DataBaseRegister::getInstance().registerDataBase(RESPONSE_STATUS, [](){
+        return std::make_unique<DataBaseStatus>();
     });
 };
 
 // 注册协议Handler
 void registerHandler() {
-    RequestHandlerRouter::getInstance().registerHandlerGetter(LOGIN_DATA, [](){
+    RequestHandlerRouter::getInstance().registerHandlerGetter(REQUEST_LOGIN_DATA, [](){
         return [](const Request& r){
             std::cout << "this is handler(id: 1)" << std::endl;
         };
     });
-    RequestHandlerRouter::getInstance().registerHandlerGetter(REGISTER_DATA, [](){
-        return [](const Request& r){
-            std::cout << "this is handler(id: 2)" << std::endl;
-        };
+    RequestHandlerRouter::getInstance().registerHandlerGetterWithResponse(REQUEST_REGISTER_DATA, []() -> RequestHandlerRouter::HandlerWithResponse {
+        return [](const Request& r) -> Response {
+                std::cout << "this is handler(id: 2)" << std::endl;
+                // 返回响应
+                return {RESPONSE_STATUS, std::make_unique<DataBaseStatus>(DataBaseStatus::Success)};
+            };
     });
 }
 

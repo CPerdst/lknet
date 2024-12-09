@@ -38,7 +38,7 @@ void IOBase::send(const Message &msg) {
     }
 }
 
-void IOBase::setMessageHandler(const std::function<void(Message)> &handler) {
+void IOBase::setMessageHandler(const std::function<void(Message, IOBase*)> &handler) {
     messageHandler = handler;
 }
 
@@ -73,13 +73,19 @@ void IOBase::doReadBody() {
     char* body = readMessage.bodyBuffer();
     boost::asio::async_read(sock, boost::asio::buffer(body, readMessageSize),
                             [this, self](std::error_code ec, std::size_t size){
-        if(!ec){
-            if(messageHandler){
-                messageHandler(readMessage);
+        try{
+            if(!ec){
+                if(messageHandler){
+                    messageHandler(readMessage, this);
+                }
+                doReadHeader();
+            }else{
+                throw std::runtime_error("socket closed as body receive failed");
             }
-            doReadHeader();
-        }else{
-            RootError() << "socket closed as body receive failed";
+        }catch(std::exception& e){
+            RootError() << ": closed connection with: " \
+            << sock.remote_endpoint().address().to_string() << ":" << sock.remote_endpoint().port() \
+            << " as: " << e.what();
             if(closeHandler) closeHandler();
         }
     });

@@ -12,6 +12,7 @@
 #include "IOBase.h"
 #include "tools.h"
 #include "common.h"
+#include "variant"
 
 class DLL_API RequestHandlerRouter {
 public:
@@ -27,13 +28,17 @@ public:
 
     void registerHandlerGetter(unsigned short id, HandlerGetterWithoutResponse getter);
 
-    HandlerGetterWithoutResponse& get(unsigned short id);
+    void registerHandlerGetterWithResponse(unsigned short id, HandlerGetterWithResponse getter);
+
+    std::variant<RequestHandlerRouter::HandlerGetterWithoutResponse, \
+    RequestHandlerRouter::HandlerGetterWithResponse>& \
+    get(unsigned short id);
 
 private:
     RequestHandlerRouter() = default;
     ~RequestHandlerRouter() = default;
 
-    std::map<unsigned short, HandlerGetterWithoutResponse> mapper;
+    std::map<unsigned short, std::variant<HandlerGetterWithoutResponse, HandlerGetterWithResponse>> mapper;
 
     static RequestHandlerRouter instance;
 
@@ -42,12 +47,12 @@ private:
 
 class DLL_API Server {
 public:
-    Server(const std::string& host, unsigned short port, std::function<void(Message)> handler = nullptr);
+    Server(const std::string& host, unsigned short port, std::function<void(Message, IOBase*)> handler = nullptr);
     ~Server() = default;
 
     void start(bool runInOtherThread = false);
 
-    void setMessageHandler(std::function<void(Message)> handler);
+    void setMessageHandler(std::function<void(Message, IOBase*)> handler);
 
 private:
 
@@ -60,7 +65,7 @@ private:
 
     std::mutex ioBasesMutex;
 
-    std::function<void(Message)> messageHandler;
+    std::function<void(Message, IOBase*)> messageHandler;
 
     bool runInOtherThread{};
 
