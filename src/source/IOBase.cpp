@@ -38,6 +38,18 @@ void IOBase::send(const Message &msg) {
     }
 }
 
+void IOBase::send(Message &&msg) {
+    bool canDoWrite = false;
+    {
+        std::unique_lock<std::mutex> lock(writeMutex);
+        canDoWrite = writeMessages.empty();
+        writeMessages.push_back(std::move(msg));
+    }
+    if(canDoWrite){
+        doWrite();
+    }
+}
+
 void IOBase::setMessageHandler(const std::function<void(Message, IOBase*)> &handler) {
     messageHandler = handler;
 }

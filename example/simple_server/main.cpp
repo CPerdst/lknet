@@ -15,10 +15,10 @@ void initLogger() {
     logger::logger::Root()->setLogFormater("[%level] [%s {%Y-%m-%d %H-%M-%S}] [%path:%line]: %message\n");
 }
 
-enum PROTOCOL_MAP {
-    REQUEST_LOGIN_DATA = 0x101,
-    REQUEST_REGISTER_DATA = 0x102,
-    RESPONSE_STATUS = 0x201
+enum PROTOCOL_MAPS {
+    PROTOCOL_REQUEST_LOGIN = 0x101,
+    PROTOCOL_REQUEST_REGISTER = 0x102,
+    PROTOCOL_RESPONSE_STATUS = 0x201
 };
 
 /**
@@ -31,7 +31,7 @@ struct LoginDataBase: public DataBase {
     std::string username;
     std::string password;
 
-    void from_json(nlohmann::json &j) override {
+    void from_json(const nlohmann::json &j) override {
         j.at("username").get_to(username);
         j.at("password").get_to(password);
     }
@@ -46,7 +46,7 @@ struct RegisterDataBase: public DataBase {
     std::string username;
     std::string password;
 
-    void from_json(nlohmann::json &j) override {
+    void from_json(const nlohmann::json &j) override {
         j.at("username").get_to(username);
         j.at("password").get_to(password);
     }
@@ -59,31 +59,32 @@ struct RegisterDataBase: public DataBase {
 // 注册协议DataBase
 void registerDataBase() {
     // 注册登录协议结构
-    DataBaseRegister::getInstance().registerDataBase(REQUEST_LOGIN_DATA, [](){
+    DataBaseRegister::getInstance().registerDataBase(PROTOCOL_REQUEST_LOGIN, [](){
         return std::make_unique<LoginDataBase>();
     });
     // 注册注册协议结构
-    DataBaseRegister::getInstance().registerDataBase(REQUEST_REGISTER_DATA, [](){
+    DataBaseRegister::getInstance().registerDataBase(PROTOCOL_REQUEST_REGISTER, [](){
         return std::make_unique<RegisterDataBase>();
     });
     // 注册响应状态结构体
-    DataBaseRegister::getInstance().registerDataBase(RESPONSE_STATUS, [](){
+    DataBaseRegister::getInstance().registerDataBase(PROTOCOL_RESPONSE_STATUS, [](){
         return std::make_unique<DataBaseStatus>();
     });
 };
 
 // 注册协议Handler
 void registerHandler() {
-    RequestHandlerRouter::getInstance().registerHandlerGetter(REQUEST_LOGIN_DATA, [](){
-        return [](const Request& r){
+    RequestHandlerRouter::getInstance().registerHandlerGetterWithResponse(PROTOCOL_REQUEST_LOGIN, [](){
+        return [](const Request& r) -> Response{
             std::cout << "this is handler(id: 1)" << std::endl;
+            return {PROTOCOL_RESPONSE_STATUS, std::make_unique<DataBaseStatus>(DataBaseStatus::Success)};
         };
     });
-    RequestHandlerRouter::getInstance().registerHandlerGetterWithResponse(REQUEST_REGISTER_DATA, []() -> RequestHandlerRouter::HandlerWithResponse {
+    RequestHandlerRouter::getInstance().registerHandlerGetterWithResponse(PROTOCOL_REQUEST_REGISTER, []() -> RequestHandlerRouter::HandlerWithResponse {
         return [](const Request& r) -> Response {
                 std::cout << "this is handler(id: 2)" << std::endl;
                 // 返回响应
-                return {RESPONSE_STATUS, std::make_unique<DataBaseStatus>(DataBaseStatus::Success)};
+                return {PROTOCOL_RESPONSE_STATUS, std::make_unique<DataBaseStatus>(DataBaseStatus::Success)};
             };
     });
 }

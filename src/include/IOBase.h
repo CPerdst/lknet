@@ -25,6 +25,7 @@ public:
 
     void start();
     void send(const Message& msg);
+    void send(Message&& msg);
     void setMessageHandler(const std::function<void(Message, IOBase*)>& handler);
     void setCloseHandler(const std::function<void(void)>& handler);
 

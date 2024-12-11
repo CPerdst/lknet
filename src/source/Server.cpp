@@ -73,9 +73,8 @@ runInOtherThread(false)
                 auto creator = std::get<RequestHandlerRouter::HandlerGetterWithResponse>(handlerVariant);
                 auto response = creator()(r);
                 // 发送响应
-                nlohmann::json responseJson = response.to_json();
                 Message responseMessage;
-                responseMessage.buildMessageFromString(responseJson.dump());
+                responseMessage.buildMessageFromString(response.to_json().dump());
                 base->send(responseMessage);
             }
         });

@@ -4,7 +4,7 @@
 
 #include "common.h"
 
-void myTestDataBase::from_json(nlohmann::json &j) {
+void myTestDataBase::from_json(const nlohmann::json &j) {
     j.at("age").get_to(age);
     j.at("name").get_to(name);
 }
@@ -49,10 +49,10 @@ status(status)
 }
 
 nlohmann::json DataBaseStatus::to_json() {
-    return {"status", status};
+    return {{"status", status}};
 }
 
-void DataBaseStatus::from_json(nlohmann::json &j) {
+void DataBaseStatus::from_json(const nlohmann::json &j) {
     status = j.at("status");
 }
 
@@ -71,7 +71,7 @@ nlohmann::json Request::to_json() const {
     return {{"id", id}, {"data", data->to_json()}};
 }
 
-void Request::from_json(nlohmann::json &j) {
+void Request::from_json(const nlohmann::json &j) {
     id = j.at("id");
     data = DataBaseRegister::getInstance().create(id);
     data->from_json(j.at("data"));
@@ -108,7 +108,7 @@ nlohmann::json Response::to_json() const {
     return {{"id", id}, {"data", data->to_json()}};
 }
 
-void Response::from_json(nlohmann::json &j) {
+void Response::from_json(const nlohmann::json &j) {
     id = j.at("id");
     data = DataBaseRegister::getInstance().create(id);
     data->from_json(j.at("data"));

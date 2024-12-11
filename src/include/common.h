@@ -15,7 +15,7 @@ struct DLL_API DataBase {
 
     virtual nlohmann::json to_json() = 0; // 序列化
 
-    virtual void from_json(nlohmann::json& j) = 0; // 反序列化
+    virtual void from_json(const nlohmann::json& j) = 0; // 反序列化
 };
 
 /**
@@ -28,7 +28,7 @@ struct DLL_API myTestDataBase: public DataBase{
 
     nlohmann::json to_json() override; // 序列化
 
-    void from_json(nlohmann::json &j) override; // 反序列化
+    void from_json(const nlohmann::json &j) override; // 反序列化
 };
 
 struct DLL_API DataBaseStatus: public DataBase {
@@ -46,7 +46,7 @@ struct DLL_API DataBaseStatus: public DataBase {
 
     nlohmann::json to_json() override; // 序列化
 
-    void from_json(nlohmann::json& j) override; // 反序列化
+    void from_json(const nlohmann::json& j) override; // 反序列化
 };
 
 /**
@@ -93,7 +93,7 @@ public:
 
     nlohmann::json to_json() const;
 
-    void from_json(nlohmann::json& j);
+    void from_json(const nlohmann::json& j);
 
     unsigned short getId() const;
 
@@ -117,7 +117,7 @@ public:
 
     nlohmann::json to_json() const;
 
-    void from_json(nlohmann::json& j);
+    void from_json(const nlohmann::json& j);
 
     unsigned short getId() const;
 
