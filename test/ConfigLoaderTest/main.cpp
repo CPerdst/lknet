@@ -8,7 +8,7 @@
 using namespace lknet::util;
 
 int main(int argc, char* argv[]) {
-    std::string filePath = "/Users/zwj1/CLionProjects/lknet/cmake-build-debug/bin/config.json";
+    std::string filePath = "config.json";
     try{
         ConfigLoader::getInstance()->loadConfigFromJsonFile(filePath);
         auto& configMap = ConfigLoader::getInstance()->getConfig();
