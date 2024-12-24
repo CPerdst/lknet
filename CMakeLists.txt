@@ -80,3 +80,5 @@ endif ()
 if (EXAMPLE_BUILD)
     add_subdirectory(example)
 endif ()
+
+add_subdirectory(test)
