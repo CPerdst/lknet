@@ -62,22 +62,18 @@ ConfigLoaderJsonCore::ConfigLoaderJsonCore(const std::string &path, std::map<std
 
 void ConfigLoaderJsonCore::parseJsonFileToMap(const std::string &path, std::map<std::string, std::string> &configMap) {
     // 加载json文件，并将其解析成configMap
-    try{
-        nlohmann::json configJson;
-        std::ifstream file(path);
-        if(!file.is_open()){
-            throw std::runtime_error("file: " + path + " can not be opened.");
-        }
-        file >> configJson;
-        for(auto &kv: configJson.items()){
-            if((!kv.value().is_string()) && (!kv.value().is_number())){
-                throw std::runtime_error("value must be string");
-            }
-            configMap[kv.key()] = to_string(kv.value());
-        }
-        RootInfo() << "Successfully Loaded ConfigFile: " << path << std::endl;
-    }catch (std::exception& e){
-        throw e;
+    nlohmann::json configJson;
+    std::ifstream file(path);
+    if(!file.is_open()){
+        throw std::runtime_error("file: " + path + " can not be opened.");
     }
+    file >> configJson;
+    for(auto &kv: configJson.items()){
+        if((!kv.value().is_string()) && (!kv.value().is_number())){
+            throw std::runtime_error("value must be string");
+        }
+        configMap[kv.key()] = to_string(kv.value());
+    }
+    RootInfo() << "Successfully Loaded ConfigFile: " << path << std::endl;
 }
 
