@@ -47,7 +47,8 @@ private:
 
 class DLL_API Server {
 public:
-    Server(const std::string& host, unsigned short port, std::function<void(Message, IOBase*)> handler = nullptr);
+    Server();
+    Server(const std::string&, unsigned short, std::function<void(Message, IOBase*)> handler = nullptr);
     ~Server() = default;
 
     void start(bool runInOtherThread = false);
@@ -55,6 +56,7 @@ public:
     void setMessageHandler(std::function<void(Message, IOBase*)> handler);
 
 private:
+    void init(const std::string&, unsigned short, std::function<void(Message, IOBase*)> handler);
 
     void doAccept();
 
