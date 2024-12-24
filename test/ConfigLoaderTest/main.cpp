@@ -10,8 +10,9 @@ using namespace lknet::util;
 int main(int argc, char* argv[]) {
     std::string filePath = "config.json";
     try{
-        ConfigLoader::getInstance()->loadConfigFromJsonFile(filePath);
-        auto& configMap = ConfigLoader::getInstance()->getConfig();
+        auto& configLoader = ConfigLoader::getInstance();
+        configLoader.loadConfig(filePath);
+        auto& configMap = configLoader.getConfig();
         for(auto& kv: configMap){
             std::cout << kv.first << ": " << kv.second << std::endl;
         }

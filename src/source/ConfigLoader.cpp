@@ -9,23 +9,58 @@
 #include "eventCapturer.h"
 
 using namespace lknet::util;
+using namespace lknet::util::tools;
 
-std::shared_ptr<ConfigLoader> ConfigLoader::instance = nullptr;
+// ------------------------
+// ConfigLoader 实现
+// ------------------------
 
-std::shared_ptr<ConfigLoader> ConfigLoader::getInstance() {
-    if(!instance){
-        instance = std::make_shared<ConfigLoaderJsonCore>();
-    }
+ConfigLoader ConfigLoader::instance;
+
+ConfigLoader &ConfigLoader::getInstance() {
     return instance;
 }
 
-void ConfigLoader::loadConfigFromJsonFile(std::string) {}
+void ConfigLoader::loadConfig(const std::string& path) {
+    if(path.empty()){
+        throw std::runtime_error("path is empty");
+    }
+    auto it = optionMap.find("parseFormat");
+    if(it == optionMap.end() || it->second == "json"){
+        ConfigLoaderJsonCore configParser(path, configMap);
+    }
+    else if(it->second == "xml"){
+        throw std::runtime_error("parseFormat(xml) no implementation");
+    }else{
+        throw std::runtime_error("please figure parseFormat in " + path);
+    }
+}
 
-std::map<std::string, std::string> &ConfigLoader::getConfig() {
+void ConfigLoader::setConfigOptions(lknet::util::ConfigLoader::ConfigOptions &&options) {
+    if(!options.empty()){
+        optionMap = std::move(options);
+    }
+}
+
+void ConfigLoader::setConfigOptions(const lknet::util::ConfigLoader::ConfigOptions &options) {
+    if(!options.empty()){
+        optionMap = options;
+    }
+}
+
+ConfigLoader::ConfigOptions &ConfigLoader::getConfig() {
     return configMap;
 }
 
-void ConfigLoaderJsonCore::loadConfigFromJsonFile(std::string path) {
+// ------------------------
+// ConfigLoaderJsonCore 实现
+// ------------------------
+
+ConfigLoaderJsonCore::ConfigLoaderJsonCore(const std::string &path, std::map<std::string, std::string> &map) {
+    parseJsonFileToMap(path, map);
+}
+
+void ConfigLoaderJsonCore::parseJsonFileToMap(const std::string &path, std::map<std::string, std::string> &configMap) {
     // 加载json文件，并将其解析成configMap
     try{
         nlohmann::json configJson;
