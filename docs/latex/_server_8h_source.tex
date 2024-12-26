@@ -1,0 +1,89 @@
+\doxysection{Server.\+h}
+\hypertarget{_server_8h_source}{}\label{_server_8h_source}\index{src/include/Server.h@{src/include/Server.h}}
+\mbox{\hyperlink{_server_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ zwj1\ on\ 24-\/11-\/27.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ GPT\_NET\_SERVER\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ GPT\_NET\_SERVER\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <boost/asio.hpp>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_i_o_base_8h}{IOBase.h}}"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8h}{common.h}}"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tools_8h}{tools.h}}"{}}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}variant"{}}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{tools_8h_a1a2aaad2f42ad198a2e6c97dc7681137}{DLL\_API}}\ \mbox{\hyperlink{class_request_handler_router}{RequestHandlerRouter}}\ \{}
+\DoxyCodeLine{00019\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{class_request_handler_router_ac40168ea22afc93f882c37915e6c6b1a}{HandlerWithoutResponse}}\ =\ std::function<void(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_request}{Request}}\ \&)>;}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{class_request_handler_router_a794df81cbe70f7731ace7d2c0727e4bf}{HandlerWithResponse}}\ =\ std::function<\mbox{\hyperlink{class_response}{Response}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_request}{Request}}\ \&)>;}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{class_request_handler_router_a83218e7b1351ff9b0233aa0eb8fe748b}{HandlerGetterWithoutResponse}}\ =}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ std::function<\mbox{\hyperlink{class_request_handler_router_ac40168ea22afc93f882c37915e6c6b1a}{HandlerWithoutResponse}}()>;}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{class_request_handler_router_a78e3bd134b996697bb65c6db0ae0ec99}{HandlerGetterWithResponse}}\ =\ std::function<\mbox{\hyperlink{class_request_handler_router_a794df81cbe70f7731ace7d2c0727e4bf}{HandlerWithResponse}}()>;}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{class_request_handler_router_ae86c57acdf884a642647248e3492a4b7}{RequestHandlerRouter}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_request_handler_router}{RequestHandlerRouter}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{class_request_handler_router}{RequestHandlerRouter}}\ \&\mbox{\hyperlink{class_request_handler_router_ad03edbfc90400ea9a139b9493dd5ffc3}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_request_handler_router}{RequestHandlerRouter}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_request_handler_router}{RequestHandlerRouter}}\ \&getInstance();}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ registerHandlerGetter(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{id},}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_request_handler_router_a83218e7b1351ff9b0233aa0eb8fe748b}{HandlerGetterWithoutResponse}}\ getter);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ registerHandlerGetterWithResponse(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{id},}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_request_handler_router_a78e3bd134b996697bb65c6db0ae0ec99}{HandlerGetterWithResponse}}\ getter);}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ std::variant<\mbox{\hyperlink{class_request_handler_router_a83218e7b1351ff9b0233aa0eb8fe748b}{RequestHandlerRouter::HandlerGetterWithoutResponse}},}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_request_handler_router_a78e3bd134b996697bb65c6db0ae0ec99}{RequestHandlerRouter::HandlerGetterWithResponse}}>\ \&}
+\DoxyCodeLine{00039\ \ \ \ \ get(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{class_request_handler_router_a6608326c0203fb94379b828a7a5d0805}{RequestHandlerRouter}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{class_request_handler_router_afa0cad17cc6f8d455d2b4b9c2544add4}{\string~RequestHandlerRouter}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ std::map<\textcolor{keywordtype}{unsigned}\ short,\ std::variant<\mbox{\hyperlink{class_request_handler_router_a83218e7b1351ff9b0233aa0eb8fe748b}{HandlerGetterWithoutResponse}},}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_request_handler_router_a78e3bd134b996697bb65c6db0ae0ec99}{HandlerGetterWithResponse}}>>}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_request_handler_router_af4fe7fc048fb331e60a94968c41b3f7a}{mapper}};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_request_handler_router}{RequestHandlerRouter}}\ \mbox{\hyperlink{class_request_handler_router_a4b8cf4dfb9e066ebcce77e1d0561365d}{instance}};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ std::mutex\ \mbox{\hyperlink{class_request_handler_router_a9d10e7aaea820fc211fa0602914da708}{instanceMutex}};}
+\DoxyCodeLine{00052\ \};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{keyword}{class\ }\mbox{\hyperlink{tools_8h_a1a2aaad2f42ad198a2e6c97dc7681137}{DLL\_API}}\ \mbox{\hyperlink{class_server}{Server}}\ \{}
+\DoxyCodeLine{00055\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00056\ \ \ \ \ \mbox{\hyperlink{class_server}{Server}}();}
+\DoxyCodeLine{00057\ \ \ \ \ \mbox{\hyperlink{class_server}{Server}}(\textcolor{keyword}{const}\ std::string\ \&,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short},}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}(\mbox{\hyperlink{class_message}{Message}},\ \mbox{\hyperlink{class_i_o_base}{IOBase}}\ *)>\ handler\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00059\ \ \ \ \ \mbox{\hyperlink{class_server_ac0c2f1f04de64bd49ef343ca283e71ed}{\string~Server}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{void}\ start(\textcolor{keywordtype}{bool}\ runInOtherThread\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{void}\ setMessageHandler(std::function<\textcolor{keywordtype}{void}(\mbox{\hyperlink{class_message}{Message}},\ \mbox{\hyperlink{class_i_o_base}{IOBase}}\ *)>\ handler);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ init(\textcolor{keyword}{const}\ std::string\ \&,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short},}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}(\mbox{\hyperlink{class_message}{Message}},\ \mbox{\hyperlink{class_i_o_base}{IOBase}}\ *)>\ handler);}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{void}\ doAccept();}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ boost::asio::io\_context\ \mbox{\hyperlink{class_server_a8a1f6c1431e76b0f2898512b73d076a2}{ioContext}};}
+\DoxyCodeLine{00072\ \ \ \ \ boost::asio::ip::tcp::acceptor\ \mbox{\hyperlink{class_server_abeef10d268df57ffe84579df1b48b04b}{acceptor}};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ std::vector<std::shared\_ptr<IOBase>>\ \mbox{\hyperlink{class_server_aa3c8d52be690f427e7f69800828c1223}{ioBases}};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ std::mutex\ \mbox{\hyperlink{class_server_a211dc9d8700e482aca07c042bfc079ae}{ioBasesMutex}};}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ std::function<void(\mbox{\hyperlink{class_message}{Message}},\ \mbox{\hyperlink{class_i_o_base}{IOBase}}\ *)>\ \mbox{\hyperlink{class_server_ae4e5778e2b6be9048996fe2a6f593f43}{messageHandler}};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{bool}\ runInOtherThread\{\};}
+\DoxyCodeLine{00081\ \};}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ GPT\_NET\_SERVER\_H}}
+
+\end{DoxyCode}

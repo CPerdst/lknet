@@ -5,17 +5,18 @@
 
 #include <boost/asio.hpp>
 #include <memory>
+
 #include "IOBase.h"
-#include "tools.h"
 #include "common.h"
 #include "queue"
+#include "tools.h"
 
 class DLL_API Client {
-public:
+   public:
     // 使用临时构造的Response，然后通过Handler延长Response寿命周期供客户端使用
-    using ResponseHandler = std::function<void(const Response&)>;
+    using ResponseHandler = std::function<void(const Response &)>;
 
-    Client(const std::string& host, unsigned short port);
+    Client(const std::string &host, unsigned short port);
 
     void start(bool runInOtherThread = false);
 
@@ -26,9 +27,9 @@ public:
      * @param ResponseHandler 用于处理服务器发来的响应
      */
 
-    void send(const Request&, ResponseHandler&&);
+    void send(const Request &, ResponseHandler &&);
 
-    void send(const Request&, const ResponseHandler&);
+    void send(const Request &, const ResponseHandler &);
 
     /**
      * 发送string字符串
@@ -36,23 +37,24 @@ public:
      *
      * @note 已废弃
      */
-    void send(const std::string& message);
+    void send(const std::string &message);
 
     void close();
 
-private:
-    void do_connect(const boost::asio::ip::tcp::resolver::results_type& endpoints);
+   private:
+    void do_connect(
+        const boost::asio::ip::tcp::resolver::results_type &endpoints);
 
     boost::asio::io_context ioContext;
     boost::asio::ip::tcp::resolver resolver;
     std::shared_ptr<IOBase> ioBase;
 
     // 响应Handler队列
-    std::queue<ResponseHandler> handlers; // 临界资源
+    std::queue<ResponseHandler> handlers;  // 临界资源
 
     std::mutex handlersMutex;
 
     bool runInOtherThread;
 };
 
-#endif // CLIENT_H
+#endif  // CLIENT_H

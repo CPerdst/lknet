@@ -1,0 +1,143 @@
+\doxysection{Data\+Base\+Register Class Reference}
+\hypertarget{class_data_base_register}{}\label{class_data_base_register}\index{DataBaseRegister@{DataBaseRegister}}
+
+
+{\ttfamily \#include $<$common.\+h$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{class_data_base_register_a9967752d9c58cedc10e312ab5477bbb9}{Creator}} = std\+::function$<$std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{struct_data_base}{Data\+Base}}$>$()$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_data_base_register_ac04603f7fa7fd5e5138c0b1d33779f37}{Data\+Base\+Register}} (const \mbox{\hyperlink{class_data_base_register}{Data\+Base\+Register}} \&)=delete
+\item 
+\mbox{\hyperlink{class_data_base_register}{Data\+Base\+Register}} \& \mbox{\hyperlink{class_data_base_register_aec1eb48dd2fad1ed7cfb3a3a38a41751}{operator=}} (const \mbox{\hyperlink{class_data_base_register}{Data\+Base\+Register}} \&)=delete
+\item 
+void \mbox{\hyperlink{class_data_base_register_a89bb545522844070d20c9821d6c035cd}{register\+Data\+Base}} (unsigned short id, const \mbox{\hyperlink{class_data_base_register_a9967752d9c58cedc10e312ab5477bbb9}{Creator}} \&c)
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{struct_data_base}{Data\+Base}} $>$ \mbox{\hyperlink{class_data_base_register_acab52f8a260db11e341cd441462f3431}{create}} (unsigned short id)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_data_base_register}{Data\+Base\+Register}} \& \mbox{\hyperlink{class_data_base_register_afeb772a443b36e522742d281f8c38095}{get\+Instance}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_data_base_register_a7d555293b85a3fd7235ae26022395103}{Data\+Base\+Register}} ()=default
+\item 
+\mbox{\hyperlink{class_data_base_register_a2c8527c898cece8035ab7388d3f3b6bc}{\texorpdfstring{$\sim$}{\string~}\+Data\+Base\+Register}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::mutex \mbox{\hyperlink{class_data_base_register_a00f85479aff1515645c4f90cbafa660e}{instance\+Mutex}}
+\item 
+std\+::map$<$ unsigned short, \mbox{\hyperlink{class_data_base_register_a9967752d9c58cedc10e312ab5477bbb9}{Creator}} $>$ \mbox{\hyperlink{class_data_base_register_a2b4b208d1e2894720a7be70a018af0ea}{creators\+Map}} \{\}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_data_base_register}{Data\+Base\+Register}} \mbox{\hyperlink{class_data_base_register_ac453f616b12ede0e5acd4f41424d06d9}{instance}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+单例模式 \doxylink{class_data_base_register}{Data\+Base\+Register} 
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{class_data_base_register_a9967752d9c58cedc10e312ab5477bbb9}\index{DataBaseRegister@{DataBaseRegister}!Creator@{Creator}}
+\index{Creator@{Creator}!DataBaseRegister@{DataBaseRegister}}
+\doxysubsubsection{\texorpdfstring{Creator}{Creator}}
+{\footnotesize\ttfamily \label{class_data_base_register_a9967752d9c58cedc10e312ab5477bbb9} 
+using \mbox{\hyperlink{class_data_base_register_a9967752d9c58cedc10e312ab5477bbb9}{Data\+Base\+Register\+::\+Creator}} = std\+::function$<$std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{struct_data_base}{Data\+Base}}$>$()$>$}
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_data_base_register_ac04603f7fa7fd5e5138c0b1d33779f37}\index{DataBaseRegister@{DataBaseRegister}!DataBaseRegister@{DataBaseRegister}}
+\index{DataBaseRegister@{DataBaseRegister}!DataBaseRegister@{DataBaseRegister}}
+\doxysubsubsection{\texorpdfstring{DataBaseRegister()}{DataBaseRegister()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_data_base_register_ac04603f7fa7fd5e5138c0b1d33779f37} 
+Data\+Base\+Register\+::\+Data\+Base\+Register (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_data_base_register}{Data\+Base\+Register}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\Hypertarget{class_data_base_register_a7d555293b85a3fd7235ae26022395103}\index{DataBaseRegister@{DataBaseRegister}!DataBaseRegister@{DataBaseRegister}}
+\index{DataBaseRegister@{DataBaseRegister}!DataBaseRegister@{DataBaseRegister}}
+\doxysubsubsection{\texorpdfstring{DataBaseRegister()}{DataBaseRegister()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_data_base_register_a7d555293b85a3fd7235ae26022395103} 
+Data\+Base\+Register\+::\+Data\+Base\+Register (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [default]}}
+
+\Hypertarget{class_data_base_register_a2c8527c898cece8035ab7388d3f3b6bc}\index{DataBaseRegister@{DataBaseRegister}!````~DataBaseRegister@{\texorpdfstring{$\sim$}{\string~}DataBaseRegister}}
+\index{````~DataBaseRegister@{\texorpdfstring{$\sim$}{\string~}DataBaseRegister}!DataBaseRegister@{DataBaseRegister}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}DataBaseRegister()}{\string~DataBaseRegister()}}
+{\footnotesize\ttfamily \label{class_data_base_register_a2c8527c898cece8035ab7388d3f3b6bc} 
+Data\+Base\+Register\+::\texorpdfstring{$\sim$}{\string~}\+Data\+Base\+Register (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_data_base_register_acab52f8a260db11e341cd441462f3431}\index{DataBaseRegister@{DataBaseRegister}!create@{create}}
+\index{create@{create}!DataBaseRegister@{DataBaseRegister}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily \label{class_data_base_register_acab52f8a260db11e341cd441462f3431} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{struct_data_base}{Data\+Base}} $>$ Data\+Base\+Register\+::create (\begin{DoxyParamCaption}\item[{unsigned short}]{id}{}\end{DoxyParamCaption})}
+
+根据注册的 id-\/creator 创建相应的 std\+::unique\+\_\+ptr$<$\+Data\+Base$>$ 对象。 throw std\+::runtime\+\_\+error();
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::unique\+\_\+ptr$<$\+Data\+Base$>$ 
+\end{DoxyReturn}
+\Hypertarget{class_data_base_register_afeb772a443b36e522742d281f8c38095}\index{DataBaseRegister@{DataBaseRegister}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!DataBaseRegister@{DataBaseRegister}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily \label{class_data_base_register_afeb772a443b36e522742d281f8c38095} 
+\mbox{\hyperlink{class_data_base_register}{Data\+Base\+Register}} \& Data\+Base\+Register\+::get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{class_data_base_register_aec1eb48dd2fad1ed7cfb3a3a38a41751}\index{DataBaseRegister@{DataBaseRegister}!operator=@{operator=}}
+\index{operator=@{operator=}!DataBaseRegister@{DataBaseRegister}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \label{class_data_base_register_aec1eb48dd2fad1ed7cfb3a3a38a41751} 
+\mbox{\hyperlink{class_data_base_register}{Data\+Base\+Register}} \& Data\+Base\+Register\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_data_base_register}{Data\+Base\+Register}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\Hypertarget{class_data_base_register_a89bb545522844070d20c9821d6c035cd}\index{DataBaseRegister@{DataBaseRegister}!registerDataBase@{registerDataBase}}
+\index{registerDataBase@{registerDataBase}!DataBaseRegister@{DataBaseRegister}}
+\doxysubsubsection{\texorpdfstring{registerDataBase()}{registerDataBase()}}
+{\footnotesize\ttfamily \label{class_data_base_register_a89bb545522844070d20c9821d6c035cd} 
+void Data\+Base\+Register\+::register\+Data\+Base (\begin{DoxyParamCaption}\item[{unsigned short}]{id}{, }\item[{const \mbox{\hyperlink{class_data_base_register_a9967752d9c58cedc10e312ab5477bbb9}{Creator}} \&}]{c}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_data_base_register_a2b4b208d1e2894720a7be70a018af0ea}\index{DataBaseRegister@{DataBaseRegister}!creatorsMap@{creatorsMap}}
+\index{creatorsMap@{creatorsMap}!DataBaseRegister@{DataBaseRegister}}
+\doxysubsubsection{\texorpdfstring{creatorsMap}{creatorsMap}}
+{\footnotesize\ttfamily \label{class_data_base_register_a2b4b208d1e2894720a7be70a018af0ea} 
+std\+::map$<$unsigned short, \mbox{\hyperlink{class_data_base_register_a9967752d9c58cedc10e312ab5477bbb9}{Creator}}$>$ Data\+Base\+Register\+::creators\+Map \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_data_base_register_ac453f616b12ede0e5acd4f41424d06d9}\index{DataBaseRegister@{DataBaseRegister}!instance@{instance}}
+\index{instance@{instance}!DataBaseRegister@{DataBaseRegister}}
+\doxysubsubsection{\texorpdfstring{instance}{instance}}
+{\footnotesize\ttfamily \label{class_data_base_register_ac453f616b12ede0e5acd4f41424d06d9} 
+\mbox{\hyperlink{class_data_base_register}{Data\+Base\+Register}} Data\+Base\+Register\+::instance\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{class_data_base_register_a00f85479aff1515645c4f90cbafa660e}\index{DataBaseRegister@{DataBaseRegister}!instanceMutex@{instanceMutex}}
+\index{instanceMutex@{instanceMutex}!DataBaseRegister@{DataBaseRegister}}
+\doxysubsubsection{\texorpdfstring{instanceMutex}{instanceMutex}}
+{\footnotesize\ttfamily \label{class_data_base_register_a00f85479aff1515645c4f90cbafa660e} 
+std\+::mutex Data\+Base\+Register\+::instance\+Mutex\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/include/\mbox{\hyperlink{common_8h}{common.\+h}}\item 
+src/source/\mbox{\hyperlink{common_8cpp}{common.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,30 @@
+\doxysection{tools.\+h}
+\hypertarget{tools_8h_source}{}\label{tools_8h_source}\index{src/include/tools.h@{src/include/tools.h}}
+\mbox{\hyperlink{tools_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ l1Akr\ on\ 2024/12/3.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ LKNET\_TOOLS\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ LKNET\_TOOLS\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#if\ defined(\_WIN32)\ ||\ defined(\_WIN64)\ \ }\textcolor{comment}{//\ Windows\ ƽ̨}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#ifdef\ EXPORTING\_DLL}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ DLL\_API\ \_\_declspec(dllexport)}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ DLL\_API\ \_\_declspec(dllimport)}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#else\ \ }\textcolor{comment}{//\ {\ucr}{\ucr}\ Windows\ ƽ̨\ (Linux,\ macOS\ {\ucr}{\ucr})}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#ifdef\ EXPORTING\_DLL}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ DLL\_API\ \_\_attribute\_\_((visibility("{}default"{})))}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ DLL\_API}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \mbox{\hyperlink{tools_8h_a1a2aaad2f42ad198a2e6c97dc7681137}{DLL\_API}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{tools_8h_acac5d1ece6ee5347ca284d4fbde158f8}{printClass}}();}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ LKNET\_TOOLS\_H}}
+
+\end{DoxyCode}

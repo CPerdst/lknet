@@ -1,0 +1,168 @@
+\doxysection{Request\+Handler\+Router Class Reference}
+\hypertarget{class_request_handler_router}{}\label{class_request_handler_router}\index{RequestHandlerRouter@{RequestHandlerRouter}}
+
+
+{\ttfamily \#include $<$Server.\+h$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{class_request_handler_router_ac40168ea22afc93f882c37915e6c6b1a}{Handler\+Without\+Response}} = std\+::function$<$void(const \mbox{\hyperlink{class_request}{Request}} \&)$>$
+\item 
+using \mbox{\hyperlink{class_request_handler_router_a794df81cbe70f7731ace7d2c0727e4bf}{Handler\+With\+Response}} = std\+::function$<$\mbox{\hyperlink{class_response}{Response}}(const \mbox{\hyperlink{class_request}{Request}} \&)$>$
+\item 
+using \mbox{\hyperlink{class_request_handler_router_a83218e7b1351ff9b0233aa0eb8fe748b}{Handler\+Getter\+Without\+Response}}
+\item 
+using \mbox{\hyperlink{class_request_handler_router_a78e3bd134b996697bb65c6db0ae0ec99}{Handler\+Getter\+With\+Response}} = std\+::function$<$\mbox{\hyperlink{class_request_handler_router_a794df81cbe70f7731ace7d2c0727e4bf}{Handler\+With\+Response}}()$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_request_handler_router_ae86c57acdf884a642647248e3492a4b7}{Request\+Handler\+Router}} (const \mbox{\hyperlink{class_request_handler_router}{Request\+Handler\+Router}} \&)=delete
+\item 
+\mbox{\hyperlink{class_request_handler_router}{Request\+Handler\+Router}} \& \mbox{\hyperlink{class_request_handler_router_ad03edbfc90400ea9a139b9493dd5ffc3}{operator=}} (const \mbox{\hyperlink{class_request_handler_router}{Request\+Handler\+Router}} \&)=delete
+\item 
+void \mbox{\hyperlink{class_request_handler_router_a224e3597614469549483f63340cd3eb4}{register\+Handler\+Getter}} (unsigned short id, \mbox{\hyperlink{class_request_handler_router_a83218e7b1351ff9b0233aa0eb8fe748b}{Handler\+Getter\+Without\+Response}} getter)
+\item 
+void \mbox{\hyperlink{class_request_handler_router_a06031ed45de4e9b03336c4a1b8b9a221}{register\+Handler\+Getter\+With\+Response}} (unsigned short id, \mbox{\hyperlink{class_request_handler_router_a78e3bd134b996697bb65c6db0ae0ec99}{Handler\+Getter\+With\+Response}} getter)
+\item 
+std\+::variant$<$ \mbox{\hyperlink{class_request_handler_router_a83218e7b1351ff9b0233aa0eb8fe748b}{Request\+Handler\+Router\+::\+Handler\+Getter\+Without\+Response}}, \mbox{\hyperlink{class_request_handler_router_a78e3bd134b996697bb65c6db0ae0ec99}{Request\+Handler\+Router\+::\+Handler\+Getter\+With\+Response}} $>$ \& \mbox{\hyperlink{class_request_handler_router_a1a1e1d37bf171d56a67d66c166d461ad}{get}} (unsigned short id)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_request_handler_router}{Request\+Handler\+Router}} \& \mbox{\hyperlink{class_request_handler_router_ad8e8541f258be86b825bac95217b6d8b}{get\+Instance}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_request_handler_router_a6608326c0203fb94379b828a7a5d0805}{Request\+Handler\+Router}} ()=default
+\item 
+\mbox{\hyperlink{class_request_handler_router_afa0cad17cc6f8d455d2b4b9c2544add4}{\texorpdfstring{$\sim$}{\string~}\+Request\+Handler\+Router}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ unsigned short, std\+::variant$<$ \mbox{\hyperlink{class_request_handler_router_a83218e7b1351ff9b0233aa0eb8fe748b}{Handler\+Getter\+Without\+Response}}, \mbox{\hyperlink{class_request_handler_router_a78e3bd134b996697bb65c6db0ae0ec99}{Handler\+Getter\+With\+Response}} $>$ $>$ \mbox{\hyperlink{class_request_handler_router_af4fe7fc048fb331e60a94968c41b3f7a}{mapper}}
+\item 
+std\+::mutex \mbox{\hyperlink{class_request_handler_router_a9d10e7aaea820fc211fa0602914da708}{instance\+Mutex}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_request_handler_router}{Request\+Handler\+Router}} \mbox{\hyperlink{class_request_handler_router_a4b8cf4dfb9e066ebcce77e1d0561365d}{instance}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{class_request_handler_router_a83218e7b1351ff9b0233aa0eb8fe748b}\index{RequestHandlerRouter@{RequestHandlerRouter}!HandlerGetterWithoutResponse@{HandlerGetterWithoutResponse}}
+\index{HandlerGetterWithoutResponse@{HandlerGetterWithoutResponse}!RequestHandlerRouter@{RequestHandlerRouter}}
+\doxysubsubsection{\texorpdfstring{HandlerGetterWithoutResponse}{HandlerGetterWithoutResponse}}
+{\footnotesize\ttfamily \label{class_request_handler_router_a83218e7b1351ff9b0233aa0eb8fe748b} 
+using \mbox{\hyperlink{class_request_handler_router_a83218e7b1351ff9b0233aa0eb8fe748b}{Request\+Handler\+Router\+::\+Handler\+Getter\+Without\+Response}}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ std::function<\mbox{\hyperlink{class_request_handler_router_ac40168ea22afc93f882c37915e6c6b1a}{HandlerWithoutResponse}}()>}
+
+\end{DoxyCode}
+\Hypertarget{class_request_handler_router_a78e3bd134b996697bb65c6db0ae0ec99}\index{RequestHandlerRouter@{RequestHandlerRouter}!HandlerGetterWithResponse@{HandlerGetterWithResponse}}
+\index{HandlerGetterWithResponse@{HandlerGetterWithResponse}!RequestHandlerRouter@{RequestHandlerRouter}}
+\doxysubsubsection{\texorpdfstring{HandlerGetterWithResponse}{HandlerGetterWithResponse}}
+{\footnotesize\ttfamily \label{class_request_handler_router_a78e3bd134b996697bb65c6db0ae0ec99} 
+using \mbox{\hyperlink{class_request_handler_router_a78e3bd134b996697bb65c6db0ae0ec99}{Request\+Handler\+Router\+::\+Handler\+Getter\+With\+Response}} = std\+::function$<$\mbox{\hyperlink{class_request_handler_router_a794df81cbe70f7731ace7d2c0727e4bf}{Handler\+With\+Response}}()$>$}
+
+\Hypertarget{class_request_handler_router_ac40168ea22afc93f882c37915e6c6b1a}\index{RequestHandlerRouter@{RequestHandlerRouter}!HandlerWithoutResponse@{HandlerWithoutResponse}}
+\index{HandlerWithoutResponse@{HandlerWithoutResponse}!RequestHandlerRouter@{RequestHandlerRouter}}
+\doxysubsubsection{\texorpdfstring{HandlerWithoutResponse}{HandlerWithoutResponse}}
+{\footnotesize\ttfamily \label{class_request_handler_router_ac40168ea22afc93f882c37915e6c6b1a} 
+using \mbox{\hyperlink{class_request_handler_router_ac40168ea22afc93f882c37915e6c6b1a}{Request\+Handler\+Router\+::\+Handler\+Without\+Response}} = std\+::function$<$void(const \mbox{\hyperlink{class_request}{Request}} \&)$>$}
+
+\Hypertarget{class_request_handler_router_a794df81cbe70f7731ace7d2c0727e4bf}\index{RequestHandlerRouter@{RequestHandlerRouter}!HandlerWithResponse@{HandlerWithResponse}}
+\index{HandlerWithResponse@{HandlerWithResponse}!RequestHandlerRouter@{RequestHandlerRouter}}
+\doxysubsubsection{\texorpdfstring{HandlerWithResponse}{HandlerWithResponse}}
+{\footnotesize\ttfamily \label{class_request_handler_router_a794df81cbe70f7731ace7d2c0727e4bf} 
+using \mbox{\hyperlink{class_request_handler_router_a794df81cbe70f7731ace7d2c0727e4bf}{Request\+Handler\+Router\+::\+Handler\+With\+Response}} = std\+::function$<$\mbox{\hyperlink{class_response}{Response}}(const \mbox{\hyperlink{class_request}{Request}} \&)$>$}
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_request_handler_router_ae86c57acdf884a642647248e3492a4b7}\index{RequestHandlerRouter@{RequestHandlerRouter}!RequestHandlerRouter@{RequestHandlerRouter}}
+\index{RequestHandlerRouter@{RequestHandlerRouter}!RequestHandlerRouter@{RequestHandlerRouter}}
+\doxysubsubsection{\texorpdfstring{RequestHandlerRouter()}{RequestHandlerRouter()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_request_handler_router_ae86c57acdf884a642647248e3492a4b7} 
+Request\+Handler\+Router\+::\+Request\+Handler\+Router (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_request_handler_router}{Request\+Handler\+Router}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\Hypertarget{class_request_handler_router_a6608326c0203fb94379b828a7a5d0805}\index{RequestHandlerRouter@{RequestHandlerRouter}!RequestHandlerRouter@{RequestHandlerRouter}}
+\index{RequestHandlerRouter@{RequestHandlerRouter}!RequestHandlerRouter@{RequestHandlerRouter}}
+\doxysubsubsection{\texorpdfstring{RequestHandlerRouter()}{RequestHandlerRouter()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_request_handler_router_a6608326c0203fb94379b828a7a5d0805} 
+Request\+Handler\+Router\+::\+Request\+Handler\+Router (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [default]}}
+
+\Hypertarget{class_request_handler_router_afa0cad17cc6f8d455d2b4b9c2544add4}\index{RequestHandlerRouter@{RequestHandlerRouter}!````~RequestHandlerRouter@{\texorpdfstring{$\sim$}{\string~}RequestHandlerRouter}}
+\index{````~RequestHandlerRouter@{\texorpdfstring{$\sim$}{\string~}RequestHandlerRouter}!RequestHandlerRouter@{RequestHandlerRouter}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}RequestHandlerRouter()}{\string~RequestHandlerRouter()}}
+{\footnotesize\ttfamily \label{class_request_handler_router_afa0cad17cc6f8d455d2b4b9c2544add4} 
+Request\+Handler\+Router\+::\texorpdfstring{$\sim$}{\string~}\+Request\+Handler\+Router (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_request_handler_router_a1a1e1d37bf171d56a67d66c166d461ad}\index{RequestHandlerRouter@{RequestHandlerRouter}!get@{get}}
+\index{get@{get}!RequestHandlerRouter@{RequestHandlerRouter}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily \label{class_request_handler_router_a1a1e1d37bf171d56a67d66c166d461ad} 
+std\+::variant$<$ \mbox{\hyperlink{class_request_handler_router_a83218e7b1351ff9b0233aa0eb8fe748b}{Request\+Handler\+Router\+::\+Handler\+Getter\+Without\+Response}}, \mbox{\hyperlink{class_request_handler_router_a78e3bd134b996697bb65c6db0ae0ec99}{Request\+Handler\+Router\+::\+Handler\+Getter\+With\+Response}} $>$ \& Request\+Handler\+Router\+::get (\begin{DoxyParamCaption}\item[{unsigned short}]{id}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_request_handler_router_ad8e8541f258be86b825bac95217b6d8b}\index{RequestHandlerRouter@{RequestHandlerRouter}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!RequestHandlerRouter@{RequestHandlerRouter}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily \label{class_request_handler_router_ad8e8541f258be86b825bac95217b6d8b} 
+\mbox{\hyperlink{class_request_handler_router}{Request\+Handler\+Router}} \& Request\+Handler\+Router\+::get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{class_request_handler_router_ad03edbfc90400ea9a139b9493dd5ffc3}\index{RequestHandlerRouter@{RequestHandlerRouter}!operator=@{operator=}}
+\index{operator=@{operator=}!RequestHandlerRouter@{RequestHandlerRouter}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \label{class_request_handler_router_ad03edbfc90400ea9a139b9493dd5ffc3} 
+\mbox{\hyperlink{class_request_handler_router}{Request\+Handler\+Router}} \& Request\+Handler\+Router\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_request_handler_router}{Request\+Handler\+Router}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\Hypertarget{class_request_handler_router_a224e3597614469549483f63340cd3eb4}\index{RequestHandlerRouter@{RequestHandlerRouter}!registerHandlerGetter@{registerHandlerGetter}}
+\index{registerHandlerGetter@{registerHandlerGetter}!RequestHandlerRouter@{RequestHandlerRouter}}
+\doxysubsubsection{\texorpdfstring{registerHandlerGetter()}{registerHandlerGetter()}}
+{\footnotesize\ttfamily \label{class_request_handler_router_a224e3597614469549483f63340cd3eb4} 
+void Request\+Handler\+Router\+::register\+Handler\+Getter (\begin{DoxyParamCaption}\item[{unsigned short}]{id}{, }\item[{\mbox{\hyperlink{class_request_handler_router_a83218e7b1351ff9b0233aa0eb8fe748b}{Request\+Handler\+Router\+::\+Handler\+Getter\+Without\+Response}}}]{getter}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_request_handler_router_a06031ed45de4e9b03336c4a1b8b9a221}\index{RequestHandlerRouter@{RequestHandlerRouter}!registerHandlerGetterWithResponse@{registerHandlerGetterWithResponse}}
+\index{registerHandlerGetterWithResponse@{registerHandlerGetterWithResponse}!RequestHandlerRouter@{RequestHandlerRouter}}
+\doxysubsubsection{\texorpdfstring{registerHandlerGetterWithResponse()}{registerHandlerGetterWithResponse()}}
+{\footnotesize\ttfamily \label{class_request_handler_router_a06031ed45de4e9b03336c4a1b8b9a221} 
+void Request\+Handler\+Router\+::register\+Handler\+Getter\+With\+Response (\begin{DoxyParamCaption}\item[{unsigned short}]{id}{, }\item[{\mbox{\hyperlink{class_request_handler_router_a78e3bd134b996697bb65c6db0ae0ec99}{Request\+Handler\+Router\+::\+Handler\+Getter\+With\+Response}}}]{getter}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_request_handler_router_a4b8cf4dfb9e066ebcce77e1d0561365d}\index{RequestHandlerRouter@{RequestHandlerRouter}!instance@{instance}}
+\index{instance@{instance}!RequestHandlerRouter@{RequestHandlerRouter}}
+\doxysubsubsection{\texorpdfstring{instance}{instance}}
+{\footnotesize\ttfamily \label{class_request_handler_router_a4b8cf4dfb9e066ebcce77e1d0561365d} 
+\mbox{\hyperlink{class_request_handler_router}{Request\+Handler\+Router}} Request\+Handler\+Router\+::instance\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{class_request_handler_router_a9d10e7aaea820fc211fa0602914da708}\index{RequestHandlerRouter@{RequestHandlerRouter}!instanceMutex@{instanceMutex}}
+\index{instanceMutex@{instanceMutex}!RequestHandlerRouter@{RequestHandlerRouter}}
+\doxysubsubsection{\texorpdfstring{instanceMutex}{instanceMutex}}
+{\footnotesize\ttfamily \label{class_request_handler_router_a9d10e7aaea820fc211fa0602914da708} 
+std\+::mutex Request\+Handler\+Router\+::instance\+Mutex\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_request_handler_router_af4fe7fc048fb331e60a94968c41b3f7a}\index{RequestHandlerRouter@{RequestHandlerRouter}!mapper@{mapper}}
+\index{mapper@{mapper}!RequestHandlerRouter@{RequestHandlerRouter}}
+\doxysubsubsection{\texorpdfstring{mapper}{mapper}}
+{\footnotesize\ttfamily \label{class_request_handler_router_af4fe7fc048fb331e60a94968c41b3f7a} 
+std\+::map$<$unsigned short, std\+::variant$<$\mbox{\hyperlink{class_request_handler_router_a83218e7b1351ff9b0233aa0eb8fe748b}{Handler\+Getter\+Without\+Response}}, \mbox{\hyperlink{class_request_handler_router_a78e3bd134b996697bb65c6db0ae0ec99}{Handler\+Getter\+With\+Response}}$>$ $>$ Request\+Handler\+Router\+::mapper\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/include/\mbox{\hyperlink{_server_8h}{Server.\+h}}\item 
+src/source/\mbox{\hyperlink{_server_8cpp}{Server.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,123 @@
+\doxysection{Message.\+h}
+\hypertarget{_message_8h_source}{}\label{_message_8h_source}\index{src/include/Message.h@{src/include/Message.h}}
+\mbox{\hyperlink{_message_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ message.h}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#ifndef\ MESSAGE\_H}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#define\ MESSAGE\_H}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <cstdio>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <cstdlib>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <cstring>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tools_8h}{tools.h}}"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_i_o_base}{IOBase}};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{tools_8h_a1a2aaad2f42ad198a2e6c97dc7681137}{DLL\_API}}\ \mbox{\hyperlink{class_i_message}{IMessage}}\ \{}
+\DoxyCodeLine{00016\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{class_i_message_a6c3abb656b8356cef73a56ad74d7a5e7}{IMessage}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_i_message_ab02076630dc982a6d2ecb5af9459907c}{\string~IMessage}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_i_message_a284a67d05f096dff0d6116ef2fdb3c55}{buildMessageFromString}}(\textcolor{keyword}{const}\ std::string\ \&message)\ =\ 0;}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_i_message_ab16e7fed321bbba6f4498d6b9fd3ebe6}{buildMessageFromArray}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *buffer,\ \textcolor{keywordtype}{int}\ size)\ =\ 0;}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{class_i_message_a561af6c48724b68ed3d90b0ab29a5103}{parseMessageToString}}()\ =\ 0;}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_i_message_aa3c5f0ee5b89ba240c3cc9b5c3ed36a3}{isValidMessage}}()\ =\ 0;}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_i_message_af1e2cf5a55ee2cf537fc9168c02eb66b}{parseMessageHeader}}()\ =\ 0;}
+\DoxyCodeLine{00029\ \};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_message}{Message}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_i_message}{IMessage}}\ \{}
+\DoxyCodeLine{00032\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{enum}\ \{\ \mbox{\hyperlink{class_message_a4f88ebc45e62f89e3a15fd8e55244d73a850f6874562707db8d8c57b6c69f485c}{MESSAGE\_HEADER\_SIZE}}\ =\ 4\ \};}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{enum}\ \{\ \mbox{\hyperlink{class_message_a883ef70b60c2a0fc488efaa57d8514e0a5e5b6294297a8a1580451a2386d3ae34}{MESSAGE\_MAX\_BODY\_SIZE}}\ =\ 512\ \};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{friend}\ \mbox{\hyperlink{class_message_acf2883850958146ad980c9b961358c4a}{IOBase}};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{class_message_a4e0c3e0a2be25186519ba075d7851b71}{Message}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{class_message_af68f5801c560c1b51c5458067e9b3fdd}{\string~Message}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ std::string\ \mbox{\hyperlink{class_message_a03f2c3658d084bea3f21b28293e9d474}{parseMessageToString}}()\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{class_message_ae294234439e41fcd7076796b8029ea02}{isValidMessage}}())\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ std::string\ tmp(\mbox{\hyperlink{class_message_aab867531523f98cfadfdcec3721ff205}{data}}\ +\ \mbox{\hyperlink{class_message_a4f88ebc45e62f89e3a15fd8e55244d73a850f6874562707db8d8c57b6c69f485c}{MESSAGE\_HEADER\_SIZE}},\ \mbox{\hyperlink{class_message_a20df65d4caf4295392a14f5632f22141}{messageBodySize}});}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ tmp;}
+\DoxyCodeLine{00047\ \ \ \ \ \}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_message_a2a333648d03b890c6b3f9920c3ae5893}{buildMessageFromString}}(\textcolor{keyword}{const}\ std::string\ \&message)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ *head\ =\ \mbox{\hyperlink{class_message_a28fa5d8213a33a0385761856020a2593}{headBuffer}}();}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ *body\ =\ \mbox{\hyperlink{class_message_a6bd1b74a6d8a99a1f56973284f700298}{bodyBuffer}}();}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ messageSize\ =\ message.size();}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{class_message_a6df0bb816c53b9d2a024d0a4aeb6f50d}{isValidSize}}(messageSize))\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 将size写入头部}}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ std::string\ tmpHeadString\ =\ std::to\_string(messageSize);}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ std::strncpy(head,\ tmpHeadString.c\_str(),\ tmpHeadString.size());}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ head[\mbox{\hyperlink{class_message_a4f88ebc45e62f89e3a15fd8e55244d73a850f6874562707db8d8c57b6c69f485c}{MESSAGE\_HEADER\_SIZE}}\ -\/\ 1]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_message_a20df65d4caf4295392a14f5632f22141}{messageBodySize}}\ =\ messageSize;}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 将buffer中的数据拷贝到body部分}}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ std::strncpy(body,\ message.c\_str(),\ messageSize);}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00065\ \ \ \ \ \}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_message_ae294234439e41fcd7076796b8029ea02}{isValidMessage}}()\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ *head\ =\ \mbox{\hyperlink{class_message_a28fa5d8213a33a0385761856020a2593}{headBuffer}}();}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ *body\ =\ \mbox{\hyperlink{class_message_a6bd1b74a6d8a99a1f56973284f700298}{bodyBuffer}}();}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (head[3]\ !=\ \textcolor{charliteral}{'\(\backslash\)0'}\ ||\ !\mbox{\hyperlink{class_message_a6df0bb816c53b9d2a024d0a4aeb6f50d}{isValidSize}}(\mbox{\hyperlink{class_message_a20df65d4caf4295392a14f5632f22141}{messageBodySize}}))\ \{}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00074\ \ \ \ \ \}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_message_aa09e049abceb2cef1cec8b9e72a0fb88}{parseMessageHeader}}()\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmpBodySize\ =\ std::atoi(\mbox{\hyperlink{class_message_a28fa5d8213a33a0385761856020a2593}{headBuffer}}());}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_message_a20df65d4caf4295392a14f5632f22141}{messageBodySize}}\ =\ tmpBodySize;}
+\DoxyCodeLine{00079\ \ \ \ \ \}}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_message_aacddb4d37d2f165de2ee70fc566dc5e9}{buildMessageFromArray}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *buffer,\ \textcolor{keywordtype}{int}\ size)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ *head\ =\ \mbox{\hyperlink{class_message_a28fa5d8213a33a0385761856020a2593}{headBuffer}}();}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ *body\ =\ \mbox{\hyperlink{class_message_a6bd1b74a6d8a99a1f56973284f700298}{bodyBuffer}}();}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{class_message_a6df0bb816c53b9d2a024d0a4aeb6f50d}{isValidSize}}(size))\ \{}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 将size写入头部}}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ std::string\ tmpHeadString\ =\ std::to\_string(size);}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ std::strncpy(head,\ tmpHeadString.c\_str(),\ tmpHeadString.size());}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ head[\mbox{\hyperlink{class_message_a4f88ebc45e62f89e3a15fd8e55244d73a850f6874562707db8d8c57b6c69f485c}{MESSAGE\_HEADER\_SIZE}}\ -\/\ 1]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_message_a20df65d4caf4295392a14f5632f22141}{messageBodySize}}\ =\ size;}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 将buffer中的数据拷贝到body部分}}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ std::strncpy(body,\ buffer,\ size);}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00096\ \ \ \ \ \}}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \ \ [[nodiscard]]\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_message_a347fe876d7a9dda909423cdc9964802d}{getMessageBodySize}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_message_a20df65d4caf4295392a14f5632f22141}{messageBodySize}};\ \}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{class_message_aee1d19ccfd32069478e1d4e9ed617672}{getMessageBody}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_message_aab867531523f98cfadfdcec3721ff205}{data}}\ +\ \mbox{\hyperlink{class_message_a4f88ebc45e62f89e3a15fd8e55244d73a850f6874562707db8d8c57b6c69f485c}{MESSAGE\_HEADER\_SIZE}};}
+\DoxyCodeLine{00102\ \ \ \ \ \}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{class_message_a28fa5d8213a33a0385761856020a2593}{headBuffer}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_message_aab867531523f98cfadfdcec3721ff205}{data}};\ \};}
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordtype}{char}\ *\mbox{\hyperlink{class_message_a6bd1b74a6d8a99a1f56973284f700298}{bodyBuffer}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_message_aab867531523f98cfadfdcec3721ff205}{data}}\ +\ \mbox{\hyperlink{class_message_a4f88ebc45e62f89e3a15fd8e55244d73a850f6874562707db8d8c57b6c69f485c}{MESSAGE\_HEADER\_SIZE}};\ \};}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_message_a6df0bb816c53b9d2a024d0a4aeb6f50d}{isValidSize}}(\textcolor{keywordtype}{int}\ size)\ \{}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (size\ >\ 0)\ \&\&\ (size\ <=\ \mbox{\hyperlink{class_message_a883ef70b60c2a0fc488efaa57d8514e0a5e5b6294297a8a1580451a2386d3ae34}{MESSAGE\_MAX\_BODY\_SIZE}});}
+\DoxyCodeLine{00111\ \ \ \ \ \}}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{class_message_aab867531523f98cfadfdcec3721ff205}{data}}[\mbox{\hyperlink{class_message_a4f88ebc45e62f89e3a15fd8e55244d73a850f6874562707db8d8c57b6c69f485c}{MESSAGE\_HEADER\_SIZE}}\ +\ \mbox{\hyperlink{class_message_a883ef70b60c2a0fc488efaa57d8514e0a5e5b6294297a8a1580451a2386d3ae34}{MESSAGE\_MAX\_BODY\_SIZE}}]\{\};}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_message_a20df65d4caf4295392a14f5632f22141}{messageBodySize}}\{\};}
+\DoxyCodeLine{00115\ \};}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ MESSAGE\_H}}
+
+\end{DoxyCode}

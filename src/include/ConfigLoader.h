@@ -5,54 +5,56 @@
 #ifndef LKNET_CONFIGLOADER_H
 #define LKNET_CONFIGLOADER_H
 
-#include "tools.h"
 #include "json.hpp"
 #include "map"
 #include "memory"
 #include "mutex"
+#include "tools.h"
 
 namespace lknet::util {
-    class DLL_API ConfigLoader {
-    public:
-        using ConfigOptions = std::map<std::string, std::string>;
+class DLL_API ConfigLoader {
+   public:
+    using ConfigOptions = std::map<std::string, std::string>;
 
-        static ConfigLoader &getInstance();
+    static ConfigLoader &getInstance();
 
-        void loadConfig(const std::string&);
+    void loadConfig(const std::string &);
 
-        void setConfigOptions(const ConfigOptions&);
+    void setConfigOptions(const ConfigOptions &);
 
-        void setConfigOptions(ConfigOptions&&);
+    void setConfigOptions(ConfigOptions &&);
 
-        virtual std::map<std::string, std::string>& getConfig();
+    virtual std::map<std::string, std::string> &getConfig();
 
-    protected:
-        std::map<std::string, std::string> configMap;
+   protected:
+    std::map<std::string, std::string> configMap;
 
-        /**
-         * "parseFormat": default for json, also has other options: "xml"
-         */
-        ConfigOptions optionMap;
+    /**
+     * "parseFormat": default for json, also has other options: "xml"
+     */
+    ConfigOptions optionMap;
 
-    private:
-        ConfigLoader() = default;
-        ~ConfigLoader() = default;
+   private:
+    ConfigLoader() = default;
+    ~ConfigLoader() = default;
 
-        static ConfigLoader instance;
-    };
+    static ConfigLoader instance;
+};
 
-    namespace tools {
-        class DLL_API ConfigLoaderJsonCore {
-        public:
-            ConfigLoaderJsonCore() = default;
-            ~ConfigLoaderJsonCore() = default;
+namespace tools {
+class DLL_API ConfigLoaderJsonCore {
+   public:
+    ConfigLoaderJsonCore() = default;
+    ~ConfigLoaderJsonCore() = default;
 
-            ConfigLoaderJsonCore(const std::string&, std::map<std::string, std::string>&);
+    ConfigLoaderJsonCore(const std::string &,
+                         std::map<std::string, std::string> &);
 
-        private:
-            void parseJsonFileToMap(const std::string&, std::map<std::string, std::string>&);
-        };
-    }
-}
+   private:
+    void parseJsonFileToMap(const std::string &,
+                            std::map<std::string, std::string> &);
+};
+}  // namespace tools
+}  // namespace lknet::util
 
-#endif //LKNET_CONFIGLOADER_H
+#endif  // LKNET_CONFIGLOADER_H

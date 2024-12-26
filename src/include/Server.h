@@ -5,40 +5,46 @@
 #ifndef GPT_NET_SERVER_H
 #define GPT_NET_SERVER_H
 
-#include <functional>
-#include <memory>
 #include <boost/asio.hpp>
+#include <functional>
 #include <iostream>
+#include <memory>
+
 #include "IOBase.h"
-#include "tools.h"
 #include "common.h"
+#include "tools.h"
 #include "variant"
 
 class DLL_API RequestHandlerRouter {
-public:
-    using HandlerWithoutResponse = std::function<void(const Request&)>;
-    using HandlerWithResponse = std::function<Response(const Request&)>;
-    using HandlerGetterWithoutResponse = std::function<HandlerWithoutResponse()>;
+   public:
+    using HandlerWithoutResponse = std::function<void(const Request &)>;
+    using HandlerWithResponse = std::function<Response(const Request &)>;
+    using HandlerGetterWithoutResponse =
+        std::function<HandlerWithoutResponse()>;
     using HandlerGetterWithResponse = std::function<HandlerWithResponse()>;
 
-    RequestHandlerRouter(const RequestHandlerRouter&) = delete;
-    RequestHandlerRouter& operator=(const RequestHandlerRouter&) = delete;
+    RequestHandlerRouter(const RequestHandlerRouter &) = delete;
+    RequestHandlerRouter &operator=(const RequestHandlerRouter &) = delete;
 
     static RequestHandlerRouter &getInstance();
 
-    void registerHandlerGetter(unsigned short id, HandlerGetterWithoutResponse getter);
+    void registerHandlerGetter(unsigned short id,
+                               HandlerGetterWithoutResponse getter);
 
-    void registerHandlerGetterWithResponse(unsigned short id, HandlerGetterWithResponse getter);
+    void registerHandlerGetterWithResponse(unsigned short id,
+                                           HandlerGetterWithResponse getter);
 
-    std::variant<RequestHandlerRouter::HandlerGetterWithoutResponse, \
-    RequestHandlerRouter::HandlerGetterWithResponse>& \
+    std::variant<RequestHandlerRouter::HandlerGetterWithoutResponse,
+                 RequestHandlerRouter::HandlerGetterWithResponse> &
     get(unsigned short id);
 
-private:
+   private:
     RequestHandlerRouter() = default;
     ~RequestHandlerRouter() = default;
 
-    std::map<unsigned short, std::variant<HandlerGetterWithoutResponse, HandlerGetterWithResponse>> mapper;
+    std::map<unsigned short, std::variant<HandlerGetterWithoutResponse,
+                                          HandlerGetterWithResponse>>
+        mapper;
 
     static RequestHandlerRouter instance;
 
@@ -46,17 +52,19 @@ private:
 };
 
 class DLL_API Server {
-public:
+   public:
     Server();
-    Server(const std::string&, unsigned short, std::function<void(Message, IOBase*)> handler = nullptr);
+    Server(const std::string &, unsigned short,
+           std::function<void(Message, IOBase *)> handler = nullptr);
     ~Server() = default;
 
     void start(bool runInOtherThread = false);
 
-    void setMessageHandler(std::function<void(Message, IOBase*)> handler);
+    void setMessageHandler(std::function<void(Message, IOBase *)> handler);
 
-private:
-    void init(const std::string&, unsigned short, std::function<void(Message, IOBase*)> handler);
+   private:
+    void init(const std::string &, unsigned short,
+              std::function<void(Message, IOBase *)> handler);
 
     void doAccept();
 
@@ -67,11 +75,9 @@ private:
 
     std::mutex ioBasesMutex;
 
-    std::function<void(Message, IOBase*)> messageHandler;
+    std::function<void(Message, IOBase *)> messageHandler;
 
     bool runInOtherThread{};
-
 };
 
-
-#endif //GPT_NET_SERVER_H
+#endif  // GPT_NET_SERVER_H

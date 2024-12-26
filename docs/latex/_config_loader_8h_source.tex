@@ -1,0 +1,63 @@
+\doxysection{Config\+Loader.\+h}
+\hypertarget{_config_loader_8h_source}{}\label{_config_loader_8h_source}\index{src/include/ConfigLoader.h@{src/include/ConfigLoader.h}}
+\mbox{\hyperlink{_config_loader_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ zwj1\ on\ 24-\/12-\/24.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ LKNET\_CONFIGLOADER\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ LKNET\_CONFIGLOADER\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{json_8hpp}{json.hpp}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}map"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}memory"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}mutex"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tools_8h}{tools.h}}"{}}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacelknet_1_1util}{lknet::util}}\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{tools_8h_a1a2aaad2f42ad198a2e6c97dc7681137}{DLL\_API}}\ \mbox{\hyperlink{classlknet_1_1util_1_1_config_loader}{ConfigLoader}}\ \{}
+\DoxyCodeLine{00016\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classlknet_1_1util_1_1_config_loader_a2ece34b4f2c834a4493ab7ff46e9062b}{ConfigOptions}}\ =\ std::map<std::string,\ std::string>;}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classlknet_1_1util_1_1_config_loader}{ConfigLoader}}\ \&getInstance();}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{void}\ loadConfig(\textcolor{keyword}{const}\ std::string\ \&);}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{void}\ setConfigOptions(\textcolor{keyword}{const}\ \mbox{\hyperlink{classlknet_1_1util_1_1_config_loader_a2ece34b4f2c834a4493ab7ff46e9062b}{ConfigOptions}}\ \&);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ setConfigOptions(\mbox{\hyperlink{classlknet_1_1util_1_1_config_loader_a2ece34b4f2c834a4493ab7ff46e9062b}{ConfigOptions}}\ \&\&);}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{virtual}\ std::map<std::string,\ std::string>\ \&getConfig();}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00030\ \ \ \ \ std::map<std::string,\ std::string>\ \mbox{\hyperlink{classlknet_1_1util_1_1_config_loader_a0a981b07210f9226d76b9db3c7e27f0c}{configMap}};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{classlknet_1_1util_1_1_config_loader_a2ece34b4f2c834a4493ab7ff46e9062b}{ConfigOptions}}\ \mbox{\hyperlink{classlknet_1_1util_1_1_config_loader_a29faef547fdd88b328688c0277ac9564}{optionMap}};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{classlknet_1_1util_1_1_config_loader_a1568016b961b56b72f5006d0c8063570}{ConfigLoader}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{classlknet_1_1util_1_1_config_loader_a482584f66fe9723b46b413be84a8295d}{\string~ConfigLoader}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classlknet_1_1util_1_1_config_loader}{ConfigLoader}}\ \mbox{\hyperlink{classlknet_1_1util_1_1_config_loader_a9600a855bfc8dc9d3b79fcbd3a3c9a9b}{instance}};}
+\DoxyCodeLine{00042\ \};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{keyword}{namespace\ }tools\ \{}
+\DoxyCodeLine{00045\ \textcolor{keyword}{class\ }\mbox{\hyperlink{tools_8h_a1a2aaad2f42ad198a2e6c97dc7681137}{DLL\_API}}\ \mbox{\hyperlink{classlknet_1_1util_1_1tools_1_1_config_loader_json_core}{ConfigLoaderJsonCore}}\ \{}
+\DoxyCodeLine{00046\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{classlknet_1_1util_1_1tools_1_1_config_loader_json_core_a56082e953750e51765ffd090e06b04fb}{ConfigLoaderJsonCore}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{classlknet_1_1util_1_1tools_1_1_config_loader_json_core_a7a40240f7d42c68bb32d977f2da63c16}{\string~ConfigLoaderJsonCore}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \mbox{\hyperlink{classlknet_1_1util_1_1tools_1_1_config_loader_json_core}{ConfigLoaderJsonCore}}(\textcolor{keyword}{const}\ std::string\ \&,}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::map<std::string,\ std::string>\ \&);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{void}\ parseJsonFileToMap(\textcolor{keyword}{const}\ std::string\ \&,}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::map<std::string,\ std::string>\ \&);}
+\DoxyCodeLine{00056\ \};}
+\DoxyCodeLine{00057\ \}\ \ \textcolor{comment}{//\ namespace\ tools}}
+\DoxyCodeLine{00058\ \}\ \ \textcolor{comment}{//\ namespace\ lknet::util}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ LKNET\_CONFIGLOADER\_H}}
+
+\end{DoxyCode}

@@ -13,7 +13,7 @@
 #endif
 #else  // �� Windows ƽ̨ (Linux, macOS ��)
 #ifdef EXPORTING_DLL
-#define DLL_API __attribute__ ((visibility ("default")))
+#define DLL_API __attribute__((visibility("default")))
 #else
 #define DLL_API
 #endif
@@ -21,4 +21,4 @@
 
 DLL_API void printClass();
 
-#endif //LKNET_TOOLS_H
+#endif  // LKNET_TOOLS_H

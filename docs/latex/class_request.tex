@@ -1,0 +1,115 @@
+\doxysection{Request Class Reference}
+\hypertarget{class_request}{}\label{class_request}\index{Request@{Request}}
+
+
+{\ttfamily \#include $<$common.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_request_a9231a8a4dd508034df0db048f35f1812}{Request}} ()=default
+\item 
+\mbox{\hyperlink{class_request_aa5d184d7174192fbd3f88c1a1ae63e77}{\texorpdfstring{$\sim$}{\string~}\+Request}} ()=default
+\item 
+\mbox{\hyperlink{class_request_a2e3cf83a6700fdaa1b446835627510e1}{Request}} (unsigned short \mbox{\hyperlink{class_request_af521e650199beb02eb773ba187d3240b}{id}}, std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{struct_data_base}{Data\+Base}} $>$ \mbox{\hyperlink{class_request_a4b9efbf6bb80692bbdaa422fbef0aa54}{data}})
+\item 
+nlohmann\+::json \mbox{\hyperlink{class_request_a64da395dcd23892f92f4d5d8b4f61d2d}{to\+\_\+json}} () const
+\item 
+void \mbox{\hyperlink{class_request_a4d603b203d3a886dcbaf07ce9c9722e5}{from\+\_\+json}} (const nlohmann\+::json \&j)
+\item 
+unsigned short \mbox{\hyperlink{class_request_a7daf2067ba76b6020a4dfe49c6711986}{get\+Id}} () const
+\item 
+const std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{struct_data_base}{Data\+Base}} $>$ \& \mbox{\hyperlink{class_request_a3ed3c1f67ec77a1224720d96064c378a}{get\+Data}} () const
+\item 
+void \mbox{\hyperlink{class_request_a3950e633722dc8daa1e76a12c9aef48b}{set\+Id}} (unsigned short \mbox{\hyperlink{class_request_af521e650199beb02eb773ba187d3240b}{id}})
+\item 
+void \mbox{\hyperlink{class_request_a2ea0ececa6eed39258b5a1cbb2087dbb}{set\+Data}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{struct_data_base}{Data\+Base}} $>$ data\+\_\+)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned short \mbox{\hyperlink{class_request_af521e650199beb02eb773ba187d3240b}{id}} \{\}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{struct_data_base}{Data\+Base}} $>$ \mbox{\hyperlink{class_request_a4b9efbf6bb80692bbdaa422fbef0aa54}{data}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_request_a9231a8a4dd508034df0db048f35f1812}\index{Request@{Request}!Request@{Request}}
+\index{Request@{Request}!Request@{Request}}
+\doxysubsubsection{\texorpdfstring{Request()}{Request()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_request_a9231a8a4dd508034df0db048f35f1812} 
+Request\+::\+Request (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{class_request_aa5d184d7174192fbd3f88c1a1ae63e77}\index{Request@{Request}!````~Request@{\texorpdfstring{$\sim$}{\string~}Request}}
+\index{````~Request@{\texorpdfstring{$\sim$}{\string~}Request}!Request@{Request}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Request()}{\string~Request()}}
+{\footnotesize\ttfamily \label{class_request_aa5d184d7174192fbd3f88c1a1ae63e77} 
+Request\+::\texorpdfstring{$\sim$}{\string~}\+Request (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{class_request_a2e3cf83a6700fdaa1b446835627510e1}\index{Request@{Request}!Request@{Request}}
+\index{Request@{Request}!Request@{Request}}
+\doxysubsubsection{\texorpdfstring{Request()}{Request()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_request_a2e3cf83a6700fdaa1b446835627510e1} 
+Request\+::\+Request (\begin{DoxyParamCaption}\item[{unsigned short}]{id}{, }\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{struct_data_base}{Data\+Base}} $>$}]{data}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_request_a4d603b203d3a886dcbaf07ce9c9722e5}\index{Request@{Request}!from\_json@{from\_json}}
+\index{from\_json@{from\_json}!Request@{Request}}
+\doxysubsubsection{\texorpdfstring{from\_json()}{from\_json()}}
+{\footnotesize\ttfamily \label{class_request_a4d603b203d3a886dcbaf07ce9c9722e5} 
+void Request\+::from\+\_\+json (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{j}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_request_a3ed3c1f67ec77a1224720d96064c378a}\index{Request@{Request}!getData@{getData}}
+\index{getData@{getData}!Request@{Request}}
+\doxysubsubsection{\texorpdfstring{getData()}{getData()}}
+{\footnotesize\ttfamily \label{class_request_a3ed3c1f67ec77a1224720d96064c378a} 
+const std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{struct_data_base}{Data\+Base}} $>$ \& Request\+::get\+Data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_request_a7daf2067ba76b6020a4dfe49c6711986}\index{Request@{Request}!getId@{getId}}
+\index{getId@{getId}!Request@{Request}}
+\doxysubsubsection{\texorpdfstring{getId()}{getId()}}
+{\footnotesize\ttfamily \label{class_request_a7daf2067ba76b6020a4dfe49c6711986} 
+unsigned short Request\+::get\+Id (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_request_a2ea0ececa6eed39258b5a1cbb2087dbb}\index{Request@{Request}!setData@{setData}}
+\index{setData@{setData}!Request@{Request}}
+\doxysubsubsection{\texorpdfstring{setData()}{setData()}}
+{\footnotesize\ttfamily \label{class_request_a2ea0ececa6eed39258b5a1cbb2087dbb} 
+void Request\+::set\+Data (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{struct_data_base}{Data\+Base}} $>$}]{data\+\_\+}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_request_a3950e633722dc8daa1e76a12c9aef48b}\index{Request@{Request}!setId@{setId}}
+\index{setId@{setId}!Request@{Request}}
+\doxysubsubsection{\texorpdfstring{setId()}{setId()}}
+{\footnotesize\ttfamily \label{class_request_a3950e633722dc8daa1e76a12c9aef48b} 
+void Request\+::set\+Id (\begin{DoxyParamCaption}\item[{unsigned short}]{id}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_request_a64da395dcd23892f92f4d5d8b4f61d2d}\index{Request@{Request}!to\_json@{to\_json}}
+\index{to\_json@{to\_json}!Request@{Request}}
+\doxysubsubsection{\texorpdfstring{to\_json()}{to\_json()}}
+{\footnotesize\ttfamily \label{class_request_a64da395dcd23892f92f4d5d8b4f61d2d} 
+nlohmann\+::json Request\+::to\+\_\+json (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_request_a4b9efbf6bb80692bbdaa422fbef0aa54}\index{Request@{Request}!data@{data}}
+\index{data@{data}!Request@{Request}}
+\doxysubsubsection{\texorpdfstring{data}{data}}
+{\footnotesize\ttfamily \label{class_request_a4b9efbf6bb80692bbdaa422fbef0aa54} 
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{struct_data_base}{Data\+Base}}$>$ Request\+::data\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_request_af521e650199beb02eb773ba187d3240b}\index{Request@{Request}!id@{id}}
+\index{id@{id}!Request@{Request}}
+\doxysubsubsection{\texorpdfstring{id}{id}}
+{\footnotesize\ttfamily \label{class_request_af521e650199beb02eb773ba187d3240b} 
+unsigned short Request\+::id \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/include/\mbox{\hyperlink{common_8h}{common.\+h}}\item 
+src/source/\mbox{\hyperlink{common_8cpp}{common.\+cpp}}\end{DoxyCompactItemize}

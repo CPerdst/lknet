@@ -1,0 +1,115 @@
+\doxysection{Response Class Reference}
+\hypertarget{class_response}{}\label{class_response}\index{Response@{Response}}
+
+
+{\ttfamily \#include $<$common.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_response_ae46287295e474fb206155345ddbcf233}{Response}} ()=default
+\item 
+\mbox{\hyperlink{class_response_a19359d3d146bac66d0f31f4387bb5447}{\texorpdfstring{$\sim$}{\string~}\+Response}} ()=default
+\item 
+\mbox{\hyperlink{class_response_a163ef18c6b8271c9e8c44194a642d679}{Response}} (unsigned short \mbox{\hyperlink{class_response_aaacb6159407a5a58936fad4276d2c84e}{id}}, std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{struct_data_base}{Data\+Base}} $>$ \mbox{\hyperlink{class_response_aa00a64c63294e99a91bf463a2a3455d5}{data}})
+\item 
+nlohmann\+::json \mbox{\hyperlink{class_response_ab09a8ccdb33c54042e421b983cb14087}{to\+\_\+json}} () const
+\item 
+void \mbox{\hyperlink{class_response_a469e3b1c937094e8c6311c1cfdf276a2}{from\+\_\+json}} (const nlohmann\+::json \&j)
+\item 
+unsigned short \mbox{\hyperlink{class_response_a61e0d1cc803c1b4499f8a946271653ea}{get\+Id}} () const
+\item 
+const std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{struct_data_base}{Data\+Base}} $>$ \& \mbox{\hyperlink{class_response_aafdad03ddbea55a54cd83fb7262cb3e3}{get\+Data}} () const
+\item 
+void \mbox{\hyperlink{class_response_a8dac0801c7dd3d5f06d41a3d59c0f295}{set\+Id}} (unsigned short \mbox{\hyperlink{class_response_aaacb6159407a5a58936fad4276d2c84e}{id}})
+\item 
+void \mbox{\hyperlink{class_response_a02235ad8f8da2cfcdefaa38d2b6b23f7}{set\+Data}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{struct_data_base}{Data\+Base}} $>$ data\+\_\+)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned short \mbox{\hyperlink{class_response_aaacb6159407a5a58936fad4276d2c84e}{id}} \{\}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{struct_data_base}{Data\+Base}} $>$ \mbox{\hyperlink{class_response_aa00a64c63294e99a91bf463a2a3455d5}{data}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_response_ae46287295e474fb206155345ddbcf233}\index{Response@{Response}!Response@{Response}}
+\index{Response@{Response}!Response@{Response}}
+\doxysubsubsection{\texorpdfstring{Response()}{Response()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_response_ae46287295e474fb206155345ddbcf233} 
+Response\+::\+Response (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{class_response_a19359d3d146bac66d0f31f4387bb5447}\index{Response@{Response}!````~Response@{\texorpdfstring{$\sim$}{\string~}Response}}
+\index{````~Response@{\texorpdfstring{$\sim$}{\string~}Response}!Response@{Response}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Response()}{\string~Response()}}
+{\footnotesize\ttfamily \label{class_response_a19359d3d146bac66d0f31f4387bb5447} 
+Response\+::\texorpdfstring{$\sim$}{\string~}\+Response (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{class_response_a163ef18c6b8271c9e8c44194a642d679}\index{Response@{Response}!Response@{Response}}
+\index{Response@{Response}!Response@{Response}}
+\doxysubsubsection{\texorpdfstring{Response()}{Response()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_response_a163ef18c6b8271c9e8c44194a642d679} 
+Response\+::\+Response (\begin{DoxyParamCaption}\item[{unsigned short}]{id}{, }\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{struct_data_base}{Data\+Base}} $>$}]{data}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_response_a469e3b1c937094e8c6311c1cfdf276a2}\index{Response@{Response}!from\_json@{from\_json}}
+\index{from\_json@{from\_json}!Response@{Response}}
+\doxysubsubsection{\texorpdfstring{from\_json()}{from\_json()}}
+{\footnotesize\ttfamily \label{class_response_a469e3b1c937094e8c6311c1cfdf276a2} 
+void Response\+::from\+\_\+json (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{j}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_response_aafdad03ddbea55a54cd83fb7262cb3e3}\index{Response@{Response}!getData@{getData}}
+\index{getData@{getData}!Response@{Response}}
+\doxysubsubsection{\texorpdfstring{getData()}{getData()}}
+{\footnotesize\ttfamily \label{class_response_aafdad03ddbea55a54cd83fb7262cb3e3} 
+const std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{struct_data_base}{Data\+Base}} $>$ \& Response\+::get\+Data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_response_a61e0d1cc803c1b4499f8a946271653ea}\index{Response@{Response}!getId@{getId}}
+\index{getId@{getId}!Response@{Response}}
+\doxysubsubsection{\texorpdfstring{getId()}{getId()}}
+{\footnotesize\ttfamily \label{class_response_a61e0d1cc803c1b4499f8a946271653ea} 
+unsigned short Response\+::get\+Id (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_response_a02235ad8f8da2cfcdefaa38d2b6b23f7}\index{Response@{Response}!setData@{setData}}
+\index{setData@{setData}!Response@{Response}}
+\doxysubsubsection{\texorpdfstring{setData()}{setData()}}
+{\footnotesize\ttfamily \label{class_response_a02235ad8f8da2cfcdefaa38d2b6b23f7} 
+void Response\+::set\+Data (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{struct_data_base}{Data\+Base}} $>$}]{data\+\_\+}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_response_a8dac0801c7dd3d5f06d41a3d59c0f295}\index{Response@{Response}!setId@{setId}}
+\index{setId@{setId}!Response@{Response}}
+\doxysubsubsection{\texorpdfstring{setId()}{setId()}}
+{\footnotesize\ttfamily \label{class_response_a8dac0801c7dd3d5f06d41a3d59c0f295} 
+void Response\+::set\+Id (\begin{DoxyParamCaption}\item[{unsigned short}]{id}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_response_ab09a8ccdb33c54042e421b983cb14087}\index{Response@{Response}!to\_json@{to\_json}}
+\index{to\_json@{to\_json}!Response@{Response}}
+\doxysubsubsection{\texorpdfstring{to\_json()}{to\_json()}}
+{\footnotesize\ttfamily \label{class_response_ab09a8ccdb33c54042e421b983cb14087} 
+nlohmann\+::json Response\+::to\+\_\+json (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_response_aa00a64c63294e99a91bf463a2a3455d5}\index{Response@{Response}!data@{data}}
+\index{data@{data}!Response@{Response}}
+\doxysubsubsection{\texorpdfstring{data}{data}}
+{\footnotesize\ttfamily \label{class_response_aa00a64c63294e99a91bf463a2a3455d5} 
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{struct_data_base}{Data\+Base}}$>$ Response\+::data\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_response_aaacb6159407a5a58936fad4276d2c84e}\index{Response@{Response}!id@{id}}
+\index{id@{id}!Response@{Response}}
+\doxysubsubsection{\texorpdfstring{id}{id}}
+{\footnotesize\ttfamily \label{class_response_aaacb6159407a5a58936fad4276d2c84e} 
+unsigned short Response\+::id \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/include/\mbox{\hyperlink{common_8h}{common.\+h}}\item 
+src/source/\mbox{\hyperlink{common_8cpp}{common.\+cpp}}\end{DoxyCompactItemize}

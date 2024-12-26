@@ -4,6 +4,4 @@
 
 // same as serialization_request
 
-int main() {
-    return 0;
-}
+int main() { return 0; }

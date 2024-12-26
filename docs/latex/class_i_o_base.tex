@@ -1,0 +1,210 @@
+\doxysection{IOBase Class Reference}
+\hypertarget{class_i_o_base}{}\label{class_i_o_base}\index{IOBase@{IOBase}}
+
+
+{\ttfamily \#include $<$IOBase.\+h$>$}
+
+Inheritance diagram for IOBase\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_i_o_base}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_i_o_base_af8d60bb85aacef3e6ccd6b84d051aca4}{IOBase}} (boost\+::asio\+::io\+\_\+context \&io\+\_\+context)
+\item 
+\mbox{\hyperlink{class_i_o_base_a11bcc93500c76608f75da97977c75e8d}{IOBase}} (boost\+::asio\+::ip\+::tcp\+::socket \&\mbox{\hyperlink{class_i_o_base_ac0d1d23e767a9a8b9743b28defed2f9c}{socket}})
+\item 
+\mbox{\hyperlink{class_i_o_base_a912f48ab99c8b069d71874eebd440ced}{\texorpdfstring{$\sim$}{\string~}\+IOBase}} ()=default
+\item 
+void \mbox{\hyperlink{class_i_o_base_ab0d6da9e58465ad34ce44733fdf96a20}{start}} ()
+\item 
+void \mbox{\hyperlink{class_i_o_base_a588779c0bc23d087464c1d30a6719c30}{send}} (const \mbox{\hyperlink{class_message}{Message}} \&msg)
+\item 
+void \mbox{\hyperlink{class_i_o_base_a781e82ceeabf0a5b89488948817b6725}{send}} (\mbox{\hyperlink{class_message}{Message}} \&\&msg)
+\item 
+void \mbox{\hyperlink{class_i_o_base_aa0731b9b98e7552a193551b60d2e025c}{set\+Message\+Handler}} (const std\+::function$<$ void(\mbox{\hyperlink{class_message}{Message}}, \mbox{\hyperlink{class_i_o_base}{IOBase}} \texorpdfstring{$\ast$}{*})$>$ \&handler)
+\item 
+void \mbox{\hyperlink{class_i_o_base_a56c1976fe3aee65e3d50a6f933dbc80d}{set\+Close\+Handler}} (const std\+::function$<$ void(void)$>$ \&handler)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+friend \mbox{\hyperlink{class_i_o_base_a4d76816f80c91acef65b502b2fc4da08}{Client}}
+\item 
+friend \mbox{\hyperlink{class_i_o_base_a8b1726704d9c7c9b79a9419898662355}{Server}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+boost\+::asio\+::ip\+::tcp\+::socket \& \mbox{\hyperlink{class_i_o_base_ac0d1d23e767a9a8b9743b28defed2f9c}{socket}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_i_o_base_a0788ed14dfbb2c4e43cb32a3039dc09c}{do\+Read\+Header}} ()
+\item 
+void \mbox{\hyperlink{class_i_o_base_ac5610353a2ab3b9c0ce2ce56319778db}{do\+Read\+Body}} ()
+\item 
+void \mbox{\hyperlink{class_i_o_base_ab723e71c6b63c9885d7ff870c5e02f80}{do\+Write}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+boost\+::asio\+::ip\+::tcp\+::socket \mbox{\hyperlink{class_i_o_base_abd9e2d49d8fb4d11dac2d6eb2cde391c}{sock}}
+\item 
+\mbox{\hyperlink{class_message}{Message}} \mbox{\hyperlink{class_i_o_base_a263a37f5cda4276517280082f03571c1}{read\+Message}}
+\item 
+std\+::deque$<$ \mbox{\hyperlink{class_message}{Message}} $>$ \mbox{\hyperlink{class_i_o_base_a7126c2b2c635a99d8af051b3a91e8104}{write\+Messages}}
+\item 
+std\+::mutex \mbox{\hyperlink{class_i_o_base_a0299f018ecd2568eee4bdfb2ec52454d}{write\+Mutex}}
+\item 
+std\+::function$<$ void(\mbox{\hyperlink{class_message}{Message}}, \mbox{\hyperlink{class_i_o_base}{IOBase}} \texorpdfstring{$\ast$}{*})$>$ \mbox{\hyperlink{class_i_o_base_a22f0583d04f7907d92c0793c28c66b50}{message\+Handler}}
+\item 
+std\+::function$<$ void(void)$>$ \mbox{\hyperlink{class_i_o_base_ada20bea22c07928614e65e88cee780ff}{close\+Handler}}
+\item 
+bool \mbox{\hyperlink{class_i_o_base_a5998c3bdaa7b268013ad4145a791eb47}{is\+IOBase\+Running}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_i_o_base_af8d60bb85aacef3e6ccd6b84d051aca4}\index{IOBase@{IOBase}!IOBase@{IOBase}}
+\index{IOBase@{IOBase}!IOBase@{IOBase}}
+\doxysubsubsection{\texorpdfstring{IOBase()}{IOBase()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_i_o_base_af8d60bb85aacef3e6ccd6b84d051aca4} 
+IOBase\+::\+IOBase (\begin{DoxyParamCaption}\item[{boost\+::asio\+::io\+\_\+context \&}]{io\+\_\+context}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\Hypertarget{class_i_o_base_a11bcc93500c76608f75da97977c75e8d}\index{IOBase@{IOBase}!IOBase@{IOBase}}
+\index{IOBase@{IOBase}!IOBase@{IOBase}}
+\doxysubsubsection{\texorpdfstring{IOBase()}{IOBase()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_i_o_base_a11bcc93500c76608f75da97977c75e8d} 
+IOBase\+::\+IOBase (\begin{DoxyParamCaption}\item[{boost\+::asio\+::ip\+::tcp\+::socket \&}]{socket}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\Hypertarget{class_i_o_base_a912f48ab99c8b069d71874eebd440ced}\index{IOBase@{IOBase}!````~IOBase@{\texorpdfstring{$\sim$}{\string~}IOBase}}
+\index{````~IOBase@{\texorpdfstring{$\sim$}{\string~}IOBase}!IOBase@{IOBase}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}IOBase()}{\string~IOBase()}}
+{\footnotesize\ttfamily \label{class_i_o_base_a912f48ab99c8b069d71874eebd440ced} 
+IOBase\+::\texorpdfstring{$\sim$}{\string~}\+IOBase (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_i_o_base_ac5610353a2ab3b9c0ce2ce56319778db}\index{IOBase@{IOBase}!doReadBody@{doReadBody}}
+\index{doReadBody@{doReadBody}!IOBase@{IOBase}}
+\doxysubsubsection{\texorpdfstring{doReadBody()}{doReadBody()}}
+{\footnotesize\ttfamily \label{class_i_o_base_ac5610353a2ab3b9c0ce2ce56319778db} 
+void IOBase\+::do\+Read\+Body (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_i_o_base_a0788ed14dfbb2c4e43cb32a3039dc09c}\index{IOBase@{IOBase}!doReadHeader@{doReadHeader}}
+\index{doReadHeader@{doReadHeader}!IOBase@{IOBase}}
+\doxysubsubsection{\texorpdfstring{doReadHeader()}{doReadHeader()}}
+{\footnotesize\ttfamily \label{class_i_o_base_a0788ed14dfbb2c4e43cb32a3039dc09c} 
+void IOBase\+::do\+Read\+Header (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_i_o_base_ab723e71c6b63c9885d7ff870c5e02f80}\index{IOBase@{IOBase}!doWrite@{doWrite}}
+\index{doWrite@{doWrite}!IOBase@{IOBase}}
+\doxysubsubsection{\texorpdfstring{doWrite()}{doWrite()}}
+{\footnotesize\ttfamily \label{class_i_o_base_ab723e71c6b63c9885d7ff870c5e02f80} 
+void IOBase\+::do\+Write (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_i_o_base_a588779c0bc23d087464c1d30a6719c30}\index{IOBase@{IOBase}!send@{send}}
+\index{send@{send}!IOBase@{IOBase}}
+\doxysubsubsection{\texorpdfstring{send()}{send()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_i_o_base_a588779c0bc23d087464c1d30a6719c30} 
+void IOBase\+::send (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_message}{Message}} \&}]{msg}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_i_o_base_a781e82ceeabf0a5b89488948817b6725}\index{IOBase@{IOBase}!send@{send}}
+\index{send@{send}!IOBase@{IOBase}}
+\doxysubsubsection{\texorpdfstring{send()}{send()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_i_o_base_a781e82ceeabf0a5b89488948817b6725} 
+void IOBase\+::send (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_message}{Message}} \&\&}]{msg}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_i_o_base_a56c1976fe3aee65e3d50a6f933dbc80d}\index{IOBase@{IOBase}!setCloseHandler@{setCloseHandler}}
+\index{setCloseHandler@{setCloseHandler}!IOBase@{IOBase}}
+\doxysubsubsection{\texorpdfstring{setCloseHandler()}{setCloseHandler()}}
+{\footnotesize\ttfamily \label{class_i_o_base_a56c1976fe3aee65e3d50a6f933dbc80d} 
+void IOBase\+::set\+Close\+Handler (\begin{DoxyParamCaption}\item[{const std\+::function$<$ void(void)$>$ \&}]{handler}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_i_o_base_aa0731b9b98e7552a193551b60d2e025c}\index{IOBase@{IOBase}!setMessageHandler@{setMessageHandler}}
+\index{setMessageHandler@{setMessageHandler}!IOBase@{IOBase}}
+\doxysubsubsection{\texorpdfstring{setMessageHandler()}{setMessageHandler()}}
+{\footnotesize\ttfamily \label{class_i_o_base_aa0731b9b98e7552a193551b60d2e025c} 
+void IOBase\+::set\+Message\+Handler (\begin{DoxyParamCaption}\item[{const std\+::function$<$ void(\mbox{\hyperlink{class_message}{Message}}, \mbox{\hyperlink{class_i_o_base}{IOBase}} \texorpdfstring{$\ast$}{*})$>$ \&}]{handler}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_i_o_base_ac0d1d23e767a9a8b9743b28defed2f9c}\index{IOBase@{IOBase}!socket@{socket}}
+\index{socket@{socket}!IOBase@{IOBase}}
+\doxysubsubsection{\texorpdfstring{socket()}{socket()}}
+{\footnotesize\ttfamily \label{class_i_o_base_ac0d1d23e767a9a8b9743b28defed2f9c} 
+boost\+::asio\+::ip\+::tcp\+::socket \& IOBase\+::socket (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_i_o_base_ab0d6da9e58465ad34ce44733fdf96a20}\index{IOBase@{IOBase}!start@{start}}
+\index{start@{start}!IOBase@{IOBase}}
+\doxysubsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily \label{class_i_o_base_ab0d6da9e58465ad34ce44733fdf96a20} 
+void IOBase\+::start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_i_o_base_a4d76816f80c91acef65b502b2fc4da08}\index{IOBase@{IOBase}!Client@{Client}}
+\index{Client@{Client}!IOBase@{IOBase}}
+\doxysubsubsection{\texorpdfstring{Client}{Client}}
+{\footnotesize\ttfamily \label{class_i_o_base_a4d76816f80c91acef65b502b2fc4da08} 
+friend IOBase\+::\+Client}
+
+\Hypertarget{class_i_o_base_ada20bea22c07928614e65e88cee780ff}\index{IOBase@{IOBase}!closeHandler@{closeHandler}}
+\index{closeHandler@{closeHandler}!IOBase@{IOBase}}
+\doxysubsubsection{\texorpdfstring{closeHandler}{closeHandler}}
+{\footnotesize\ttfamily \label{class_i_o_base_ada20bea22c07928614e65e88cee780ff} 
+std\+::function$<$void(void)$>$ IOBase\+::close\+Handler\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_i_o_base_a5998c3bdaa7b268013ad4145a791eb47}\index{IOBase@{IOBase}!isIOBaseRunning@{isIOBaseRunning}}
+\index{isIOBaseRunning@{isIOBaseRunning}!IOBase@{IOBase}}
+\doxysubsubsection{\texorpdfstring{isIOBaseRunning}{isIOBaseRunning}}
+{\footnotesize\ttfamily \label{class_i_o_base_a5998c3bdaa7b268013ad4145a791eb47} 
+bool IOBase\+::is\+IOBase\+Running\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_i_o_base_a22f0583d04f7907d92c0793c28c66b50}\index{IOBase@{IOBase}!messageHandler@{messageHandler}}
+\index{messageHandler@{messageHandler}!IOBase@{IOBase}}
+\doxysubsubsection{\texorpdfstring{messageHandler}{messageHandler}}
+{\footnotesize\ttfamily \label{class_i_o_base_a22f0583d04f7907d92c0793c28c66b50} 
+std\+::function$<$void(\mbox{\hyperlink{class_message}{Message}}, \mbox{\hyperlink{class_i_o_base}{IOBase}} \texorpdfstring{$\ast$}{*})$>$ IOBase\+::message\+Handler\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_i_o_base_a263a37f5cda4276517280082f03571c1}\index{IOBase@{IOBase}!readMessage@{readMessage}}
+\index{readMessage@{readMessage}!IOBase@{IOBase}}
+\doxysubsubsection{\texorpdfstring{readMessage}{readMessage}}
+{\footnotesize\ttfamily \label{class_i_o_base_a263a37f5cda4276517280082f03571c1} 
+\mbox{\hyperlink{class_message}{Message}} IOBase\+::read\+Message\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_i_o_base_a8b1726704d9c7c9b79a9419898662355}\index{IOBase@{IOBase}!Server@{Server}}
+\index{Server@{Server}!IOBase@{IOBase}}
+\doxysubsubsection{\texorpdfstring{Server}{Server}}
+{\footnotesize\ttfamily \label{class_i_o_base_a8b1726704d9c7c9b79a9419898662355} 
+friend IOBase\+::\+Server}
+
+\Hypertarget{class_i_o_base_abd9e2d49d8fb4d11dac2d6eb2cde391c}\index{IOBase@{IOBase}!sock@{sock}}
+\index{sock@{sock}!IOBase@{IOBase}}
+\doxysubsubsection{\texorpdfstring{sock}{sock}}
+{\footnotesize\ttfamily \label{class_i_o_base_abd9e2d49d8fb4d11dac2d6eb2cde391c} 
+boost\+::asio\+::ip\+::tcp\+::socket IOBase\+::sock\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_i_o_base_a7126c2b2c635a99d8af051b3a91e8104}\index{IOBase@{IOBase}!writeMessages@{writeMessages}}
+\index{writeMessages@{writeMessages}!IOBase@{IOBase}}
+\doxysubsubsection{\texorpdfstring{writeMessages}{writeMessages}}
+{\footnotesize\ttfamily \label{class_i_o_base_a7126c2b2c635a99d8af051b3a91e8104} 
+std\+::deque$<$\mbox{\hyperlink{class_message}{Message}}$>$ IOBase\+::write\+Messages\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_i_o_base_a0299f018ecd2568eee4bdfb2ec52454d}\index{IOBase@{IOBase}!writeMutex@{writeMutex}}
+\index{writeMutex@{writeMutex}!IOBase@{IOBase}}
+\doxysubsubsection{\texorpdfstring{writeMutex}{writeMutex}}
+{\footnotesize\ttfamily \label{class_i_o_base_a0299f018ecd2568eee4bdfb2ec52454d} 
+std\+::mutex IOBase\+::write\+Mutex\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/include/\mbox{\hyperlink{_i_o_base_8h}{IOBase.\+h}}\item 
+src/source/\mbox{\hyperlink{_i_o_base_8cpp}{IOBase.\+cpp}}\end{DoxyCompactItemize}

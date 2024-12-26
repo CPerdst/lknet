@@ -1,0 +1,130 @@
+\doxysection{lknet\+::util\+::Config\+Loader Class Reference}
+\hypertarget{classlknet_1_1util_1_1_config_loader}{}\label{classlknet_1_1util_1_1_config_loader}\index{lknet::util::ConfigLoader@{lknet::util::ConfigLoader}}
+
+
+{\ttfamily \#include $<$Config\+Loader.\+h$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classlknet_1_1util_1_1_config_loader_a2ece34b4f2c834a4493ab7ff46e9062b}{Config\+Options}} = std\+::map$<$std\+::string, std\+::string$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classlknet_1_1util_1_1_config_loader_af7317649f90c438615300975e150d498}{load\+Config}} (const std\+::string \&)
+\item 
+void \mbox{\hyperlink{classlknet_1_1util_1_1_config_loader_aa5e47e7a1110b652e979c277075f50df}{set\+Config\+Options}} (const \mbox{\hyperlink{classlknet_1_1util_1_1_config_loader_a2ece34b4f2c834a4493ab7ff46e9062b}{Config\+Options}} \&)
+\item 
+void \mbox{\hyperlink{classlknet_1_1util_1_1_config_loader_a86ea0463930bb1d59e8ebef642b84c45}{set\+Config\+Options}} (\mbox{\hyperlink{classlknet_1_1util_1_1_config_loader_a2ece34b4f2c834a4493ab7ff46e9062b}{Config\+Options}} \&\&)
+\item 
+virtual std\+::map$<$ std\+::string, std\+::string $>$ \& \mbox{\hyperlink{classlknet_1_1util_1_1_config_loader_a6db8fc64b45b67d66e5c277e54ab20d2}{get\+Config}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classlknet_1_1util_1_1_config_loader}{Config\+Loader}} \& \mbox{\hyperlink{classlknet_1_1util_1_1_config_loader_a4a149e393d99a33a0516b04360d90bcc}{get\+Instance}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ std\+::string, std\+::string $>$ \mbox{\hyperlink{classlknet_1_1util_1_1_config_loader_a0a981b07210f9226d76b9db3c7e27f0c}{config\+Map}}
+\item 
+\mbox{\hyperlink{classlknet_1_1util_1_1_config_loader_a2ece34b4f2c834a4493ab7ff46e9062b}{Config\+Options}} \mbox{\hyperlink{classlknet_1_1util_1_1_config_loader_a29faef547fdd88b328688c0277ac9564}{option\+Map}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classlknet_1_1util_1_1_config_loader_a1568016b961b56b72f5006d0c8063570}{Config\+Loader}} ()=default
+\item 
+\mbox{\hyperlink{classlknet_1_1util_1_1_config_loader_a482584f66fe9723b46b413be84a8295d}{\texorpdfstring{$\sim$}{\string~}\+Config\+Loader}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classlknet_1_1util_1_1_config_loader}{Config\+Loader}} \mbox{\hyperlink{classlknet_1_1util_1_1_config_loader_a9600a855bfc8dc9d3b79fcbd3a3c9a9b}{instance}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classlknet_1_1util_1_1_config_loader_a2ece34b4f2c834a4493ab7ff46e9062b}\index{lknet::util::ConfigLoader@{lknet::util::ConfigLoader}!ConfigOptions@{ConfigOptions}}
+\index{ConfigOptions@{ConfigOptions}!lknet::util::ConfigLoader@{lknet::util::ConfigLoader}}
+\doxysubsubsection{\texorpdfstring{ConfigOptions}{ConfigOptions}}
+{\footnotesize\ttfamily \label{classlknet_1_1util_1_1_config_loader_a2ece34b4f2c834a4493ab7ff46e9062b} 
+using \mbox{\hyperlink{classlknet_1_1util_1_1_config_loader_a2ece34b4f2c834a4493ab7ff46e9062b}{lknet\+::util\+::\+Config\+Loader\+::\+Config\+Options}} = std\+::map$<$std\+::string, std\+::string$>$}
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classlknet_1_1util_1_1_config_loader_a1568016b961b56b72f5006d0c8063570}\index{lknet::util::ConfigLoader@{lknet::util::ConfigLoader}!ConfigLoader@{ConfigLoader}}
+\index{ConfigLoader@{ConfigLoader}!lknet::util::ConfigLoader@{lknet::util::ConfigLoader}}
+\doxysubsubsection{\texorpdfstring{ConfigLoader()}{ConfigLoader()}}
+{\footnotesize\ttfamily \label{classlknet_1_1util_1_1_config_loader_a1568016b961b56b72f5006d0c8063570} 
+lknet\+::util\+::\+Config\+Loader\+::\+Config\+Loader (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [default]}}
+
+\Hypertarget{classlknet_1_1util_1_1_config_loader_a482584f66fe9723b46b413be84a8295d}\index{lknet::util::ConfigLoader@{lknet::util::ConfigLoader}!````~ConfigLoader@{\texorpdfstring{$\sim$}{\string~}ConfigLoader}}
+\index{````~ConfigLoader@{\texorpdfstring{$\sim$}{\string~}ConfigLoader}!lknet::util::ConfigLoader@{lknet::util::ConfigLoader}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ConfigLoader()}{\string~ConfigLoader()}}
+{\footnotesize\ttfamily \label{classlknet_1_1util_1_1_config_loader_a482584f66fe9723b46b413be84a8295d} 
+lknet\+::util\+::\+Config\+Loader\+::\texorpdfstring{$\sim$}{\string~}\+Config\+Loader (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classlknet_1_1util_1_1_config_loader_a6db8fc64b45b67d66e5c277e54ab20d2}\index{lknet::util::ConfigLoader@{lknet::util::ConfigLoader}!getConfig@{getConfig}}
+\index{getConfig@{getConfig}!lknet::util::ConfigLoader@{lknet::util::ConfigLoader}}
+\doxysubsubsection{\texorpdfstring{getConfig()}{getConfig()}}
+{\footnotesize\ttfamily \label{classlknet_1_1util_1_1_config_loader_a6db8fc64b45b67d66e5c277e54ab20d2} 
+\mbox{\hyperlink{classlknet_1_1util_1_1_config_loader_a2ece34b4f2c834a4493ab7ff46e9062b}{Config\+Loader\+::\+Config\+Options}} \& Config\+Loader\+::get\+Config (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+\Hypertarget{classlknet_1_1util_1_1_config_loader_a4a149e393d99a33a0516b04360d90bcc}\index{lknet::util::ConfigLoader@{lknet::util::ConfigLoader}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!lknet::util::ConfigLoader@{lknet::util::ConfigLoader}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily \label{classlknet_1_1util_1_1_config_loader_a4a149e393d99a33a0516b04360d90bcc} 
+\mbox{\hyperlink{classlknet_1_1util_1_1_config_loader}{Config\+Loader}} \& Config\+Loader\+::get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classlknet_1_1util_1_1_config_loader_af7317649f90c438615300975e150d498}\index{lknet::util::ConfigLoader@{lknet::util::ConfigLoader}!loadConfig@{loadConfig}}
+\index{loadConfig@{loadConfig}!lknet::util::ConfigLoader@{lknet::util::ConfigLoader}}
+\doxysubsubsection{\texorpdfstring{loadConfig()}{loadConfig()}}
+{\footnotesize\ttfamily \label{classlknet_1_1util_1_1_config_loader_af7317649f90c438615300975e150d498} 
+void Config\+Loader\+::load\+Config (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classlknet_1_1util_1_1_config_loader_a86ea0463930bb1d59e8ebef642b84c45}\index{lknet::util::ConfigLoader@{lknet::util::ConfigLoader}!setConfigOptions@{setConfigOptions}}
+\index{setConfigOptions@{setConfigOptions}!lknet::util::ConfigLoader@{lknet::util::ConfigLoader}}
+\doxysubsubsection{\texorpdfstring{setConfigOptions()}{setConfigOptions()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classlknet_1_1util_1_1_config_loader_a86ea0463930bb1d59e8ebef642b84c45} 
+void Config\+Loader\+::set\+Config\+Options (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classlknet_1_1util_1_1_config_loader_a2ece34b4f2c834a4493ab7ff46e9062b}{Config\+Options}} \&\&}]{options}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classlknet_1_1util_1_1_config_loader_aa5e47e7a1110b652e979c277075f50df}\index{lknet::util::ConfigLoader@{lknet::util::ConfigLoader}!setConfigOptions@{setConfigOptions}}
+\index{setConfigOptions@{setConfigOptions}!lknet::util::ConfigLoader@{lknet::util::ConfigLoader}}
+\doxysubsubsection{\texorpdfstring{setConfigOptions()}{setConfigOptions()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classlknet_1_1util_1_1_config_loader_aa5e47e7a1110b652e979c277075f50df} 
+void Config\+Loader\+::set\+Config\+Options (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classlknet_1_1util_1_1_config_loader_a2ece34b4f2c834a4493ab7ff46e9062b}{Config\+Options}} \&}]{options}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classlknet_1_1util_1_1_config_loader_a0a981b07210f9226d76b9db3c7e27f0c}\index{lknet::util::ConfigLoader@{lknet::util::ConfigLoader}!configMap@{configMap}}
+\index{configMap@{configMap}!lknet::util::ConfigLoader@{lknet::util::ConfigLoader}}
+\doxysubsubsection{\texorpdfstring{configMap}{configMap}}
+{\footnotesize\ttfamily \label{classlknet_1_1util_1_1_config_loader_a0a981b07210f9226d76b9db3c7e27f0c} 
+std\+::map$<$std\+::string, std\+::string$>$ lknet\+::util\+::\+Config\+Loader\+::config\+Map\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classlknet_1_1util_1_1_config_loader_a9600a855bfc8dc9d3b79fcbd3a3c9a9b}\index{lknet::util::ConfigLoader@{lknet::util::ConfigLoader}!instance@{instance}}
+\index{instance@{instance}!lknet::util::ConfigLoader@{lknet::util::ConfigLoader}}
+\doxysubsubsection{\texorpdfstring{instance}{instance}}
+{\footnotesize\ttfamily \label{classlknet_1_1util_1_1_config_loader_a9600a855bfc8dc9d3b79fcbd3a3c9a9b} 
+\mbox{\hyperlink{classlknet_1_1util_1_1_config_loader}{Config\+Loader}} Config\+Loader\+::instance\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classlknet_1_1util_1_1_config_loader_a29faef547fdd88b328688c0277ac9564}\index{lknet::util::ConfigLoader@{lknet::util::ConfigLoader}!optionMap@{optionMap}}
+\index{optionMap@{optionMap}!lknet::util::ConfigLoader@{lknet::util::ConfigLoader}}
+\doxysubsubsection{\texorpdfstring{optionMap}{optionMap}}
+{\footnotesize\ttfamily \label{classlknet_1_1util_1_1_config_loader_a29faef547fdd88b328688c0277ac9564} 
+\mbox{\hyperlink{classlknet_1_1util_1_1_config_loader_a2ece34b4f2c834a4493ab7ff46e9062b}{Config\+Options}} lknet\+::util\+::\+Config\+Loader\+::option\+Map\hspace{0.3cm}{\ttfamily [protected]}}
+
+"{}parse\+Format"{}\+: default for json, also has other options\+: "{}xml"{} 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/include/\mbox{\hyperlink{_config_loader_8h}{Config\+Loader.\+h}}\item 
+src/source/\mbox{\hyperlink{_config_loader_8cpp}{Config\+Loader.\+cpp}}\end{DoxyCompactItemize}

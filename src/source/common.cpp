@@ -19,11 +19,9 @@ nlohmann::json myTestDataBase::to_json() {
 
 DataBaseRegister DataBaseRegister::instance;
 
-DataBaseRegister& DataBaseRegister::getInstance() {
-    return instance;
-}
+DataBaseRegister &DataBaseRegister::getInstance() { return instance; }
 
-void DataBaseRegister::registerDataBase(unsigned short id, const Creator& c){
+void DataBaseRegister::registerDataBase(unsigned short id, const Creator &c) {
     std::unique_lock<std::mutex> lock(instanceMutex);
     creatorsMap.insert({id, c});
 }
@@ -32,25 +30,20 @@ std::unique_ptr<DataBase> DataBaseRegister::create(unsigned short id) {
     // 防止多线程同时访问creatorsMap造成问题，需要枷锁
     std::unique_lock<std::mutex> lock(instanceMutex);
     auto it = creatorsMap.find(id);
-    if(it != creatorsMap.end()) {
+    if (it != creatorsMap.end()) {
         return it->second();
     }
-    throw std::runtime_error("can not find DataBase type(id:" + std::to_string(id) + ")");
+    throw std::runtime_error(
+        "can not find DataBase type(id:" + std::to_string(id) + ")");
 }
 
 // ----------------------
 // DataBaseStatus 实现
 // ----------------------
 
-DataBaseStatus::DataBaseStatus(RESPONSE_STATUS status):
-status(status)
-{
+DataBaseStatus::DataBaseStatus(RESPONSE_STATUS status) : status(status) {}
 
-}
-
-nlohmann::json DataBaseStatus::to_json() {
-    return {{"status", status}};
-}
+nlohmann::json DataBaseStatus::to_json() { return {{"status", status}}; }
 
 void DataBaseStatus::from_json(const nlohmann::json &j) {
     status = j.at("status");
@@ -60,12 +53,8 @@ void DataBaseStatus::from_json(const nlohmann::json &j) {
 // Request 实现
 // ----------------------
 
-Request::Request(unsigned short id, std::unique_ptr<DataBase> data):
-id(id),
-data(std::move(data))
-{
-
-}
+Request::Request(unsigned short id, std::unique_ptr<DataBase> data)
+    : id(id), data(std::move(data)) {}
 
 nlohmann::json Request::to_json() const {
     return {{"id", id}, {"data", data->to_json()}};
@@ -77,17 +66,11 @@ void Request::from_json(const nlohmann::json &j) {
     data->from_json(j.at("data"));
 }
 
-unsigned short Request::getId() const {
-    return id;
-}
+unsigned short Request::getId() const { return id; }
 
-const std::unique_ptr<DataBase>& Request::getData() const {
-    return data;
-}
+const std::unique_ptr<DataBase> &Request::getData() const { return data; }
 
-void Request::setId(unsigned short id_) {
-    id = id_;
-}
+void Request::setId(unsigned short id_) { id = id_; }
 
 void Request::setData(std::unique_ptr<DataBase> data_) {
     data = std::move(data_);
@@ -97,12 +80,8 @@ void Request::setData(std::unique_ptr<DataBase> data_) {
 // Response 实现
 // ----------------------
 
-Response::Response(unsigned short id, std::unique_ptr<DataBase> data):
-id(id),
-data(std::move(data))
-{
-
-}
+Response::Response(unsigned short id, std::unique_ptr<DataBase> data)
+    : id(id), data(std::move(data)) {}
 
 nlohmann::json Response::to_json() const {
     return {{"id", id}, {"data", data->to_json()}};
@@ -114,19 +93,12 @@ void Response::from_json(const nlohmann::json &j) {
     data->from_json(j.at("data"));
 }
 
-unsigned short Response::getId() const {
-    return id;
-}
+unsigned short Response::getId() const { return id; }
 
-const std::unique_ptr<DataBase>& Response::getData() const {
-    return data;
-}
+const std::unique_ptr<DataBase> &Response::getData() const { return data; }
 
-void Response::setId(unsigned short id_) {
-    id = id_;
-}
+void Response::setId(unsigned short id_) { id = id_; }
 
 void Response::setData(std::unique_ptr<DataBase> data_) {
     data = std::move(data_);
 }
-

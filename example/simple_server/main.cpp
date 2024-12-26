@@ -7,12 +7,13 @@
  * 此样例展示了如何通过 server 实例来实现自定义协议消息处理
  */
 
-#include "iostream"
 #include "Server.h"
+#include "iostream"
 
 void initLogger() {
     logger::logger::Root()->setLevel(packer::Debug);
-    logger::logger::Root()->setLogFormater("[%level] [%s {%Y-%m-%d %H-%M-%S}] [%path:%line]: %message\n");
+    logger::logger::Root()->setLogFormater(
+        "[%level] [%s {%Y-%m-%d %H-%M-%S}] [%path:%line]: %message\n");
 }
 
 enum PROTOCOL_MAPS {
@@ -27,7 +28,7 @@ enum PROTOCOL_MAPS {
  */
 
 // 用于登录的登录数据结构
-struct LoginDataBase: public DataBase {
+struct LoginDataBase : public DataBase {
     std::string username;
     std::string password;
 
@@ -42,7 +43,7 @@ struct LoginDataBase: public DataBase {
 };
 
 // 用于注册的注册数据结构
-struct RegisterDataBase: public DataBase {
+struct RegisterDataBase : public DataBase {
     std::string username;
     std::string password;
 
@@ -59,34 +60,41 @@ struct RegisterDataBase: public DataBase {
 // 注册协议DataBase
 void registerDataBase() {
     // 注册登录协议结构
-    DataBaseRegister::getInstance().registerDataBase(PROTOCOL_REQUEST_LOGIN, [](){
-        return std::make_unique<LoginDataBase>();
-    });
+    DataBaseRegister::getInstance().registerDataBase(
+        PROTOCOL_REQUEST_LOGIN,
+        []() { return std::make_unique<LoginDataBase>(); });
     // 注册注册协议结构
-    DataBaseRegister::getInstance().registerDataBase(PROTOCOL_REQUEST_REGISTER, [](){
-        return std::make_unique<RegisterDataBase>();
-    });
+    DataBaseRegister::getInstance().registerDataBase(
+        PROTOCOL_REQUEST_REGISTER,
+        []() { return std::make_unique<RegisterDataBase>(); });
     // 注册响应状态结构体
-    DataBaseRegister::getInstance().registerDataBase(PROTOCOL_RESPONSE_STATUS, [](){
-        return std::make_unique<DataBaseStatus>();
-    });
+    DataBaseRegister::getInstance().registerDataBase(
+        PROTOCOL_RESPONSE_STATUS,
+        []() { return std::make_unique<DataBaseStatus>(); });
 };
 
 // 注册协议Handler
 void registerHandler() {
-    RequestHandlerRouter::getInstance().registerHandlerGetterWithResponse(PROTOCOL_REQUEST_LOGIN, [](){
-        return [](const Request& r) -> Response{
-            std::cout << "this is handler(id: 1)" << std::endl;
-            return {PROTOCOL_RESPONSE_STATUS, std::make_unique<DataBaseStatus>(DataBaseStatus::Success)};
-        };
-    });
-    RequestHandlerRouter::getInstance().registerHandlerGetterWithResponse(PROTOCOL_REQUEST_REGISTER, []() -> RequestHandlerRouter::HandlerWithResponse {
-        return [](const Request& r) -> Response {
+    RequestHandlerRouter::getInstance().registerHandlerGetterWithResponse(
+        PROTOCOL_REQUEST_LOGIN, []() {
+            return [](const Request &r) -> Response {
+                std::cout << "this is handler(id: 1)" << std::endl;
+                return {
+                    PROTOCOL_RESPONSE_STATUS,
+                    std::make_unique<DataBaseStatus>(DataBaseStatus::Success)};
+            };
+        });
+    RequestHandlerRouter::getInstance().registerHandlerGetterWithResponse(
+        PROTOCOL_REQUEST_REGISTER,
+        []() -> RequestHandlerRouter::HandlerWithResponse {
+            return [](const Request &r) -> Response {
                 std::cout << "this is handler(id: 2)" << std::endl;
                 // 返回响应
-                return {PROTOCOL_RESPONSE_STATUS, std::make_unique<DataBaseStatus>(DataBaseStatus::Success)};
+                return {
+                    PROTOCOL_RESPONSE_STATUS,
+                    std::make_unique<DataBaseStatus>(DataBaseStatus::Success)};
             };
-    });
+        });
 }
 
 void initServer() {
@@ -95,25 +103,25 @@ void initServer() {
     registerHandler();
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[]) {
     initServer();
     // connect to 127.0.0.1 : 8080
     std::string host;
     unsigned short port = 0;
-    if(argc == 1){
+    if (argc == 1) {
         host = "127.0.0.1";
         port = 8080;
-    }else if(argc == 2){
+    } else if (argc == 2) {
         host = argv[1];
         port = 8080;
-    }else if(argc == 3){
+    } else if (argc == 3) {
         host = argv[1];
         port = std::stoi(argv[2]);
-        if(!port){
+        if (!port) {
             RootError() << "argument 'port' parse failed.";
             exit(EXIT_FAILURE);
         }
-    }else{
+    } else {
         RootError() << "usage: " << argv[0] << " [host] [port]";
     }
 

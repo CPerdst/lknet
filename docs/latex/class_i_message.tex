@@ -1,0 +1,102 @@
+\doxysection{IMessage Class Reference}
+\hypertarget{class_i_message}{}\label{class_i_message}\index{IMessage@{IMessage}}
+
+
+{\ttfamily \#include $<$Message.\+h$>$}
+
+Inheritance diagram for IMessage\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_i_message}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_i_message_a6c3abb656b8356cef73a56ad74d7a5e7}{IMessage}} ()=default
+\item 
+virtual \mbox{\hyperlink{class_i_message_ab02076630dc982a6d2ecb5af9459907c}{\texorpdfstring{$\sim$}{\string~}\+IMessage}} ()=default
+\item 
+virtual bool \mbox{\hyperlink{class_i_message_a284a67d05f096dff0d6116ef2fdb3c55}{build\+Message\+From\+String}} (const std\+::string \&message)=0
+\item 
+virtual bool \mbox{\hyperlink{class_i_message_ab16e7fed321bbba6f4498d6b9fd3ebe6}{build\+Message\+From\+Array}} (const char \texorpdfstring{$\ast$}{*}buffer, int size)=0
+\item 
+virtual std\+::string \mbox{\hyperlink{class_i_message_a561af6c48724b68ed3d90b0ab29a5103}{parse\+Message\+To\+String}} ()=0
+\item 
+virtual bool \mbox{\hyperlink{class_i_message_aa3c5f0ee5b89ba240c3cc9b5c3ed36a3}{is\+Valid\+Message}} ()=0
+\item 
+virtual void \mbox{\hyperlink{class_i_message_af1e2cf5a55ee2cf537fc9168c02eb66b}{parse\+Message\+Header}} ()=0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_i_message_a6c3abb656b8356cef73a56ad74d7a5e7}\index{IMessage@{IMessage}!IMessage@{IMessage}}
+\index{IMessage@{IMessage}!IMessage@{IMessage}}
+\doxysubsubsection{\texorpdfstring{IMessage()}{IMessage()}}
+{\footnotesize\ttfamily \label{class_i_message_a6c3abb656b8356cef73a56ad74d7a5e7} 
+IMessage\+::\+IMessage (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{class_i_message_ab02076630dc982a6d2ecb5af9459907c}\index{IMessage@{IMessage}!````~IMessage@{\texorpdfstring{$\sim$}{\string~}IMessage}}
+\index{````~IMessage@{\texorpdfstring{$\sim$}{\string~}IMessage}!IMessage@{IMessage}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}IMessage()}{\string~IMessage()}}
+{\footnotesize\ttfamily \label{class_i_message_ab02076630dc982a6d2ecb5af9459907c} 
+virtual IMessage\+::\texorpdfstring{$\sim$}{\string~}\+IMessage (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_i_message_ab16e7fed321bbba6f4498d6b9fd3ebe6}\index{IMessage@{IMessage}!buildMessageFromArray@{buildMessageFromArray}}
+\index{buildMessageFromArray@{buildMessageFromArray}!IMessage@{IMessage}}
+\doxysubsubsection{\texorpdfstring{buildMessageFromArray()}{buildMessageFromArray()}}
+{\footnotesize\ttfamily \label{class_i_message_ab16e7fed321bbba6f4498d6b9fd3ebe6} 
+virtual bool IMessage\+::build\+Message\+From\+Array (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{int}]{size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_message_aacddb4d37d2f165de2ee70fc566dc5e9}{Message}}.
+
+\Hypertarget{class_i_message_a284a67d05f096dff0d6116ef2fdb3c55}\index{IMessage@{IMessage}!buildMessageFromString@{buildMessageFromString}}
+\index{buildMessageFromString@{buildMessageFromString}!IMessage@{IMessage}}
+\doxysubsubsection{\texorpdfstring{buildMessageFromString()}{buildMessageFromString()}}
+{\footnotesize\ttfamily \label{class_i_message_a284a67d05f096dff0d6116ef2fdb3c55} 
+virtual bool IMessage\+::build\+Message\+From\+String (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_message_a2a333648d03b890c6b3f9920c3ae5893}{Message}}.
+
+\Hypertarget{class_i_message_aa3c5f0ee5b89ba240c3cc9b5c3ed36a3}\index{IMessage@{IMessage}!isValidMessage@{isValidMessage}}
+\index{isValidMessage@{isValidMessage}!IMessage@{IMessage}}
+\doxysubsubsection{\texorpdfstring{isValidMessage()}{isValidMessage()}}
+{\footnotesize\ttfamily \label{class_i_message_aa3c5f0ee5b89ba240c3cc9b5c3ed36a3} 
+virtual bool IMessage\+::is\+Valid\+Message (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_message_ae294234439e41fcd7076796b8029ea02}{Message}}.
+
+\Hypertarget{class_i_message_af1e2cf5a55ee2cf537fc9168c02eb66b}\index{IMessage@{IMessage}!parseMessageHeader@{parseMessageHeader}}
+\index{parseMessageHeader@{parseMessageHeader}!IMessage@{IMessage}}
+\doxysubsubsection{\texorpdfstring{parseMessageHeader()}{parseMessageHeader()}}
+{\footnotesize\ttfamily \label{class_i_message_af1e2cf5a55ee2cf537fc9168c02eb66b} 
+virtual void IMessage\+::parse\+Message\+Header (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_message_aa09e049abceb2cef1cec8b9e72a0fb88}{Message}}.
+
+\Hypertarget{class_i_message_a561af6c48724b68ed3d90b0ab29a5103}\index{IMessage@{IMessage}!parseMessageToString@{parseMessageToString}}
+\index{parseMessageToString@{parseMessageToString}!IMessage@{IMessage}}
+\doxysubsubsection{\texorpdfstring{parseMessageToString()}{parseMessageToString()}}
+{\footnotesize\ttfamily \label{class_i_message_a561af6c48724b68ed3d90b0ab29a5103} 
+virtual std\+::string IMessage\+::parse\+Message\+To\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_message_a03f2c3658d084bea3f21b28293e9d474}{Message}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/include/\mbox{\hyperlink{_message_8h}{Message.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,165 @@
+\doxysection{Client Class Reference}
+\hypertarget{class_client}{}\label{class_client}\index{Client@{Client}}
+
+
+{\ttfamily \#include $<$Client.\+h$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{class_client_a9da65cc1c28bcc639860bd790c02afb5}{Response\+Handler}} = std\+::function$<$void(const \mbox{\hyperlink{class_response}{Response}} \&)$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_client_a21ac135694878383f672243a00f2319f}{Client}} (const std\+::string \&host, unsigned short port)
+\item 
+void \mbox{\hyperlink{class_client_a93ddee50d8d91bef0dfb085ba9ce258f}{start}} (bool \mbox{\hyperlink{class_client_addfb21544ff5ca6d3360eb55e3d243ad}{run\+In\+Other\+Thread}}=false)
+\item 
+void \mbox{\hyperlink{class_client_a6a6bd79fd04792f01d2e9541abaf5a05}{send}} (const \mbox{\hyperlink{class_request}{Request}} \&, \mbox{\hyperlink{class_client_a9da65cc1c28bcc639860bd790c02afb5}{Response\+Handler}} \&\&)
+\item 
+void \mbox{\hyperlink{class_client_abcb63c486de5b70191d7ada564806777}{send}} (const \mbox{\hyperlink{class_request}{Request}} \&, const \mbox{\hyperlink{class_client_a9da65cc1c28bcc639860bd790c02afb5}{Response\+Handler}} \&)
+\item 
+void \mbox{\hyperlink{class_client_aeca512a199716beb628e51d730f64c8f}{send}} (const std\+::string \&message)
+\item 
+void \mbox{\hyperlink{class_client_a2ac4838875e743af25125d8b5c8eba09}{close}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_client_aadd87eb4ce981ed22fcf129c7d4f5d86}{do\+\_\+connect}} (const boost\+::asio\+::ip\+::tcp\+::resolver\+::results\+\_\+type \&endpoints)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+boost\+::asio\+::io\+\_\+context \mbox{\hyperlink{class_client_af2ef70a6285cb457a86634967af88005}{io\+Context}}
+\item 
+boost\+::asio\+::ip\+::tcp\+::resolver \mbox{\hyperlink{class_client_ae95a12714b3ac8ee9ed45e266e986d47}{resolver}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_o_base}{IOBase}} $>$ \mbox{\hyperlink{class_client_a7955e6f6c471eb17f5e145d5fe2606f0}{io\+Base}}
+\item 
+std\+::queue$<$ \mbox{\hyperlink{class_client_a9da65cc1c28bcc639860bd790c02afb5}{Response\+Handler}} $>$ \mbox{\hyperlink{class_client_ab277f3538f4e9ba15f6c7740cc918ed5}{handlers}}
+\item 
+std\+::mutex \mbox{\hyperlink{class_client_afb3cec319bd8cf02fd68f592ad793137}{handlers\+Mutex}}
+\item 
+bool \mbox{\hyperlink{class_client_addfb21544ff5ca6d3360eb55e3d243ad}{run\+In\+Other\+Thread}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{class_client_a9da65cc1c28bcc639860bd790c02afb5}\index{Client@{Client}!ResponseHandler@{ResponseHandler}}
+\index{ResponseHandler@{ResponseHandler}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{ResponseHandler}{ResponseHandler}}
+{\footnotesize\ttfamily \label{class_client_a9da65cc1c28bcc639860bd790c02afb5} 
+using \mbox{\hyperlink{class_client_a9da65cc1c28bcc639860bd790c02afb5}{Client\+::\+Response\+Handler}} = std\+::function$<$void(const \mbox{\hyperlink{class_response}{Response}} \&)$>$}
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_client_a21ac135694878383f672243a00f2319f}\index{Client@{Client}!Client@{Client}}
+\index{Client@{Client}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{Client()}{Client()}}
+{\footnotesize\ttfamily \label{class_client_a21ac135694878383f672243a00f2319f} 
+Client\+::\+Client (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{host}{, }\item[{unsigned short}]{port}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_client_a2ac4838875e743af25125d8b5c8eba09}\index{Client@{Client}!close@{close}}
+\index{close@{close}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily \label{class_client_a2ac4838875e743af25125d8b5c8eba09} 
+void Client\+::close (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_client_aadd87eb4ce981ed22fcf129c7d4f5d86}\index{Client@{Client}!do\_connect@{do\_connect}}
+\index{do\_connect@{do\_connect}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{do\_connect()}{do\_connect()}}
+{\footnotesize\ttfamily \label{class_client_aadd87eb4ce981ed22fcf129c7d4f5d86} 
+void Client\+::do\+\_\+connect (\begin{DoxyParamCaption}\item[{const boost\+::asio\+::ip\+::tcp\+::resolver\+::results\+\_\+type \&}]{endpoints}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_client_abcb63c486de5b70191d7ada564806777}\index{Client@{Client}!send@{send}}
+\index{send@{send}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{send()}{send()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{class_client_abcb63c486de5b70191d7ada564806777} 
+void Client\+::send (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_request}{Request}} \&}]{request}{, }\item[{const \mbox{\hyperlink{class_client_a9da65cc1c28bcc639860bd790c02afb5}{Response\+Handler}} \&}]{handler}{ = {\ttfamily \mbox{[}\mbox{]}(const~\mbox{\hyperlink{class_response}{Response}}~\&)~\{~return;~\}}}\end{DoxyParamCaption})}
+
+\Hypertarget{class_client_a6a6bd79fd04792f01d2e9541abaf5a05}\index{Client@{Client}!send@{send}}
+\index{send@{send}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{send()}{send()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{class_client_a6a6bd79fd04792f01d2e9541abaf5a05} 
+void Client\+::send (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_request}{Request}} \&}]{request}{, }\item[{\mbox{\hyperlink{class_client_a9da65cc1c28bcc639860bd790c02afb5}{Response\+Handler}} \&\&}]{handler}{ = {\ttfamily \mbox{[}\mbox{]}(const~\mbox{\hyperlink{class_response}{Response}}~\&)~\{~return;~\}}}\end{DoxyParamCaption})}
+
+发送\+Request
+
+
+\begin{DoxyParams}{Parameters}
+{\em \doxylink{class_request}{Request}} & 请求结构体 \\
+\hline
+{\em Response\+Handler} & 用于处理服务器发来的响应 \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_client_aeca512a199716beb628e51d730f64c8f}\index{Client@{Client}!send@{send}}
+\index{send@{send}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{send()}{send()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{class_client_aeca512a199716beb628e51d730f64c8f} 
+void Client\+::send (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{message}{}\end{DoxyParamCaption})}
+
+发送string字符串 
+\begin{DoxyParams}{Parameters}
+{\em message} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+已废弃 
+\end{DoxyNote}
+\Hypertarget{class_client_a93ddee50d8d91bef0dfb085ba9ce258f}\index{Client@{Client}!start@{start}}
+\index{start@{start}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily \label{class_client_a93ddee50d8d91bef0dfb085ba9ce258f} 
+void Client\+::start (\begin{DoxyParamCaption}\item[{bool}]{run\+In\+Other\+Thread}{ = {\ttfamily false}}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_client_ab277f3538f4e9ba15f6c7740cc918ed5}\index{Client@{Client}!handlers@{handlers}}
+\index{handlers@{handlers}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{handlers}{handlers}}
+{\footnotesize\ttfamily \label{class_client_ab277f3538f4e9ba15f6c7740cc918ed5} 
+std\+::queue$<$\mbox{\hyperlink{class_client_a9da65cc1c28bcc639860bd790c02afb5}{Response\+Handler}}$>$ Client\+::handlers\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_client_afb3cec319bd8cf02fd68f592ad793137}\index{Client@{Client}!handlersMutex@{handlersMutex}}
+\index{handlersMutex@{handlersMutex}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{handlersMutex}{handlersMutex}}
+{\footnotesize\ttfamily \label{class_client_afb3cec319bd8cf02fd68f592ad793137} 
+std\+::mutex Client\+::handlers\+Mutex\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_client_a7955e6f6c471eb17f5e145d5fe2606f0}\index{Client@{Client}!ioBase@{ioBase}}
+\index{ioBase@{ioBase}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{ioBase}{ioBase}}
+{\footnotesize\ttfamily \label{class_client_a7955e6f6c471eb17f5e145d5fe2606f0} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{class_i_o_base}{IOBase}}$>$ Client\+::io\+Base\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_client_af2ef70a6285cb457a86634967af88005}\index{Client@{Client}!ioContext@{ioContext}}
+\index{ioContext@{ioContext}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{ioContext}{ioContext}}
+{\footnotesize\ttfamily \label{class_client_af2ef70a6285cb457a86634967af88005} 
+boost\+::asio\+::io\+\_\+context Client\+::io\+Context\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_client_ae95a12714b3ac8ee9ed45e266e986d47}\index{Client@{Client}!resolver@{resolver}}
+\index{resolver@{resolver}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{resolver}{resolver}}
+{\footnotesize\ttfamily \label{class_client_ae95a12714b3ac8ee9ed45e266e986d47} 
+boost\+::asio\+::ip\+::tcp\+::resolver Client\+::resolver\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_client_addfb21544ff5ca6d3360eb55e3d243ad}\index{Client@{Client}!runInOtherThread@{runInOtherThread}}
+\index{runInOtherThread@{runInOtherThread}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{runInOtherThread}{runInOtherThread}}
+{\footnotesize\ttfamily \label{class_client_addfb21544ff5ca6d3360eb55e3d243ad} 
+bool Client\+::run\+In\+Other\+Thread\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/include/\mbox{\hyperlink{_client_8h}{Client.\+h}}\item 
+src/source/\mbox{\hyperlink{_client_8cpp}{Client.\+cpp}}\end{DoxyCompactItemize}

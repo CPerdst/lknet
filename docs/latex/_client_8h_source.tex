@@ -1,0 +1,53 @@
+\doxysection{Client.\+h}
+\hypertarget{_client_8h_source}{}\label{_client_8h_source}\index{src/include/Client.h@{src/include/Client.h}}
+\mbox{\hyperlink{_client_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ client.h}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#ifndef\ CLIENT\_H}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#define\ CLIENT\_H}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <boost/asio.hpp>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_i_o_base_8h}{IOBase.h}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8h}{common.h}}"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}queue"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tools_8h}{tools.h}}"{}}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{tools_8h_a1a2aaad2f42ad198a2e6c97dc7681137}{DLL\_API}}\ \mbox{\hyperlink{class_client}{Client}}\ \{}
+\DoxyCodeLine{00015\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{comment}{//\ 使用临时构造的Response，然后通过Handler延长Response寿命周期供客户端使用}}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{class_client_a9da65cc1c28bcc639860bd790c02afb5}{ResponseHandler}}\ =\ std::function<void(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_response}{Response}}\ \&)>;}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{class_client}{Client}}(\textcolor{keyword}{const}\ std::string\ \&host,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ port);}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{void}\ start(\textcolor{keywordtype}{bool}\ runInOtherThread\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ send(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_request}{Request}}\ \&,\ \mbox{\hyperlink{class_client_a9da65cc1c28bcc639860bd790c02afb5}{ResponseHandler}}\ \&\&);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ send(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_request}{Request}}\ \&,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_client_a9da65cc1c28bcc639860bd790c02afb5}{ResponseHandler}}\ \&);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ send(\textcolor{keyword}{const}\ std::string\ \&message);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ close();}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{void}\ do\_connect(}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ boost::asio::ip::tcp::resolver::results\_type\ \&endpoints);}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ boost::asio::io\_context\ \mbox{\hyperlink{class_client_af2ef70a6285cb457a86634967af88005}{ioContext}};}
+\DoxyCodeLine{00049\ \ \ \ \ boost::asio::ip::tcp::resolver\ \mbox{\hyperlink{class_client_ae95a12714b3ac8ee9ed45e266e986d47}{resolver}};}
+\DoxyCodeLine{00050\ \ \ \ \ std::shared\_ptr<IOBase>\ \mbox{\hyperlink{class_client_a7955e6f6c471eb17f5e145d5fe2606f0}{ioBase}};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{comment}{//\ 响应Handler队列}}
+\DoxyCodeLine{00053\ \ \ \ \ std::queue<ResponseHandler>\ \mbox{\hyperlink{class_client_ab277f3538f4e9ba15f6c7740cc918ed5}{handlers}};\ \ \textcolor{comment}{//\ 临界资源}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ std::mutex\ \mbox{\hyperlink{class_client_afb3cec319bd8cf02fd68f592ad793137}{handlersMutex}};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_client_addfb21544ff5ca6d3360eb55e3d243ad}{runInOtherThread}};}
+\DoxyCodeLine{00058\ \};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ CLIENT\_H}}
+
+\end{DoxyCode}

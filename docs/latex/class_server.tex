@@ -1,0 +1,134 @@
+\doxysection{Server Class Reference}
+\hypertarget{class_server}{}\label{class_server}\index{Server@{Server}}
+
+
+{\ttfamily \#include $<$Server.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_server_ad5ec9462b520e59f7ea831e157ee5e59}{Server}} ()
+\item 
+\mbox{\hyperlink{class_server_af0aadeedcc78051de90863e13a7b7918}{Server}} (const std\+::string \&, unsigned short, std\+::function$<$ void(\mbox{\hyperlink{class_message}{Message}}, \mbox{\hyperlink{class_i_o_base}{IOBase}} \texorpdfstring{$\ast$}{*})$>$ handler=nullptr)
+\item 
+\mbox{\hyperlink{class_server_ac0c2f1f04de64bd49ef343ca283e71ed}{\texorpdfstring{$\sim$}{\string~}\+Server}} ()=default
+\item 
+void \mbox{\hyperlink{class_server_a4542d8d5a89ec007ac7801e328f6e5a7}{start}} (bool \mbox{\hyperlink{class_server_adcd53b81103ac3073722b343782b4c2a}{run\+In\+Other\+Thread}}=false)
+\item 
+void \mbox{\hyperlink{class_server_a80b374dac79cb152b1b47c162747b40f}{set\+Message\+Handler}} (std\+::function$<$ void(\mbox{\hyperlink{class_message}{Message}}, \mbox{\hyperlink{class_i_o_base}{IOBase}} \texorpdfstring{$\ast$}{*})$>$ handler)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_server_a0d2b73f7cd1bdf7f0a1162bba3925676}{init}} (const std\+::string \&, unsigned short, std\+::function$<$ void(\mbox{\hyperlink{class_message}{Message}}, \mbox{\hyperlink{class_i_o_base}{IOBase}} \texorpdfstring{$\ast$}{*})$>$ handler)
+\item 
+void \mbox{\hyperlink{class_server_ab82a8e08039f56109b148be9fe76fd96}{do\+Accept}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+boost\+::asio\+::io\+\_\+context \mbox{\hyperlink{class_server_a8a1f6c1431e76b0f2898512b73d076a2}{io\+Context}}
+\item 
+boost\+::asio\+::ip\+::tcp\+::acceptor \mbox{\hyperlink{class_server_abeef10d268df57ffe84579df1b48b04b}{acceptor}}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_i_o_base}{IOBase}} $>$ $>$ \mbox{\hyperlink{class_server_aa3c8d52be690f427e7f69800828c1223}{io\+Bases}}
+\item 
+std\+::mutex \mbox{\hyperlink{class_server_a211dc9d8700e482aca07c042bfc079ae}{io\+Bases\+Mutex}}
+\item 
+std\+::function$<$ void(\mbox{\hyperlink{class_message}{Message}}, \mbox{\hyperlink{class_i_o_base}{IOBase}} \texorpdfstring{$\ast$}{*})$>$ \mbox{\hyperlink{class_server_ae4e5778e2b6be9048996fe2a6f593f43}{message\+Handler}}
+\item 
+bool \mbox{\hyperlink{class_server_adcd53b81103ac3073722b343782b4c2a}{run\+In\+Other\+Thread}} \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_server_ad5ec9462b520e59f7ea831e157ee5e59}\index{Server@{Server}!Server@{Server}}
+\index{Server@{Server}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{Server()}{Server()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_server_ad5ec9462b520e59f7ea831e157ee5e59} 
+Server\+::\+Server (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_server_af0aadeedcc78051de90863e13a7b7918}\index{Server@{Server}!Server@{Server}}
+\index{Server@{Server}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{Server()}{Server()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_server_af0aadeedcc78051de90863e13a7b7918} 
+Server\+::\+Server (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{host}{, }\item[{unsigned short}]{port}{, }\item[{std\+::function$<$ void(\mbox{\hyperlink{class_message}{Message}}, \mbox{\hyperlink{class_i_o_base}{IOBase}} \texorpdfstring{$\ast$}{*})$>$}]{handler}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})}
+
+\Hypertarget{class_server_ac0c2f1f04de64bd49ef343ca283e71ed}\index{Server@{Server}!````~Server@{\texorpdfstring{$\sim$}{\string~}Server}}
+\index{````~Server@{\texorpdfstring{$\sim$}{\string~}Server}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Server()}{\string~Server()}}
+{\footnotesize\ttfamily \label{class_server_ac0c2f1f04de64bd49ef343ca283e71ed} 
+Server\+::\texorpdfstring{$\sim$}{\string~}\+Server (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_server_ab82a8e08039f56109b148be9fe76fd96}\index{Server@{Server}!doAccept@{doAccept}}
+\index{doAccept@{doAccept}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{doAccept()}{doAccept()}}
+{\footnotesize\ttfamily \label{class_server_ab82a8e08039f56109b148be9fe76fd96} 
+void Server\+::do\+Accept (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_server_a0d2b73f7cd1bdf7f0a1162bba3925676}\index{Server@{Server}!init@{init}}
+\index{init@{init}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily \label{class_server_a0d2b73f7cd1bdf7f0a1162bba3925676} 
+void Server\+::init (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{host}{, }\item[{unsigned short}]{port}{, }\item[{std\+::function$<$ void(\mbox{\hyperlink{class_message}{Message}}, \mbox{\hyperlink{class_i_o_base}{IOBase}} \texorpdfstring{$\ast$}{*})$>$}]{handler}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_server_a80b374dac79cb152b1b47c162747b40f}\index{Server@{Server}!setMessageHandler@{setMessageHandler}}
+\index{setMessageHandler@{setMessageHandler}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{setMessageHandler()}{setMessageHandler()}}
+{\footnotesize\ttfamily \label{class_server_a80b374dac79cb152b1b47c162747b40f} 
+void Server\+::set\+Message\+Handler (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(\mbox{\hyperlink{class_message}{Message}}, \mbox{\hyperlink{class_i_o_base}{IOBase}} \texorpdfstring{$\ast$}{*})$>$}]{handler}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_server_a4542d8d5a89ec007ac7801e328f6e5a7}\index{Server@{Server}!start@{start}}
+\index{start@{start}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily \label{class_server_a4542d8d5a89ec007ac7801e328f6e5a7} 
+void Server\+::start (\begin{DoxyParamCaption}\item[{bool}]{run\+In\+Other\+Thread}{ = {\ttfamily false}}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_server_abeef10d268df57ffe84579df1b48b04b}\index{Server@{Server}!acceptor@{acceptor}}
+\index{acceptor@{acceptor}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{acceptor}{acceptor}}
+{\footnotesize\ttfamily \label{class_server_abeef10d268df57ffe84579df1b48b04b} 
+boost\+::asio\+::ip\+::tcp\+::acceptor Server\+::acceptor\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_server_aa3c8d52be690f427e7f69800828c1223}\index{Server@{Server}!ioBases@{ioBases}}
+\index{ioBases@{ioBases}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{ioBases}{ioBases}}
+{\footnotesize\ttfamily \label{class_server_aa3c8d52be690f427e7f69800828c1223} 
+std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{class_i_o_base}{IOBase}}$>$ $>$ Server\+::io\+Bases\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_server_a211dc9d8700e482aca07c042bfc079ae}\index{Server@{Server}!ioBasesMutex@{ioBasesMutex}}
+\index{ioBasesMutex@{ioBasesMutex}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{ioBasesMutex}{ioBasesMutex}}
+{\footnotesize\ttfamily \label{class_server_a211dc9d8700e482aca07c042bfc079ae} 
+std\+::mutex Server\+::io\+Bases\+Mutex\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_server_a8a1f6c1431e76b0f2898512b73d076a2}\index{Server@{Server}!ioContext@{ioContext}}
+\index{ioContext@{ioContext}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{ioContext}{ioContext}}
+{\footnotesize\ttfamily \label{class_server_a8a1f6c1431e76b0f2898512b73d076a2} 
+boost\+::asio\+::io\+\_\+context Server\+::io\+Context\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_server_ae4e5778e2b6be9048996fe2a6f593f43}\index{Server@{Server}!messageHandler@{messageHandler}}
+\index{messageHandler@{messageHandler}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{messageHandler}{messageHandler}}
+{\footnotesize\ttfamily \label{class_server_ae4e5778e2b6be9048996fe2a6f593f43} 
+std\+::function$<$void(\mbox{\hyperlink{class_message}{Message}}, \mbox{\hyperlink{class_i_o_base}{IOBase}} \texorpdfstring{$\ast$}{*})$>$ Server\+::message\+Handler\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_server_adcd53b81103ac3073722b343782b4c2a}\index{Server@{Server}!runInOtherThread@{runInOtherThread}}
+\index{runInOtherThread@{runInOtherThread}!Server@{Server}}
+\doxysubsubsection{\texorpdfstring{runInOtherThread}{runInOtherThread}}
+{\footnotesize\ttfamily \label{class_server_adcd53b81103ac3073722b343782b4c2a} 
+bool Server\+::run\+In\+Other\+Thread \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/include/\mbox{\hyperlink{_server_8h}{Server.\+h}}\item 
+src/source/\mbox{\hyperlink{_server_8cpp}{Server.\+cpp}}\end{DoxyCompactItemize}

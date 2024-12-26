@@ -1,0 +1,60 @@
+\doxysection{IOBase.\+h}
+\hypertarget{_i_o_base_8h_source}{}\label{_i_o_base_8h_source}\index{src/include/IOBase.h@{src/include/IOBase.h}}
+\mbox{\hyperlink{_i_o_base_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ iobase.h}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#ifndef\ IOBASE\_H}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#define\ IOBASE\_H}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <boost/asio.hpp>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <deque>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_message_8h}{Message.h}}"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}eventCapturer.h"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{tools_8h}{tools.h}}"{}}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_client}{Client}};}
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_server}{Server}};}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{tools_8h_a1a2aaad2f42ad198a2e6c97dc7681137}{DLL\_API}}\ \mbox{\hyperlink{class_i_o_base}{IOBase}}\ :\ \textcolor{keyword}{public}\ std::enable\_shared\_from\_this<IOBase>\ \{}
+\DoxyCodeLine{00019\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{friend}\ \mbox{\hyperlink{class_i_o_base_a4d76816f80c91acef65b502b2fc4da08}{Client}};}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{friend}\ \mbox{\hyperlink{class_i_o_base_a8b1726704d9c7c9b79a9419898662355}{Server}};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_i_o_base}{IOBase}}(boost::asio::io\_context\ \&io\_context);}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_i_o_base}{IOBase}}(boost::asio::ip::tcp::socket\ \&socket);}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{class_i_o_base_a912f48ab99c8b069d71874eebd440ced}{\string~IOBase}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ start();}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{void}\ send(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_message}{Message}}\ \&msg);}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{void}\ send(\mbox{\hyperlink{class_message}{Message}}\ \&\&msg);}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ setMessageHandler(}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::function<\textcolor{keywordtype}{void}(\mbox{\hyperlink{class_message}{Message}},\ \mbox{\hyperlink{class_i_o_base}{IOBase}}\ *)>\ \&handler);}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ setCloseHandler(\textcolor{keyword}{const}\ std::function<\textcolor{keywordtype}{void}(\textcolor{keywordtype}{void})>\ \&handler);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00035\ \ \ \ \ boost::asio::ip::tcp::socket\ \&socket();}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ doReadHeader();}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ doReadBody();}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ doWrite();}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ boost::asio::ip::tcp::socket\ \mbox{\hyperlink{class_i_o_base_abd9e2d49d8fb4d11dac2d6eb2cde391c}{sock}};}
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{class_message}{Message}}\ \mbox{\hyperlink{class_i_o_base_a263a37f5cda4276517280082f03571c1}{readMessage}};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ std::deque<Message>\ \mbox{\hyperlink{class_i_o_base_a7126c2b2c635a99d8af051b3a91e8104}{writeMessages}};}
+\DoxyCodeLine{00046\ \ \ \ \ std::mutex\ \mbox{\hyperlink{class_i_o_base_a0299f018ecd2568eee4bdfb2ec52454d}{writeMutex}};}
+\DoxyCodeLine{00047\ \ \ \ \ std::function<void(\mbox{\hyperlink{class_message}{Message}},\ \mbox{\hyperlink{class_i_o_base}{IOBase}}\ *)>\ \mbox{\hyperlink{class_i_o_base_a22f0583d04f7907d92c0793c28c66b50}{messageHandler}};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ std::function<void(\textcolor{keywordtype}{void})>\ \mbox{\hyperlink{class_i_o_base_ada20bea22c07928614e65e88cee780ff}{closeHandler}};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_i_o_base_a5998c3bdaa7b268013ad4145a791eb47}{isIOBaseRunning}};}
+\DoxyCodeLine{00052\ \};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ IOBASE\_H}}
+
+\end{DoxyCode}
