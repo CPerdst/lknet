@@ -12,7 +12,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin) # 二进制文件输
 # 定义全局宏
 # ---------------
 
-option(EXAMPLE_BUILD "Build example project" OFF) # 默认关闭
+OPTION(EXAMPLE_BUILD "Build example project" OFF) # 默认关闭
+
+OPTION(TEST_BUILD "Build test project" OFF) # 默认关闭
 
 # ---------------
 # 编译 lklog 共享库
@@ -81,4 +83,6 @@ if (EXAMPLE_BUILD)
     add_subdirectory(example)
 endif ()
 
-add_subdirectory(test)
+if(TEST_BUILD)
+    add_subdirectory(test)
+endif ()

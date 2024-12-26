@@ -5,6 +5,8 @@
 #include "Server.h"
 #include "ConfigLoader.h"
 
+using namespace lknet::util;
+
 // -------------------------
 // RequestHandlerRouter 实现
 // -------------------------
@@ -43,13 +45,13 @@ RequestHandlerRouter::HandlerGetterWithResponse>&
 Server::Server():
 acceptor(ioContext),
 messageHandler(nullptr),
-runInOtherThread(false){
-    // 获取全局配置
-    auto& configLoader = lknet::util::ConfigLoader::getInstance();
+runInOtherThread(false)
+{
+    auto& configLoader = ConfigLoader::getInstance();
+    configLoader.loadConfig("config.json");
     auto& configMap = configLoader.getConfig();
     auto hostIt = configMap.find("host");
     auto portIt = configMap.find("port");
-
     init(hostIt == configMap.end() ? "127.0.0.1" : hostIt->second,
          portIt == configMap.end() ? 8080 : std::stoi(portIt->second),
          nullptr);
@@ -75,7 +77,7 @@ void Server::start(bool runInOtherThread_) {
     }
 }
 
-void Server::init(const std::string& host, unsigned short port, std::function<void(Message, IOBase*)> handler) {
+void Server::init(const std::string& host, unsigned short port, std::function<void(Message, IOBase*)> handler){
     auto endpoint = boost::asio::ip::tcp::endpoint(
             boost::asio::ip::make_address(host),
             port);
