@@ -9,6 +9,16 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib) # 动态库输出路
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin) # 二进制文件输出路径
 
 # ---------------
+# 禁止输出警告
+# ---------------
+
+if(MSVC)
+    add_compile_options(/W0)
+else()
+    add_compile_options(/w)
+endif()
+
+# ---------------
 # 定义全局宏
 # ---------------
 
@@ -28,17 +38,22 @@ add_subdirectory(lklog)
 # ------------
 
 # 如果是 Windows 平台，需要设置对应的 Boost 库路径
-if(WIN32)
+if (WIN32)
     # 设置 Boost 配置路径，并查找 Boost 的 Boost_INCLUDE_DIR 和 Boost_LIBRARY_DIRS
     # 使用 GNU Compiler Collection 的 MingW 编译套件依赖于同样使用 MingW 编译的 Boost
     # 使用 MSVC 编译套件依赖于使用 MSVC 编译的 Boost
-    set(Boost_DIR "D:\\boost-1.76.0-windows-x86-mingw\\lib\\cmake\\Boost-1.86.0")
-endif ()
+    if (USER_PRESET_BOOST_DIR)
+        message(STATUS "Boost根路径： ${USER_PRESET_BOOST_DIR}")
+        set(Boost_DIR ${USER_PRESET_BOOST_DIR})
+    endif (USER_PRESET_BOOST_DIR)
+endif (WIN32)
 
 find_package(Boost REQUIRED)
 
 if(Boost_FOUND)
     message(STATUS "Found boost library ${Boost_VERSION}")
+    message(STATUS "Boost libraries: ${Boost_LIBRARIES}")
+    message(STATUS "Boost include dirs: ${Boost_INCLUDE_DIRS}")
 else ()
     message(FATAL_ERROR "Boost library can not be found")
 endif ()
