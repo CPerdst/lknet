@@ -63,6 +63,30 @@ if %option_compile% == 1 (
 )
 
 @REM ---------------------
+@REM 输出CRT模式
+@REM ---------------------
+
+set crt_build_opt=1
+
+echo "CRT输出模式："
+echo "1) 静态"
+echo "2) 动态"
+
+set /p crt_build_opt=
+
+set CRT_BUILD_TYPE=static
+
+if %crt_build_opt% == 1 (
+    set CRT_BUILD_TYPE=static
+) else if %crt_build_opt% == 2 (
+    set CRT_BUILD_TYPE=dynamic
+) else (
+    echo "请选择1或2"
+    pause
+    exit /b
+)
+
+@REM ---------------------
 @REM 选择所支持的编译套件
 @REM ---------------------
 
@@ -76,21 +100,21 @@ echo "4) x142-32"
 
 set /p dev_kit_opt=
 
-set BUILD_TOOLSET_="v143"
-set BUILD_ARCH_="x64"
+set BUILD_TOOLSET_=v143
+set BUILD_ARCH_=x64
 
 if %dev_kit_opt% == 1 (
-    set BUILD_TOOLSET_="v143"
-    set BUILD_ARCH_="x64"
+    set BUILD_TOOLSET_=v143
+    set BUILD_ARCH_=x64
 ) else if %dev_kit_opt% == 2 (
-    set BUILD_TOOLSET_="v143"
-    set BUILD_ARCH_="WIN32"
+    set BUILD_TOOLSET_=v143
+    set BUILD_ARCH_=WIN32
 ) else if %dev_kit_opt% == 3 (
-    set BUILD_TOOLSET_="v142"
-    set BUILD_ARCH_="x64"
+    set BUILD_TOOLSET_=v142
+    set BUILD_ARCH_=x64
 ) else if %dev_kit_opt% == 4 (
-    set BUILD_TOOLSET_="v142"
-    set BUILD_ARCH_="WIN32"
+    set BUILD_TOOLSET_=v142
+    set BUILD_ARCH_=WIN32
 ) else (
     echo "请选择1或2或3或4"
     pause
@@ -121,10 +145,16 @@ if %example_test_compile% == 1 (
     exit /b
 )
 
-mkdir build-%Dcompile%-%BUILD_TOOLSET_%-%BUILD_ARCH_%
-pushd build-%Dcompile%-%BUILD_TOOLSET_%-%BUILD_ARCH_%
+mkdir build-%Dcompile%-%BUILD_TOOLSET_%-%BUILD_ARCH_%-%CRT_BUILD_TYPE%
+pushd build-%Dcompile%-%BUILD_TOOLSET_%-%BUILD_ARCH_%-%CRT_BUILD_TYPE%
 
-cmake   -T %BUILD_TOOLSET_% -A %BUILD_ARCH_% ^
+echo "use command: "
+echo "cmake -T %BUILD_TOOLSET_% -A %BUILD_ARCH_% -DCRT_BUILD_TYPE=%CRT_BUILD_TYPE%"
+echo "-DEXAMPLE_BUILD=%Dexample_test% -DTEST_BUILD=%Dexample_test%"
+echo "-DUSER_PRESET_BOOST_DIR=%user_preset_boost_dir% -S .. -B ."
+echo.
+
+cmake   -T %BUILD_TOOLSET_% -A %BUILD_ARCH_% -DCRT_BUILD_TYPE=%CRT_BUILD_TYPE% ^
         -DEXAMPLE_BUILD=%Dexample_test% -DTEST_BUILD=%Dexample_test% ^
         -DUSER_PRESET_BOOST_DIR=%user_preset_boost_dir% ^
         -S .. -B .

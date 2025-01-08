@@ -8,6 +8,9 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib) # 静态库输出路
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib) # 动态库输出路径
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin) # 二进制文件输出路径
 
+if (NOT CRT_BUILD_TYPE)
+    set (CRT_BUILD_TYPE "static")
+endif ()
 # ---------------
 # 禁止输出警告
 # ---------------
@@ -65,7 +68,14 @@ endif ()
 # 获取 lknet 源码
 file(GLOB LKNET_SOURCE "src/source/*.cpp")
 # 编译 lknet 共享库
-add_library(lknet SHARED ${LKNET_SOURCE})
+if (CRT_BUILD_TYPE STREQUAL "static")
+    add_library(lknet STATIC ${LKNET_SOURCE})
+elseif (CRT_BUILD_TYPE STREQUAL "dynamic")
+    add_library(lknet SHARED ${LKNET_SOURCE})
+else ()
+    message(FATAL_ERROR "Macro CRT_BUILD_TYPE: ${CRT_BUILD_TYPE} is invalid")
+endif ()
+
 
 # 定义 Windows 编译链接库所需宏
 if (WIN32)
