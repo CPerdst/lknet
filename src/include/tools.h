@@ -5,15 +5,17 @@
 #ifndef LKNET_TOOLS_H
 #define LKNET_TOOLS_H
 
-#if defined(_WIN32) || defined(_WIN64)  // Windows ƽ̨
-#ifdef EXPORTING_DLL
+#if defined(_WIN32) || defined(_WIN64)  // Windows ??
+#if defined(STATIC_BUILD)
+#define DLL_API
+#elif defined(EXPORTING_DLL)
 #define DLL_API __declspec(dllexport)
 #else
 #define DLL_API __declspec(dllimport)
 #endif
-#else  // �� Windows ƽ̨ (Linux, macOS ��)
+#else  // ?? Windows ?? (Linux, macOS ??)
 #ifdef EXPORTING_DLL
-#define DLL_API __attribute__((visibility("default")))
+#define DLL_API __attribute__ ((visibility ("default")))
 #else
 #define DLL_API
 #endif
