@@ -137,10 +137,48 @@ git clone --recursive https://github.com/CPerdst/lknet.git
 
 项目仅支持C++17及以上，后面会考虑适配C++11
 
+#### Windows下自动编译脚本
+
+使用build.bat脚本
+
+1、指定BoostConfig.cmake所在的路径
+
+2、自动更新lklog子模块
+
+3、选择编译模式（Debug、Release
+
+4、选择CRT输出模式（静态、动态
+
+5、选择本机支持的编译套件（v143-x64、v143-32、v142-x64、v142-32
+
+6、选择是否编译使用样例与测试样例
+
+#### 手动编译
+
 ``` shell
 cmake -S path/to/lknet -B path/to/lknet/build
 cmake --build path/to/lknet/build --target lknet
 ```
+
+cmake编译选项
+
+输出静态链接库(默认)
+
+-DCRT_BUILD_TYPE=static 
+
+输出动态链接库
+
+-DCRT_BUILT_TYPE=dynamic
+
+项目依赖于Boost库，需要为项目指定BoostConfig.cmake所在的路径
+
+-DUSER_PRESET_BOOST_DIR=/path/to/BoostConfig.cmake
+
+可以指定是否编译样例与测试样例
+
+-DEXAMPLE_BUILD
+
+-DTEST_BUILD
 
 注：可以使用 cmake --build path/to/lknet/build --target help 获取帮助构建信息
 

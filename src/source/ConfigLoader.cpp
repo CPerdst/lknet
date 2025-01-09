@@ -6,7 +6,7 @@
 
 #include <memory>
 
-#include "eventCapturer.h"
+#include "EventCapturer.h"
 #include "fstream"
 
 using namespace lknet::util;

@@ -9,7 +9,7 @@
 #include <mutex>
 
 #include "Message.h"
-#include "eventCapturer.h"
+#include "EventCapturer.h"
 #include "tools.h"
 
 class Client;

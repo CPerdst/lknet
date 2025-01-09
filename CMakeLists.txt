@@ -15,11 +15,15 @@ endif ()
 # 禁止输出警告
 # ---------------
 
-if(MSVC)
-    add_compile_options(/W0)
-else()
-    add_compile_options(/w)
-endif()
+if(WIN32)
+    if(MSVC)
+        add_compile_options(/W0)
+    else()
+        add_compile_options(/w)
+    endif()
+else ()
+    add_compile_options(-Wall -Wextra)
+endif ()
 
 # ---------------
 # 定义全局宏
