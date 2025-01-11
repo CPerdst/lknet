@@ -7,14 +7,14 @@ pipeline {
                     // 使用三引号包裹多行 Shell 脚本
                     sh '''
                     cat <<EOF > ./Dockerfile
-                    FROM ubuntu:20.04
+FROM ubuntu:20.04
 
-                    RUN apt-get update && apt-get install -y build-essential wget git libboost-all-dev cmake curl vim net-tools && apt-get clean
+RUN apt-get update && apt-get install -y build-essential wget git libboost-all-dev cmake curl vim net-tools && apt-get clean
 
-                    WORKDIR /app
+WORKDIR /app
 
-                    CMD ["/bin/bash"]
-                    EOF
+CMD ["/bin/bash"]
+EOF
 
                     cat ./Dockerfile
                     '''
