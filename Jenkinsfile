@@ -50,10 +50,8 @@ EOF
                 script{
                     // 设置容器使用host网络，并设置代理
                     docker.image('l1akr-boost-env:v1.0').inside('--network host -e http_proxy=http://10.211.55.2:7890 -e https_proxy=http://10.211.55.2:7890 -e all_proxy=socks://10.211.55.2:7890 -e no_proxy=localhost,127.0.0.0/8,::1') {
-                        sh '''
-                        git clone --recursive https://github.com/CPerdst/lknet.git
-                        cd lknet && echo '${params.BUILD_TYPE}\n${params.OCR_BUILD_TYPE}\n${params.EXAMPLE_TEST_BUILD}\n${TOOLSET_TYPE}' | ./build.sh
-                        '''
+                        sh "git clone --recursive https://github.com/CPerdst/lknet.git"
+                        sh "cd lknet && echo '${params.BUILD_TYPE}\n${params.OCR_BUILD_TYPE}\n${params.EXAMPLE_TEST_BUILD}\n${TOOLSET_TYPE}' | ./build.sh"
                     }
                 }
             }
