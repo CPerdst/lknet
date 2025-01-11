@@ -141,9 +141,16 @@ function main_track() {
 
     # 选择编译套件（默认gcc、g++
     build_tool=$(select_build_tool)
+    if [[ "${build_tool}" == "gcc" ]];then
+      build_tool_c="gcc"
+      build_tool_cxx="g++"
+    elif [[ "${build_tool}" == "clang" ]];then
+      build_tool_c="clang"
+      build_tool_cxx="clang++"
+    fi
 
     echo "command: "
-    echo "cmake -DCMAKE_C_COMPILER=${build_tool} -DCMAKE_CXX_COMPILER=${build_tool}++" \
+    echo "cmake -DCMAKE_C_COMPILER=${build_tool_c} -DCMAKE_CXX_COMPILER=${build_tool_cxx}++" \
          "-DCMAKE_BUILD_TYPE=${build_type} -DCRT_BUILD_TYPE=${crt_type} -DEXAMPLE_BUILD=${example_test_build_if}" \
          "-DTEST_BUILD_TYPE=${example_test_build_if} -S . -B build-${build_type}-${build_tool}-${crt_type}"
 
