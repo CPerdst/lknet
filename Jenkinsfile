@@ -24,7 +24,7 @@ pipeline {
                 script {
                     // 明确上下文路径（当前目录 .）
                     sh '''
-                    docker build -t l1Akr-Boost_env:v1.0 -f ./Dockerfile .
+                    docker build -t l1akr-boost-env:v1.0 -f ./Dockerfile .
                     '''
                 }
             }
