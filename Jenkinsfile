@@ -15,6 +15,8 @@ pipeline {
 
                     CMD ["/bin/bash"]
                     EOF
+
+                    cat ./Dockerfile
                     '''
                 }
             }
