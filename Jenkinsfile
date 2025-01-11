@@ -64,7 +64,7 @@ EOF
         always {
             script {
                 sh '''
-                docker rmi l1akr-boost-env:v1.0 || true
+                rm -rf lknet
                 '''
             }
         }
