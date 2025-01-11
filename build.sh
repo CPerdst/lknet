@@ -150,14 +150,14 @@ function main_track() {
     fi
 
     echo "command: "
-    echo "cmake -DCMAKE_C_COMPILER=${build_tool_c} -DCMAKE_CXX_COMPILER=${build_tool_cxx}++" \
+    echo "cmake -DCMAKE_C_COMPILER=${build_tool_c} -DCMAKE_CXX_COMPILER=${build_tool_cxx}" \
          "-DCMAKE_BUILD_TYPE=${build_type} -DCRT_BUILD_TYPE=${crt_type} -DEXAMPLE_BUILD=${example_test_build_if}" \
          "-DTEST_BUILD_TYPE=${example_test_build_if} -S . -B build-${build_type}-${build_tool}-${crt_type}"
 
     mkdir build-${build_type}-${build_tool}-${crt_type}
     pushd build-${build_type}-${build_tool}-${crt_type}
 
-    cmake -DCMAKE_C_COMPILER=${build_tool} -DCMAKE_CXX_COMPILER=${build_tool}++ -DCMAKE_BUILD_TYPE=${build_type} -DCRT_BUILD_TYPE=${crt_type} -DEXAMPLE_BUILD=${example_test_build_if} -DTEST_BUILD_TYPE=${example_test_build_if} -S .. -B .
+    cmake -DCMAKE_C_COMPILER=${build_tool_c} -DCMAKE_CXX_COMPILER=${build_tool_cxx} -DCMAKE_BUILD_TYPE=${build_type} -DCRT_BUILD_TYPE=${crt_type} -DEXAMPLE_BUILD=${example_test_build_if} -DTEST_BUILD_TYPE=${example_test_build_if} -S .. -B .
 
     cmake --build . -j6 --target all
 }
