@@ -26,7 +26,7 @@ function check_boostcondig_dir() {
 }
 
 function check_submodule() {
-  if [[ -d ${1}/CMakeLists.txt ]]; then
+  if [[ -f ${1}/CMakeLists.txt ]]; then
     return 0
   fi
 
