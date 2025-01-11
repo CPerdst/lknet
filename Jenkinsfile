@@ -1,5 +1,16 @@
 pipeline {
     agent any
+    environment {
+        DOCKER_IMAGE = 'boost-env:v1.3'
+        WORKSPACE_DIR = '/var/lib/jenkins/workspace/myfirstpipe'
+        WORKSPACE = '/workspace'
+    }
+    parameters {
+      choice choices: ['1', '2'], description: '编译模式 1) Debug 2) Release', name: 'BUILD_TYPE'
+      choice choices: ['1', '2'], description: 'OCR编译模式 1) 静态 2) 动态', name: 'OCR_BUILD_TYPE'
+      choice choices: ['2', '1'], description: '是否编译使用样例与测试样例 1) 是 2) 否', name: 'EXAMPLE_TEST_BUILD'
+      choice choices: ['1', '2'], description: '编译套件 1)GNU 2) Clang', name: 'TOOLSET_TYPE'
+    }
     stages {
         stage('构建初始化') {
             steps {
@@ -8,6 +19,9 @@ pipeline {
                     sh '''
                     cat <<EOF > ./Dockerfile
 FROM ubuntu:20.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Asia/Shanghai
 
 RUN apt-get update && apt-get install -y build-essential wget git libboost-all-dev cmake curl vim net-tools && apt-get clean
 
@@ -21,7 +35,7 @@ EOF
                 }
             }
         }
-        stage('构建') {
+        stage('构建容器镜像') {
             steps {
                 script {
                     // 明确上下文路径（当前目录 .）
@@ -29,6 +43,29 @@ EOF
                     docker build -t l1akr-boost-env:v1.0 -f ./Dockerfile .
                     '''
                 }
+            }
+        }
+        stage('运行容器并执行项目构建') {
+            steps {
+                script{
+                    // 设置容器使用host网络，并设置代理
+                    docker.image('l1akr-boost-env:1.0').inside('--network host -e http_proxy=http://10.211.55.2:7890 -e https_proxy=http://10.211.55.2:7890 -e all_proxy=socks://10.211.55.2:7890 -e no_proxy=localhost,127.0.0.0/8,::1') {
+                        sh '''
+                        sh 'git clone --recursive https://github.com/CPerdst/lknet.git'
+                        sh "cd lknet && echo '${params.BUILD_TYPE}\n${params.OCR_BUILD_TYPE}\n${params.EXAMPLE_TEST_BUILD}\n${TOOLSET_TYPE}' | ./build.sh"
+                        '''
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            script {
+                sh '''
+                docker rmi l1akr-boost-env:v1.0 || true
+                '''
             }
         }
     }
