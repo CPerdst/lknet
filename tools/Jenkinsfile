@@ -79,7 +79,7 @@ EXPOSE 18080
 
 COPY ./lknet/build-Debug-gcc-static/bin/example_simple_server /WORKSPACE
 
-CMD [\"/bin/bash\", \"/WORKSPACE/example_simple_server\"]
+CMD [\"/WORKSPACE/example_simple_server\", \"127.0.0.1\", \"18080\"]
 EOF
                     docker build -t ${TEST_IMAGE_NAME} -f Dockerfile .
                     """
