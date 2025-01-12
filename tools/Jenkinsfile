@@ -75,11 +75,12 @@ FROM ${DOCKER_IMAGE}
 
 WORKDIR /WORKSPACE
 
+EXPOSE 18080
+
 COPY ./lknet/build-Debug-gcc-static/bin/example_simple_server /WORKSPACE
 
-CMD [\"/bin/bash\", \"/WORKSPACE/simple-server\"]
+CMD [\"/bin/bash\", \"/WORKSPACE/example_simple_server\"]
 EOF
-                    find ./ -name '*simple*'
                     docker build -t ${TEST_IMAGE_NAME} -f Dockerfile .
                     """
                 }
@@ -99,6 +100,7 @@ EOF
                     -e all_proxy=socks://10.211.55.2:7890 \
                     -e no_proxy=localhost,127.0.0.0/8,::1 \
                     -w /WORKSPACE \
+                    -p 18080:18080 \
                     ${TEST_IMAGE_NAME}
                     """
                 }
