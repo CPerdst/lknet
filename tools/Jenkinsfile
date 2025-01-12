@@ -79,7 +79,7 @@ COPY ./lknet/build-Debug-gcc-static/bin/simple-server /WORKSPACE
 
 CMD [\"/bin/bash\", \"/WORKSPACE/simple-server\"]
 EOF
-
+                    find ./ -name '*simple*'
                     docker build -t ${TEST_IMAGE_NAME} -f Dockerfile .
                     """
                 }
