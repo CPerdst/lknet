@@ -55,12 +55,22 @@ EOF
                         sh "cat ./lknet/tools/Jenkinsfile"
                         // 执行代码构建
                         sh "cd lknet && echo '${params.BUILD_TYPE}\n${params.OCR_BUILD_TYPE}\n${params.EXAMPLE_TEST_BUILD}\n${params.TOOLSET_TYPE}' | ./build.sh"
-                        // 测试样例代码
-                        sh '''
-                        echo $(pwd)
-                        find .
-                        '''
+//                         // 测试样例代码
+//                         sh '''
+//                         ./lknet/build-Debug-gcc-static/bin/simple-server 127.0.0.1 18080 &
+//                         tail -f /dev/null
+//                         '''
                     }
+                }
+            }
+        }
+        stage('运行测试样例') {
+            steps {
+                script {
+                    sh '''
+                    echo $(pwd)
+
+                    '''
                 }
             }
         }
