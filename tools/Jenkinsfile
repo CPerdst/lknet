@@ -113,7 +113,7 @@ WORKDIR /WORKSPACE
 
 COPY ./build-Debug-gcc-static/bin/example_simple_client /WORKSPACE
 
-CMD [\"/WORKSPACE/example_simple_client\"]
+CMD [\"/WORKSPACE/example_simple_client\", \"127.0.0.1\", \"18080\"]
 EOF
                     docker build -t ${TEST_CLIENT_IMAGE_NAME} -f Dockerfile .
                     """

@@ -24,10 +24,10 @@ int main(int argc, char *argv[]) {
     unsigned short port = 0;
     if (argc == 1) {
         host = "127.0.0.1";
-        port = 8080;
+        port = 18080;
     } else if (argc == 2) {
         host = argv[1];
-        port = 8080;
+        port = 18080;
     } else if (argc == 3) {
         host = argv[1];
         port = std::stoi(argv[2]);
