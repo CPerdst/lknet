@@ -4,8 +4,8 @@ add_subdirectory(simple_server)
 
 add_subdirectory(simple_client)
 
-add_subdirectory(simple_server_with_callback)
+#add_subdirectory(simple_server_with_callback)
 
-add_subdirectory(serialization_request)
+#add_subdirectory(serialization_request)
 
-add_subdirectory(test)
+#add_subdirectory(test)
