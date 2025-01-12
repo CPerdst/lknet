@@ -97,7 +97,7 @@ EOF
                     -e https_proxy=http://10.211.55.2:7890 \
                     -e all_proxy=socks://10.211.55.2:7890 \
                     -e no_proxy=localhost,127.0.0.0/8,::1 \
-                    -w /WORKSPACE
+                    -w /WORKSPACE \
                     ${TEST_IMAGE_NAME}
                     """
                 }
