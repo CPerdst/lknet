@@ -1,9 +1,10 @@
 pipeline {
     agent any
     environment {
-        DOCKER_IMAGE = 'boost-env:v1.3'
+        DOCKER_IMAGE = 'l1akr/boost-env:v1.0'
         WORKSPACE_DIR = '/var/lib/jenkins/workspace/myfirstpipe'
         WORKSPACE = '/workspace'
+        CONTAINER_NAME = 'simple-server-container'
     }
     parameters {
       choice choices: ['1', '2'], description: '编译模式 1) Debug 2) Release', name: 'BUILD_TYPE'
@@ -67,10 +68,19 @@ EOF
         stage('运行测试样例') {
             steps {
                 script {
-                    sh '''
-                    echo $(pwd)
-                    echo $(ls)
-                    '''
+                    sh """
+                    echo \$(pwd)
+                    echo \$(ls)
+                    docker run -d --network host \
+                    --name ${CONTAINER_NAME} \
+                    -e http_proxy=http://10.211.55.2:7890 \
+                    -e https_proxy=http://10.211.55.2:7890 \
+                    -e all_proxy=socks://10.211.55.2:7890 \
+                    -e no_proxy=localhost,127.0.0.0/8,::1 \
+                    -w /WORKSPACE \
+                    -v ./lknet:/WORKSPACE/lknet \
+                    ${DOCKER_IMAGE} /bin/bash -c './lknet/build-Debug-gcc-static/bin/simple-server 127.0.0.1 18080'
+                    """
                 }
             }
         }
@@ -80,7 +90,7 @@ EOF
         always {
             script {
                 sh '''
-                rm -rf lknet
+                rm -rf ./*
                 '''
             }
         }
