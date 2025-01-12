@@ -71,7 +71,7 @@ EOF
                 script {
                     sh """
                     cat <<EOF > ./Dockerfile
-FOMR ${DOCKER_IMAGE}
+FROM ${DOCKER_IMAGE}
 
 WORKDIR /WORKSPACE
 
