@@ -2,10 +2,11 @@ pipeline {
     agent any
     environment {
         DOCKER_IMAGE = 'l1akr/boost-env:v1.0'
-        WORKSPACE_DIR = '/var/lib/jenkins/workspace/myfirstpipe'
         WORKSPACE = '/workspace'
         TEST_CONTAINER_NAME = 'simple-server-container'
         TEST_IMAGE_NAME = 'simple-server-env:latest'
+        TEST_CLIENT_CONTAINER_NAME = 'simple-client-container'
+        TEST_CLIENT_IMAGE_NAME = 'simple-client-env:latest'
     }
     parameters {
       choice choices: ['1', '2'], description: '编译模式 1) Debug 2) Release', name: 'BUILD_TYPE'
@@ -14,7 +15,7 @@ pipeline {
       choice choices: ['1', '2'], description: '编译套件 1)GNU 2) Clang', name: 'TOOLSET_TYPE'
     }
     stages {
-        stage('构建初始化') {
+        stage('构建Boost环境镜像') {
             steps {
                 script {
                     // 使用三引号包裹多行 Shell 脚本
@@ -35,19 +36,15 @@ EOF
                     cat ./Dockerfile
                     '''
                 }
-            }
-        }
-        stage('构建容器镜像') {
-            steps {
+                // 构建容器镜像
                 script {
-                    // 明确上下文路径（当前目录 .）
                     sh '''
                     docker build -t l1akr-boost-env:v1.0 -f ./Dockerfile .
                     '''
                 }
             }
         }
-        stage('运行容器并执行项目构建') {
+        stage('启动Boost环境并执行项目构建') {
             steps {
                 script{
                     // 设置容器使用host网络，并设置代理
@@ -68,8 +65,9 @@ EOF
                 }
             }
         }
-        stage('构建测试容器') {
+        stage('部署测试服务端') {
             steps {
+                // 构建服务端容器镜像
                 script {
                     sh """
                     cat <<EOF > ./Dockerfile
@@ -86,14 +84,9 @@ EOF
                     docker build -t ${TEST_IMAGE_NAME} -f Dockerfile .
                     """
                 }
-            }
-        }
-        stage('运行测试样例') {
-            steps {
+                // 启动服务端容器
                 script {
                     sh """
-                    echo \$(pwd)
-                    echo \$(ls)
                     docker rm -f ${TEST_CONTAINER_NAME} || echo "ok"
                     docker run -d --network host \
                     --name ${TEST_CONTAINER_NAME} \
@@ -104,6 +97,39 @@ EOF
                     -w /WORKSPACE \
                     -p 18080:18080 \
                     ${TEST_IMAGE_NAME}
+                    """
+                }
+            }
+        }
+        stage('部署测试客户端') {
+            steps {
+                // 构建客户端容器镜像
+                script {
+                    sh """
+                    cat <<EOF > ./Dockerfile
+FROM ${DOCKER_IMAGE}
+
+WORKDIR /WORKSPACE
+
+COPY ./build-Debug-gcc-static/bin/example_simple_client /WORKSPACE
+
+CMD [\"/WORKSPACE/example_simple_client\"]
+EOF
+                    docker build -t ${TEST_CLIENT_IMAGE_NAME} -f Dockerfile .
+                    """
+                }
+                // 启动客户端容器
+                script {
+                    sh """
+                    docker rm -r ${TEST_CLIENT_CONTAINER_NAME} || echo 'ok'
+                    docker run -d --network host \
+                    --name ${TEST_CONTAINER_NAME} \
+                    -e http_proxy=http://10.211.55.2:7890 \
+                    -e https_proxy=http://10.211.55.2:7890 \
+                    -e all_proxy=socks://10.211.55.2:7890 \
+                    -e no_proxy=localhost,127.0.0.0/8,::1 \
+                    -w /WORKSPACE \
+                    ${TEST_CLIENT_IMAGE_NAME}
                     """
                 }
             }
