@@ -91,6 +91,7 @@ EOF
                     sh """
                     echo \$(pwd)
                     echo \$(ls)
+                    docker rm -f ${TEST_CONTAINER_NAME} || echo "ok"
                     docker run -d --network host \
                     --name ${TEST_CONTAINER_NAME} \
                     -e http_proxy=http://10.211.55.2:7890 \
@@ -108,9 +109,9 @@ EOF
     post {
         always {
             script {
-                sh '''
+                sh """
                 rm -rf ./*
-                '''
+                """
             }
         }
     }
