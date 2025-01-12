@@ -55,6 +55,8 @@ EOF
                         // 克隆远程代码
 //                         sh "git clone --recursive https://github.com/CPerdst/lknet.git"
 //                         sh "cat ./lknet/tools/Jenkinsfile"
+                        // 初始化子模块
+                        sh "git submodule update --init lklog"
                         // 执行代码构建
                         sh "echo '${params.BUILD_TYPE}\n${params.OCR_BUILD_TYPE}\n${params.EXAMPLE_TEST_BUILD}\n${params.TOOLSET_TYPE}' | ./build.sh"
 //                         // 测试样例代码

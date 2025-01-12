@@ -30,7 +30,7 @@ function check_submodule() {
     return 0
   fi
 
-  git submodule update --init --recursive --remote ${1}
+  git submodule update --init ${1}
 
   return 0
 }
