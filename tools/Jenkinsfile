@@ -75,7 +75,7 @@ FROM ${DOCKER_IMAGE}
 
 WORKDIR /WORKSPACE
 
-COPY ./lknet/build-Debug-gcc-static/bin/simple-server /WORKSPACE
+COPY ./lknet/build-Debug-gcc-static/bin/example_simple_server /WORKSPACE
 
 CMD [\"/bin/bash\", \"/WORKSPACE/simple-server\"]
 EOF
