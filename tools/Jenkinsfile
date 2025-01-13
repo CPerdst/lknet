@@ -15,40 +15,38 @@ pipeline {
       choice choices: ['1', '2'], description: '编译套件 1)GNU 2) Clang', name: 'TOOLSET_TYPE'
     }
     stages {
-//         stage('构建Boost环境镜像') {
-//             steps {
-//                 script {
-//                     // 使用三引号包裹多行 Shell 脚本
-//                     sh '''
-//                     cat <<EOF > ./Dockerfile
-// FROM ubuntu:20.04
-//
-// ENV DEBIAN_FRONTEND=noninteractive
-// ENV TZ=Asia/Shanghai
-//
-// RUN apt-get update && apt-get install -y build-essential wget git libboost-all-dev cmake curl vim net-tools && apt-get clean
-//
-// WORKDIR /app
-//
-// CMD ["/bin/bash"]
-// EOF
-//
-//                     cat ./Dockerfile
-//                     '''
-//                 }
-//                 // 构建容器镜像
-//                 script {
-//                     sh '''
-//                     docker build -t l1akr-boost-env:v1.0 -f ./Dockerfile .
-//                     '''
-//                 }
-//             }
-//         }
+        stage('构建Boost环境镜像') {
+            steps {
+                script {
+                    // 使用三引号包裹多行 Shell 脚本
+                    sh '''
+                    cat <<EOF > ./Dockerfile
+FROM ubuntu:20.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Asia/Shanghai
+
+RUN apt-get update && apt-get install -y build-essential wget git libboost-all-dev cmake curl vim net-tools && apt-get clean
+
+WORKDIR /app
+
+CMD ["/bin/bash"]
+EOF
+                    '''
+                }
+                // 构建容器镜像
+                script {
+                    sh '''
+                    docker build -t l1akr/boost-env:v1.0 -f ./Dockerfile .
+                    '''
+                }
+            }
+        }
         stage('启动Boost环境并执行项目构建') {
             steps {
                 script{
                     // 设置容器使用host网络，并设置代理
-                    docker.image('l1akr/boost-env:v1.0').inside('--network host -e http_proxy=http://10.211.55.2:7890 -e https_proxy=http://10.211.55.2:7890 -e all_proxy=socks://10.211.55.2:7890 -e no_proxy=localhost,127.0.0.0/8,::1') {
+                    docker.image('l1akr/boost-env:v1.0').inside() {
                         // 克隆远程代码
 //                         sh "git clone --recursive https://github.com/CPerdst/lknet.git"
 //                         sh "cat ./lknet/tools/Jenkinsfile"
@@ -67,7 +65,7 @@ pipeline {
         }
         stage('部署测试服务端') {
             steps {
-                // 构建服务端容器镜像
+                // 编写Dockerfile
                 script {
                     sh """
                     cat <<EOF > ./Dockerfile
@@ -81,20 +79,18 @@ COPY ./build-Debug-gcc-static/bin/example_simple_server /WORKSPACE
 
 CMD [\"/WORKSPACE/example_simple_server\", \"127.0.0.1\", \"18080\"]
 EOF
-                    docker build -t ${TEST_IMAGE_NAME} -f Dockerfile .
                     """
+                }
+                // 构建服务端容器镜像
+                script {
+                    sh "docker build -t ${TEST_IMAGE_NAME} -f Dockerfile ."
                 }
                 // 启动服务端容器
                 script {
                     sh """
                     docker rm -f ${TEST_CONTAINER_NAME} || echo "ok"
-                    docker run -d --network host \
+                    docker run -d \
                     --name ${TEST_CONTAINER_NAME} \
-                    -e http_proxy=http://10.211.55.2:7890 \
-                    -e https_proxy=http://10.211.55.2:7890 \
-                    -e all_proxy=socks://10.211.55.2:7890 \
-                    -e no_proxy=localhost,127.0.0.0/8,::1 \
-                    -w /WORKSPACE \
                     -p 18080:18080 \
                     ${TEST_IMAGE_NAME}
                     """
@@ -103,7 +99,7 @@ EOF
         }
         stage('部署测试客户端') {
             steps {
-                // 构建客户端容器镜像
+                // 编写Dockerfile
                 script {
                     sh """
                     cat <<EOF > ./Dockerfile
@@ -115,20 +111,18 @@ COPY ./build-Debug-gcc-static/bin/example_simple_client /WORKSPACE
 
 CMD [\"/WORKSPACE/example_simple_client\", \"127.0.0.1\", \"18080\"]
 EOF
-                    docker build -t ${TEST_CLIENT_IMAGE_NAME} -f Dockerfile .
                     """
+                }
+                // 构建客户端容器镜像
+                script {
+                    sh "docker build -t ${TEST_CLIENT_IMAGE_NAME} -f Dockerfile ."
                 }
                 // 启动客户端容器
                 script {
                     sh """
                     docker rm -f ${TEST_CLIENT_CONTAINER_NAME} || echo 'ok'
-                    docker run -d --network host \
+                    docker run -d \
                     --name ${TEST_CLIENT_CONTAINER_NAME} \
-                    -e http_proxy=http://10.211.55.2:7890 \
-                    -e https_proxy=http://10.211.55.2:7890 \
-                    -e all_proxy=socks://10.211.55.2:7890 \
-                    -e no_proxy=localhost,127.0.0.0/8,::1 \
-                    -w /WORKSPACE \
                     ${TEST_CLIENT_IMAGE_NAME}
                     """
                 }
