@@ -1,5 +1,5 @@
 pipeline {
-    agent {label 'huawei_ubuntu2004_node1'}
+    agent {label 'aliyun_ubuntu2004_node1'}
     environment {
         DOCKER_IMAGE = 'l1akr/boost-env:v1.0'
         WORKSPACE = '/workspace'
