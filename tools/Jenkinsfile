@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent {label 'huawei_ubuntu2004_node1'}
     environment {
         DOCKER_IMAGE = 'l1akr/boost-env:v1.0'
         WORKSPACE = '/workspace'
@@ -121,7 +121,7 @@ EOF
                 // 启动客户端容器
                 script {
                     sh """
-                    docker rm -r ${TEST_CLIENT_CONTAINER_NAME} || echo 'ok'
+                    docker rm -f ${TEST_CLIENT_CONTAINER_NAME} || echo 'ok'
                     docker run -d --network host \
                     --name ${TEST_CLIENT_CONTAINER_NAME} \
                     -e http_proxy=http://10.211.55.2:7890 \
