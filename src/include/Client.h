@@ -16,6 +16,12 @@ class DLL_API Client {
     // 使用临时构造的Response，然后通过Handler延长Response寿命周期供客户端使用
     using ResponseHandler = std::function<void(const Response &)>;
 
+    // 默认连接 127.0.0.1:9831
+    Client();
+
+    // 解析 configPath
+    Client(const std::string& configPath);
+
     Client(const std::string &host, unsigned short port);
 
     void start(bool runInOtherThread = false);
@@ -55,6 +61,10 @@ class DLL_API Client {
     std::mutex handlersMutex;
 
     bool runInOtherThread;
+
+    std::string configPath;
+    std::string host;
+    std::string port;
 };
 
 #endif  // CLIENT_H

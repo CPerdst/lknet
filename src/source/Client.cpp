@@ -1,8 +1,28 @@
 // client.cpp
 
 #include "Client.h"
-
 #include <iostream>
+#include "ConfigLoader.h"
+
+Client::Client()
+: resolver(ioContext),
+      ioBase(std::make_shared<IOBase>(ioContext)),
+      runInOtherThread(false){
+    Client("127.0.0.1", 9831);
+}
+
+Client::Client(const std::string& configPath)
+: resolver(ioContext),
+      ioBase(std::make_shared<IOBase>(ioContext)),
+      runInOtherThread(false){
+    lknet::util::ConfigLoader& loader = lknet::util::ConfigLoader::getInstance();
+    loader.setConfigOptions({{"parseFormat", "json"}});
+    loader.loadConfig(configPath);
+    auto config = loader.getConfig();
+    this->host = config["host"];
+    this->port = config["port"];
+    Client(host, std::stoi(port));
+}
 
 Client::Client(const std::string &host, unsigned short port)
     : resolver(ioContext),
@@ -29,20 +49,23 @@ Client::Client(const std::string &host, unsigned short port)
 
     ioBase->setCloseHandler([this]() { close(); });
 
-    resolver.async_resolve(
-        host, std::to_string(port),
-        [this](std::error_code ec,
-               boost::asio::ip::tcp::resolver::results_type endpoints) {
-            if (!ec) {
-                do_connect(endpoints);
-            } else {
-                std::cout << "resolve host::service failed" << std::endl;
-            }
-        });
+    this->host = host;
+    this->port = std::to_string(port);
 }
 
 void Client::start(bool runInOtherThread_) {
     runInOtherThread = runInOtherThread_;
+    resolver.async_resolve(
+    host, port,
+    [this](std::error_code ec,
+           boost::asio::ip::tcp::resolver::results_type endpoints) {
+        if (!ec) {
+            do_connect(endpoints);
+        } else {
+            std::cout << "resolve host::service failed" << std::endl;
+            exit(1);
+        }
+    });
     if (runInOtherThread) {
         std::thread contextThread([this]() { ioContext.run(); });
         contextThread.detach();

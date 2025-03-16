@@ -27,12 +27,12 @@ class DLL_API ConfigLoader {
     virtual std::map<std::string, std::string> &getConfig();
 
    protected:
-    std::map<std::string, std::string> configMap;
+    std::map<std::string, std::string> configMap{};
 
     /**
      * "parseFormat": default for json, also has other options: "xml"
      */
-    ConfigOptions optionMap;
+    ConfigOptions optionMap{};
 
    private:
     ConfigLoader() = default;
