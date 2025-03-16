@@ -79,7 +79,8 @@ class DLL_API DataBaseRegister {
 
     std::mutex instanceMutex;
 
-    std::map<unsigned short, Creator> creatorsMap{};
+    // std::map<unsigned short, Creator> creatorsMap{};
+    static std::map<unsigned short, Creator>& getCreatorsMap();
 };
 
 class DLL_API Request {

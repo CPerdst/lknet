@@ -17,24 +17,34 @@ nlohmann::json myTestDataBase::to_json() {
 // DataBaseRegister 实现
 // ----------------------
 
-DataBaseRegister DataBaseRegister::instance;
+DataBaseRegister DataBaseRegister::instance{};
 
 DataBaseRegister &DataBaseRegister::getInstance() { return instance; }
 
 void DataBaseRegister::registerDataBase(unsigned short id, const Creator &c) {
     std::unique_lock<std::mutex> lock(instanceMutex);
-    creatorsMap.insert({id, c});
+    try {
+        // Creator copy = c;
+        getCreatorsMap().insert({id, c});
+    }catch (std::exception &e) {
+        throw std::runtime_error(e.what());
+    }
 }
 
 std::unique_ptr<DataBase> DataBaseRegister::create(unsigned short id) {
     // 防止多线程同时访问creatorsMap造成问题，需要枷锁
     std::unique_lock<std::mutex> lock(instanceMutex);
-    auto it = creatorsMap.find(id);
-    if (it != creatorsMap.end()) {
+    auto it = getCreatorsMap().find(id);
+    if (it != getCreatorsMap().end()) {
         return it->second();
     }
     throw std::runtime_error(
         "can not find DataBase type(id:" + std::to_string(id) + ")");
+}
+
+std::map<unsigned short, DataBaseRegister::Creator>& DataBaseRegister::getCreatorsMap() {
+    static std::map<unsigned short, DataBaseRegister::Creator> creatorsMap;
+    return creatorsMap;
 }
 
 // ----------------------

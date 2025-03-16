@@ -20,7 +20,7 @@ void RequestHandlerRouter::registerHandlerGetter(
     unsigned short id,
     RequestHandlerRouter::HandlerGetterWithoutResponse getter) {
     std::unique_lock<std::mutex> lock(instanceMutex);
-    mapper[id] =
+    getMapper()[id] =
         std::variant<HandlerGetterWithoutResponse, HandlerGetterWithResponse>(
             getter);
 }
@@ -28,17 +28,23 @@ void RequestHandlerRouter::registerHandlerGetter(
 void RequestHandlerRouter::registerHandlerGetterWithResponse(
     unsigned short id, RequestHandlerRouter::HandlerGetterWithResponse getter) {
     std::unique_lock<std::mutex> lock(instanceMutex);
-    mapper[id] =
+    getMapper()[id] =
         std::variant<HandlerGetterWithoutResponse, HandlerGetterWithResponse>(
             getter);
+}
+
+std::map<unsigned short, std::variant<RequestHandlerRouter::HandlerGetterWithoutResponse,
+RequestHandlerRouter::HandlerGetterWithResponse>> RequestHandlerRouter::getMapper() {
+    static std::map<unsigned short, std::variant<HandlerGetterWithoutResponse, HandlerGetterWithResponse>> mapper;
+    return mapper;
 }
 
 std::variant<RequestHandlerRouter::HandlerGetterWithoutResponse,
              RequestHandlerRouter::HandlerGetterWithResponse> &
 RequestHandlerRouter::get(unsigned short id) {
     std::unique_lock<std::mutex> lock(instanceMutex);
-    auto it = mapper.find(id);
-    if (it != mapper.end()) {
+    auto it = getMapper().find(id);
+    if (it != getMapper().end()) {
         return it->second;
     }
     throw std::runtime_error(
