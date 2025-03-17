@@ -34,7 +34,7 @@ void RequestHandlerRouter::registerHandlerGetterWithResponse(
 }
 
 std::map<unsigned short, std::variant<RequestHandlerRouter::HandlerGetterWithoutResponse,
-RequestHandlerRouter::HandlerGetterWithResponse>> RequestHandlerRouter::getMapper() {
+RequestHandlerRouter::HandlerGetterWithResponse>> &RequestHandlerRouter::getMapper() {
     static std::map<unsigned short, std::variant<HandlerGetterWithoutResponse, HandlerGetterWithResponse>> mapper;
     return mapper;
 }

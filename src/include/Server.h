@@ -46,7 +46,7 @@ class DLL_API RequestHandlerRouter {
     //                                       HandlerGetterWithResponse>>
     //     mapper;
     static std::map<unsigned short, std::variant<HandlerGetterWithoutResponse,
-                                          HandlerGetterWithResponse>> getMapper();
+                                          HandlerGetterWithResponse>>& getMapper();
 
     static RequestHandlerRouter instance;
 
