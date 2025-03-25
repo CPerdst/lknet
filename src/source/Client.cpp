@@ -2,14 +2,14 @@
 
 #include "Client.h"
 #include <iostream>
+
+#include "ClientBuilder.h"
 #include "ConfigLoader.h"
 
-Client::Client()
-: resolver(ioContext),
-      ioBase(std::make_shared<IOBase>(ioContext)),
-      runInOtherThread(false){
-    Client("127.0.0.1", 9831);
-}
+Client::Client(): Client("127.0.0.1", 9831){}
+
+Client::Client(std::shared_ptr<ClientBuilder> builder)
+: Client(builder->host, builder->port){}
 
 Client::Client(const std::string& configPath)
 : resolver(ioContext),

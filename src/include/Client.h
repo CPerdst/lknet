@@ -11,6 +11,8 @@
 #include "queue"
 #include "tools.h"
 
+class ClientBuilder;
+
 class DLL_API Client {
    public:
     // 使用临时构造的Response，然后通过Handler延长Response寿命周期供客户端使用
@@ -18,6 +20,8 @@ class DLL_API Client {
 
     // 默认连接 127.0.0.1:9831
     Client();
+
+    Client(std::shared_ptr<ClientBuilder> builder);
 
     // 解析 configPath
     Client(const std::string& configPath);

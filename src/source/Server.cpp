@@ -3,7 +3,7 @@
 //
 
 #include "Server.h"
-
+#include "ServerBuilder.h"
 #include "ConfigLoader.h"
 
 using namespace lknet::util;
@@ -64,6 +64,12 @@ Server::Server()
     auto portIt = configMap.find("port");
     init(hostIt == configMap.end() ? "127.0.0.1" : hostIt->second,
          portIt == configMap.end() ? 8080 : std::stoi(portIt->second), nullptr);
+}
+
+Server::Server(const std::shared_ptr<ServerBuilder>& builder)
+    : acceptor(ioContext), messageHandler(nullptr), runInOtherThread(false)
+{
+    init(builder->host, builder->port, builder->callback);
 }
 
 Server::Server(const std::string &host, unsigned short port,

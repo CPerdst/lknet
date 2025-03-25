@@ -15,6 +15,8 @@
 #include "tools.h"
 #include "variant"
 
+class ServerBuilder;
+
 class DLL_API RequestHandlerRouter {
    public:
     using HandlerWithoutResponse = std::function<void(const Request &)>;
@@ -56,6 +58,7 @@ class DLL_API RequestHandlerRouter {
 class DLL_API Server {
    public:
     Server();
+    explicit Server(const std::shared_ptr<ServerBuilder>& builder);
     Server(const std::string &, unsigned short,
            std::function<void(Message, IOBase *)> handler = nullptr);
     ~Server() = default;
