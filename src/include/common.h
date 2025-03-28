@@ -71,6 +71,8 @@ class DLL_API DataBaseRegister {
      */
     std::unique_ptr<DataBase> create(unsigned short id);
 
+    static std::map<unsigned short, DataBaseRegister::Creator> creatorsMap;
+
    private:
     DataBaseRegister() = default;
     ~DataBaseRegister() = default;

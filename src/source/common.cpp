@@ -3,6 +3,7 @@
 //
 
 #include "common.h"
+#include "EventCapturer.h"
 
 void myTestDataBase::from_json(const nlohmann::json &j) {
     j.at("age").get_to(age);
@@ -34,6 +35,7 @@ void DataBaseRegister::registerDataBase(unsigned short id, const Creator &c) {
 std::unique_ptr<DataBase> DataBaseRegister::create(unsigned short id) {
     // 防止多线程同时访问creatorsMap造成问题，需要枷锁
     std::unique_lock<std::mutex> lock(instanceMutex);
+    RootDebug() << getCreatorsMap().size();
     auto it = getCreatorsMap().find(id);
     if (it != getCreatorsMap().end()) {
         return it->second();
@@ -42,8 +44,9 @@ std::unique_ptr<DataBase> DataBaseRegister::create(unsigned short id) {
         "can not find DataBase type(id:" + std::to_string(id) + ")");
 }
 
+std::map<unsigned short, DataBaseRegister::Creator> DataBaseRegister::creatorsMap{};
+
 std::map<unsigned short, DataBaseRegister::Creator>& DataBaseRegister::getCreatorsMap() {
-    static std::map<unsigned short, DataBaseRegister::Creator> creatorsMap;
     return creatorsMap;
 }
 
