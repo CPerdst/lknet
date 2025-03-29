@@ -27,6 +27,7 @@ void DataBaseRegister::registerDataBase(unsigned short id, const Creator &c) {
     try {
         // Creator copy = c;
         getCreatorsMap().insert({id, c});
+        RootDebug() << "Registered database " << id << ", size: " << getCreatorsMap().size();
     }catch (std::exception &e) {
         throw std::runtime_error(e.what());
     }
@@ -35,7 +36,6 @@ void DataBaseRegister::registerDataBase(unsigned short id, const Creator &c) {
 std::unique_ptr<DataBase> DataBaseRegister::create(unsigned short id) {
     // 防止多线程同时访问creatorsMap造成问题，需要枷锁
     std::unique_lock<std::mutex> lock(instanceMutex);
-    RootDebug() << getCreatorsMap().size();
     auto it = getCreatorsMap().find(id);
     if (it != getCreatorsMap().end()) {
         return it->second();

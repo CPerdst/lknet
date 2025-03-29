@@ -31,6 +31,7 @@ void RequestHandlerRouter::registerHandlerGetterWithResponse(
     getMapper()[id] =
         std::variant<HandlerGetterWithoutResponse, HandlerGetterWithResponse>(
             getter);
+    RootDebug() << "Registered handler getter with response " << id << " , size: " << getMapper().size();
 }
 
 std::map<unsigned short, std::variant<RequestHandlerRouter::HandlerGetterWithoutResponse,
